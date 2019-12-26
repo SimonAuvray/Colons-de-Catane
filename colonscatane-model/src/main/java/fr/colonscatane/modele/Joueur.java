@@ -8,6 +8,8 @@ import javax.persistence.OneToMany;
 
 public class Joueur extends Utilisateur {
 	
+	
+	
 	private Couleur couleur;
 	private int score;
 	private int boisPossede;
@@ -17,6 +19,9 @@ public class Joueur extends Utilisateur {
 
 	private int pierrePossede;
 	private int moutonPossede;
+	
+
+
 	private int compteurColonie;
 	private int compteurVille;
 	private int compteurRoute;

@@ -46,7 +46,7 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 					// définition du joueur
 					
 					if (myResult.getString("occupation") == null) {
-						monCoin.setOccupation(inoccupe);
+						monCoin.setOccupationCoin(inoccupe);
 						
 						mesPositions.add(monCoin);
 						}
@@ -54,7 +54,7 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 					else {
 					
 						Joueur monJoueur = new Joueur (Couleur.valueOf(myResult.getString("occupation")), myResult.getString("nom"));
-						monCoin.setOccupation(monJoueur);
+						monCoin.setOccupationCoin(monJoueur);
 						
 						
 						mesPositions.add(monCoin);
@@ -71,7 +71,7 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 						// définition du joueur
 						
 						if (myResult.getString("occupation") == null) {
-							monSegment.setOccupation(inoccupe);
+							monSegment.setOccupationSegment(inoccupe);
 							
 							mesPositions.add(monSegment);
 						}
@@ -79,7 +79,7 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 						else {
 						
 							Joueur monJoueur = new Joueur (Couleur.valueOf(myResult.getString("occupation")), myResult.getString("nom"));
-							monSegment.setOccupation(monJoueur);
+							monSegment.setOccupationSegment(monJoueur);
 							
 							
 							mesPositions.add(monSegment);
@@ -202,14 +202,14 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 					
 					// definition du joueur
 					if (myResult.getString("occupation") == null) {
-						monCoin.setOccupation(inoccupe);
+						monCoin.setOccupationCoin(inoccupe);
 						
 						}
 					
 					else {
 					
 						Joueur monJoueur = new Joueur (Couleur.valueOf(myResult.getString("occupation")), myResult.getString("nom"));
-						monCoin.setOccupation(monJoueur);
+						monCoin.setOccupationCoin(monJoueur);
 
 						}
 					
@@ -227,14 +227,14 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 					
 					// definition du joueur
 					if (myResult.getString("occupation") == null) {
-						monSegment.setOccupation(inoccupe);
+						monSegment.setOccupationSegment(inoccupe);
 						
 						}
 					
 					else {
 					
 						Joueur monJoueur = new Joueur (Couleur.valueOf(myResult.getString("occupation")), myResult.getString("nom"));
-						monSegment.setOccupation(monJoueur);
+						monSegment.setOccupationSegment(monJoueur);
 
 						}
 					

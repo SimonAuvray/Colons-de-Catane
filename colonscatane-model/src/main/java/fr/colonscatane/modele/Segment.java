@@ -16,5 +16,15 @@ public class Segment extends PositionPlateau {
 	@JoinColumn(name = "SEGMENT_JOUEUR")
 	protected Joueur occupationSegment;
 
+	public Joueur getOccupationSegment() {
+		return occupationSegment;
+	}
+
+	public void setOccupationSegment(Joueur occupationSegment) {
+		this.occupationSegment = occupationSegment;
+	}
+
+	
+	
 
 }

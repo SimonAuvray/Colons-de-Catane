@@ -19,7 +19,20 @@ public abstract class PositionPlateau {
 	protected int x;
 	protected int y;
 	
-    /**
+	protected Joueur Occupation;
+	
+	
+	
+	
+    public Joueur getOccupation() {
+		return Occupation;
+	}
+
+	public void setOccupation(Joueur occupation) {
+		Occupation = occupation;
+	}
+
+	/**
      * Default constructor
      */
     public PositionPlateau() {

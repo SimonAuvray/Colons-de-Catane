@@ -14,8 +14,35 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @DiscriminatorValue("1")
 public class Coin extends PositionPlateau {
+	
+	
+	
 
-    public Coin() {
+    public List<TuileRessource> getRessources() {
+		return ressources;
+	}
+
+	public void setRessources(List<TuileRessource> ressources) {
+		this.ressources = ressources;
+	}
+
+	public int getTaille() {
+		return taille;
+	}
+
+	public void setTaille(int taille) {
+		this.taille = taille;
+	}
+
+	public Joueur getOccupationCoin() {
+		return occupationCoin;
+	}
+
+	public void setOccupationCoin(Joueur occupationCoin) {
+		this.occupationCoin = occupationCoin;
+	}
+
+	public Coin() {
     }
     
     @ManyToMany

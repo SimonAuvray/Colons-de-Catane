@@ -28,9 +28,10 @@ public class Application {
 			inscription();
 			initialisation();
 			
-			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
 			
-			System.out.println(maPos.getId());
+//			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
+//			
+//			System.out.println(maPos.getId());
 			
 			sc.close();
 

@@ -9,10 +9,10 @@
 		<class>fr.colonscatane.modele.Coin</class>
 		<class>fr.colonscatane.modele.Joueur</class>
 		<class>fr.colonscatane.modele.Segment</class>
+		<class>fr.colonscatane.modele.Partie</class>
 		<class>fr.colonscatane.modele.TuileRessource</class>
 		<class>fr.colonscatane.modele.Utilisateur</class>
-		
-
+				
 		<properties>
 			<property name="hibernate.connection.url" value="jdbc:mysql://172.16.44.108:3306/emusic?serverTimezone=UTC" />
 			<property name="hibernate.connection.driver" value="com.mysql.jdbc.Driver" />

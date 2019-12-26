@@ -5,33 +5,28 @@ import java.util.Scanner;
 
 import fr.colonscatane.dao.DAOJoueur;
 import fr.colonscatane.dao.DAOPositionPlateau;
+import fr.colonscatane.dao.IDAOJoueur;
+import fr.colonscatane.hibernate.DAOJoueurHibernate;
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.Segment;
+import fr.colonscatane.modele.TuileRessource;
 
 public class Application {
-
 	
-
-		
 		public static Scanner sc = new Scanner(System.in);
-		public static DAOJoueur daoJoueur = new DAOJoueur();
+		public static IDAOJoueur daoJoueur = new DAOJoueurHibernate();
 		public static DAOPositionPlateau daoPositionPlateau = new DAOPositionPlateau();
 		public static Partie partieEnCours = new Partie();
-
 		
 		public static void main(String[] args) {
-			
-			
-			
-			
+	
 			daoJoueur.deleteAll();
 			daoPositionPlateau.deleteAll();
 			inscription();
 			initialisation();
-			
 			
 			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
 			
@@ -39,18 +34,10 @@ public class Application {
 			
 			sc.close();
 
-			
-			
-			
-			
+		
 		}
 			
 			
-			
-			
-
-		
-
 		/**
 		 * Création de la liste des joueur pour la partie en cours
 		 */
@@ -101,11 +88,12 @@ public class Application {
 		
 		public static void initialisation() {
 		    
-	    	//premiere moitiee de tableau​
+	    	//premiere moitiee de tableau
 	    	//pour chaque ligne avec alternance coin/segment
+				// on ne pose la tuile que au X,Y central (donc une case vide sur 2)
 	    	
+			int compteurTuile = -1;
 	    	int nonAchetable = 8; 
-	    	//pour chaque ligne avec alternance coin/segment
 	    	for (int i = 2 ; i < 7 ; i +=2) {
 	    		for (int j = nonAchetable ; j < 29-nonAchetable ; j++) {
 	    			if ( j % 2 == 0 ) {
@@ -137,6 +125,13 @@ public class Application {
 	            		}
 	        			else {
 	        				//c'est une tuile
+	        				if(compteurTuile % 2 == 0) {
+	        					PositionPlateau positionPlateau = new TuileRessource();
+	        					positionPlateau.setX(i);
+	        					positionPlateau.setY(j);
+	        					daoPositionPlateau.save(positionPlateau);
+	        				}
+	        				compteurTuile += 1 ;	        				
 	        			}
 	    			}
 	    		}
@@ -150,14 +145,21 @@ public class Application {
 	            		}
 	        			else {
 	        				//c'est une tuile
+	        				if(compteurTuile % 2 == 0) {
+	        					PositionPlateau positionPlateau = new TuileRessource();
+	        					positionPlateau.setX(i);
+	        					positionPlateau.setY(j);
+	        					daoPositionPlateau.save(positionPlateau);
+	        				}
+	        				compteurTuile += 1 ;	
 	        			}
 	    			}
 	    		}
 	    		nonAchetable -= 2;
 	    	}
 	    	
-	    	nonAchetable = 4 ;
 	    	//pour la "descente" du plateau
+	    	nonAchetable = 4 ;
 	    	for (int i = 8 ; i < 13 ; i +=2) {
 	    		for (int j = nonAchetable ; j < 29-nonAchetable ; j++) {
 	    			if ( j % 2 == 0 ) {
@@ -187,6 +189,13 @@ public class Application {
 	   			}
 	    		else {
 	    				//c'est une tuile
+	    			if(compteurTuile % 2 == 0) {
+    					PositionPlateau positionPlateau = new TuileRessource();
+    					positionPlateau.setX(9);
+    					positionPlateau.setY(j);
+    					daoPositionPlateau.save(positionPlateau);
+    				}
+    				compteurTuile += 1 ;	
 	    			}
 	    		}
 	    	
@@ -200,6 +209,13 @@ public class Application {
 	   			}
 	    		else {
 	    				//c'est une tuile
+	    			if(compteurTuile % 2 == 0) {
+    					PositionPlateau positionPlateau = new TuileRessource();
+    					positionPlateau.setX(11);
+    					positionPlateau.setY(j);
+    					daoPositionPlateau.save(positionPlateau);
+    				}
+    				compteurTuile += 1 ;	
 	    		}
 	    	}
 	    	

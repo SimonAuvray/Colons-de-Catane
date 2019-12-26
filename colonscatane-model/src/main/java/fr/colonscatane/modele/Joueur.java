@@ -2,6 +2,7 @@ package fr.colonscatane.modele;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,22 +13,25 @@ import javax.persistence.Table;
 @Table(name = "joueur")
 public class Joueur extends Utilisateur {
 	
-	
-	
+	@Column(name = "J_COULEUR", nullable = false)
 	private Couleur couleur;
+	@Column(name = "J_SCORE")
 	private int score;
+	@Column(name = "J_BOIS_POSSEDE")
 	private int boisPossede;
+	@Column(name = "J_BLE_POSSEDE")
 	private int blePossede;
+	@Column(name = "J_ARGILE_POSSEDE")
 	private int argilePossede;
-
-
+	@Column(name = "J_PIERRE_POSSEDE")
 	private int pierrePossede;
+	@Column(name = "J_MOUTON_POSSEDE")
 	private int moutonPossede;
-	
-
-
+	@Column(name = "J_COMPTEUR_COLONIES")
 	private int compteurColonie;
+	@Column(name = "J_COMPTEUR_VILLE")
 	private int compteurVille;
+	@Column(name = "J_COMPTEUR_ROUTE")
 	private int compteurRoute;
 	
 	@ManyToOne

@@ -5,14 +5,14 @@ package fr.colonscatane.modele;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("3")
 public class TuileRessource extends PositionPlateau{
 	
 	List<PositionPlateau> lstPositionsPlateau;
-	int x;
-	int y;
 	
 	public TuileRessource() {
 		this.lstPositionsPlateau = new ArrayList<PositionPlateau>();

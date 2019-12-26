@@ -5,11 +5,9 @@ package fr.colonscatane.modele;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Entity;
 
-
+@Entity
 public class TuileRessource extends PositionPlateau{
 	
 	List<PositionPlateau> lstPositionsPlateau;

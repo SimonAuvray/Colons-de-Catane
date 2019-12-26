@@ -1,13 +1,25 @@
 package fr.colonscatane.modele;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Partie")
 public class Partie {
 	
 		public static final int NB_JOUEUR_MAX = 4;
 		public static final int NB_JOUEUR_MIN = 2;
 		
+		@OneToMany(mappedBy = "partie")
 		List<Joueur> lstJoueurs;
+		
+		@OneToMany(mappedBy = "partie")
+		private List<Tour> tours;
+		
 		public Partie() {
 			this.lstJoueurs = new ArrayList<Joueur>();
 		}

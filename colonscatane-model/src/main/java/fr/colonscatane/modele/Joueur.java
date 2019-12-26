@@ -1,5 +1,11 @@
 package fr.colonscatane.modele;
 
+import java.util.List;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 public class Joueur extends Utilisateur {
 	
 	private Couleur couleur;
@@ -14,6 +20,16 @@ public class Joueur extends Utilisateur {
 	private int compteurColonie;
 	private int compteurVille;
 	private int compteurRoute;
+	
+	@ManyToOne
+	@JoinColumn(name = "JOUEUR_PARTIE")
+	private Partie partie;
+	
+	@OneToMany(mappedBy = "occupationCoin")
+	private List<Coin> coins;
+	
+	@OneToMany(mappedBy = "occupationSegment")
+	private List<Segment> segments;
 	
 	public Couleur getCouleur() {
 		return couleur;
@@ -117,13 +133,6 @@ public class Joueur extends Utilisateur {
 	public String toString() {
 		return "Joueur [couleur=" + couleur + ", nom=" + nom + "]";
 	}
-
-
-	
-		
-
-
-	
 	
 	
 	

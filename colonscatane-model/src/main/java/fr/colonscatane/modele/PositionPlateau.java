@@ -1,16 +1,23 @@
 package fr.colonscatane.modele;
 
-/**
- * 
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "posistion_plateau")
 public abstract class PositionPlateau {
 
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "POS_ID")
 	protected int id;
+	
 	protected int x;
 	protected int y;
-	
-	protected Joueur occupation = new Joueur();
 	
     /**
      * Default constructor
@@ -41,18 +48,6 @@ public abstract class PositionPlateau {
 	public void setY(int y) {
 		this.y = y;
 	}
-
-	public Joueur getOccupation() {
-		return occupation;
-	}
-
-	public void setOccupation(Joueur occupation) {
-		this.occupation = occupation;
-	}
-
-	
-    
-    
 
 
 

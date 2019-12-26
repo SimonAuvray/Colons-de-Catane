@@ -1,17 +1,15 @@
 package fr.colonscatane;
 
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
-
-
-import fr.colonscatane.dao.ConnectionSQL;
-import fr.colonscatane.dao.*;
-import fr.colonscatane.modele.*;
+import fr.colonscatane.dao.DAOJoueur;
+import fr.colonscatane.dao.DAOPositionPlateau;
+import fr.colonscatane.modele.Coin;
+import fr.colonscatane.modele.Joueur;
+import fr.colonscatane.modele.Partie;
+import fr.colonscatane.modele.PositionPlateau;
+import fr.colonscatane.modele.Segment;
 
 public class Application {
 

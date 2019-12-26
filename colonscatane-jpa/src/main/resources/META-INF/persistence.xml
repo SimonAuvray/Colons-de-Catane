@@ -14,7 +14,7 @@
 		<class>fr.colonscatane.modele.Utilisateur</class>
 				
 		<properties>
-			<property name="hibernate.connection.url" value="jdbc:mysql://172.16.44.108:3306/emusic?serverTimezone=UTC" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://172.16.44.108:3306/colon_catane?serverTimezone=UTC" />
 			<property name="hibernate.connection.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.connection.user" value="root" />
 			<property name="hibernate.connection.password" value="lien44=lien44" />

@@ -1,12 +1,17 @@
 package fr.colonscatane.modele;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 public abstract class  Utilisateur {
 	protected String nom;
 	
 	protected String username;
 	protected String password;
 	
-	
+	@OneToOne
+	@JoinColumn(name = "UTILISATEUR_JOUEUR")
+	protected Joueur joueur;	
 	
 	
 	public String getNom() {

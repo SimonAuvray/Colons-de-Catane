@@ -1,13 +1,14 @@
 package fr.colonscatane;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import fr.colonscatane.hibernate.ConnexionHibernate;
+import fr.colonscatane.hibernate.DAOCoinHibernate;
 import fr.colonscatane.hibernate.DAOJoueurHibernate;
 import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
+import fr.colonscatane.hibernate.DAOTuileRessourceHibernate;
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
@@ -23,22 +24,24 @@ public class Application {
 		public static Partie partieEnCours = new Partie();
 		
 		public static void main(String[] args) {
-	
-			daoJoueur.deleteAll();
-			daoPositionPlateau.deleteAll();
+			
+			deleteJeu();
+			
 			inscription();
 			initialisation();
-			liaisonTuileCoin();
+//			liaisonTuileCoin();
 			
 			
 //			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
 //			
 //			System.out.println(maPos.getId());
 			
+			
 			ConnexionHibernate.close();
 
 		
 		}
+
 
 
 		/**
@@ -228,7 +231,39 @@ public class Application {
 		
 	private static void liaisonTuileCoin() {
 		// TODO Auto-generated method stub
-		List<TuileRessource> tuiles = new ArrayList<TuileRessource>();
-		
+		DAOTuileRessourceHibernate daoTuileRessource = new DAOTuileRessourceHibernate();
+		List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(3);
+		for (PositionPlateau T : mesTuiles) {
+			int x = T.getX();
+			int y = T.getY();
+			System.out.println("tuile " + x + " "+ y);
+			try {
+//				DAOCoinHibernate daoCoin = new DAOCoinHibernate();
+//				Coin coin = (Coin)daoCoin.findByXY(x-1, y-2);
+//				System.out.println(coin.getClass());
+//				coin.ressources.add((TuileRessource) T);
+//				Coin coin2 = (Coin)daoCoin.findByXY(x-1, y);
+//				coin2.ressources.add((TuileRessource) T);
+//				Coin coin3 = (Coin)daoCoin.findByXY(x-1, y+2);
+//				coin3.ressources.add((TuileRessource) T);
+//				
+//				Coin coin4 = (Coin)daoCoin.findByXY(x+1, y-2);
+//				coin4.ressources.add((TuileRessource) T);
+//				Coin coin5 = (Coin)daoCoin.findByXY(x+1, y);
+//				coin5.ressources.add((TuileRessource) T);
+//				Coin coin6 = (Coin)daoCoin.findByXY(x+1, y+2);
+//				coin6.ressources.add((TuileRessource) T);
+			}
+			catch (Exception errPlateau) {
+				System.out.println("erreur de configuration du plateau; liaisonTuileCoin");
+			}
+		}
+	}
+
+
+	private static void deleteJeu() {
+
+		DAOPositionPlateauHibernate daoPositionPlateauHibernate = new DAOPositionPlateauHibernate();
+		daoPositionPlateauHibernate.deleteAll();
 	}
 }

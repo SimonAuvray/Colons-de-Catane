@@ -2,6 +2,7 @@ package fr.colonscatane.modele;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -16,25 +17,25 @@ import javax.persistence.UniqueConstraint;
 public class Coin extends PositionPlateau {
 	
 	 @ManyToMany
-	    @JoinTable(name = "LIENS",
-	    		uniqueConstraints = @UniqueConstraint(columnNames = {"LIEN_COIN_ID", "LIEN_TUILE_ID"} ),
-	    		joinColumns = @JoinColumn(name = "LIEN_COIN_ID", referencedColumnName = "POS_ID"),
-	    		inverseJoinColumns = @JoinColumn(name = "LIEN_TUILE_ID", referencedColumnName = "POS_ID"))
-	    public List<TuileRessource> ressources;
+	 @JoinTable(name = "LIENS",
+	   	uniqueConstraints = @UniqueConstraint(columnNames = {"LIEN_COIN_ID", "LIEN_TUILE_ID"} ),
+	   	joinColumns = @JoinColumn(name = "LIEN_COIN_ID", referencedColumnName = "POS_ID"),
+	   	inverseJoinColumns = @JoinColumn(name = "LIEN_TUILE_ID", referencedColumnName = "POS_ID"))
+    public List<TuileRessource> ressources;
 	    
-	    @Column(name = "TAILLE_OCCUPATION")
-	    public int taille;
+	@Column(name = "TAILLE_OCCUPATION")
+	public int taille;
 	    
-	    @ManyToOne
-		@JoinColumn(name = "COIN_JOUEUR")
-		protected Joueur occupationCoin;
+	@ManyToOne
+	@JoinColumn(name = "COIN_JOUEUR")
+	protected Joueur occupationCoin;
 	
 
-	    public Coin() {
-	    }
+	public Coin() {
+    }
 	    
-	    public List<TuileRessource> getRessources() {
-		return ressources;
+    public List<TuileRessource> getRessources() {
+    	return ressources;
 	}
 
 	public void setRessources(List<TuileRessource> ressources) {

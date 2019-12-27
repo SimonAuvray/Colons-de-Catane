@@ -58,8 +58,9 @@ public class DAOPositionPlateauHibernate extends ConnexionHibernate implements I
 	}
 
 	@Override
-	public PositionPlateau findByType(PositionPlateau type) {
+	public List<PositionPlateau> findByType(int type) {
 		// TODO Auto-generated method stub
+//		return em.createQuery("select p from PositionPlateau p where p.DTYPE_")
 		return null;
 	}
 

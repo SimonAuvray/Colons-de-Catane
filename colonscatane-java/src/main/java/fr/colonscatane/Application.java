@@ -1,11 +1,11 @@
 package fr.colonscatane;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
-import fr.colonscatane.dao.DAOJoueur;
-import fr.colonscatane.dao.DAOPositionPlateau;
-import fr.colonscatane.dao.IDAOJoueur;
+import fr.colonscatane.hibernate.ConnexionHibernate;
 import fr.colonscatane.hibernate.DAOJoueurHibernate;
 import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
 import fr.colonscatane.modele.Coin;
@@ -28,18 +28,19 @@ public class Application {
 			daoPositionPlateau.deleteAll();
 			inscription();
 			initialisation();
+			liaisonTuileCoin();
 			
 			
 //			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
 //			
 //			System.out.println(maPos.getId());
 			
-			daoJoueur.close();
+			ConnexionHibernate.close();
 
 		
 		}
-			
-			
+
+
 		/**
 		 * Création de la liste des joueur pour la partie en cours
 		 */
@@ -223,4 +224,11 @@ public class Application {
 	    	
 	    	System.out.println("plateau vide , mais pret");
 	    }
+		
+		
+	private static void liaisonTuileCoin() {
+		// TODO Auto-generated method stub
+		List<TuileRessource> tuiles = new ArrayList<TuileRessource>();
+		
+	}
 }

@@ -5,6 +5,7 @@ package fr.colonscatane.modele;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -14,7 +15,13 @@ import javax.persistence.ManyToMany;
 public class TuileRessource extends PositionPlateau {
 	
 	@ManyToMany(mappedBy = "ressources")
-	List<Coin> listeCoin;
+	private List<Coin> listeCoin;
+	
+	@Column(name="TUILE_RESSOURCE")
+	private TypeTuile type ;
+	
+	@Column(name="TUILE_NUMERO")
+	private int numero;
 	
 	public TuileRessource() {
 		this.listeCoin = new ArrayList<Coin>();
@@ -37,6 +44,39 @@ public class TuileRessource extends PositionPlateau {
 	public int getY() {
 		return y;
 	}
+
+
+	public List<Coin> getListeCoin() {
+		return listeCoin;
+	}
+
+
+	public void setListeCoin(List<Coin> listeCoin) {
+		this.listeCoin = listeCoin;
+	}
+
+
+	public TypeTuile getType() {
+		return type;
+	}
+
+
+	public void setType(TypeTuile type) {
+		this.type = type;
+	}
+
+
+	public int getNumero() {
+		return numero;
+	}
+
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	
+	
+	
 	
 	
 	

@@ -1,5 +1,7 @@
 package fr.colonscatane;
 
+import java.util.ArrayList;
+import java.util.*;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -15,12 +17,14 @@ import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.Segment;
 import fr.colonscatane.modele.TuileRessource;
+import fr.colonscatane.modele.TypeTuile;
 
 public class Application {
 	
 		public static Scanner sc = new Scanner(System.in);
 		public static DAOJoueurHibernate daoJoueur = new DAOJoueurHibernate();
 		public static DAOPositionPlateauHibernate daoPositionPlateau = new DAOPositionPlateauHibernate();
+		public static DAOTuileRessourceHibernate daoTuileRessource = new DAOTuileRessourceHibernate();
 		public static Partie partieEnCours = new Partie();
 		
 		public static void main(String[] args) {
@@ -30,6 +34,9 @@ public class Application {
 			inscription();
 			initialisation();
 //			liaisonTuileCoin();
+			
+			placementRessource();
+			placementNumero();
 			
 			
 //			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
@@ -227,6 +234,109 @@ public class Application {
 	    	
 	    	System.out.println("plateau vide , mais pret");
 	    }
+		
+		
+		
+		
+		public static void placementRessource () {
+			
+			List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(3);
+			
+			Collections.shuffle(mesTuiles);
+
+			
+			int compteurPrairie = 4;
+			int compteurForet = 4;
+			int compteurMontagne = 3;
+			int compteurCarriere = 3;
+			
+			
+			int parcoureur = 0;
+			
+			for (int i = 0; i<compteurPrairie ; i++) {
+				TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+				maTuile.setType(TypeTuile.Prairie);
+				parcoureur ++;
+				daoTuileRessource.save(maTuile);
+			}
+			
+			
+			for (int i = 0; i<compteurForet ; i++) {
+				TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+				maTuile.setType(TypeTuile.Foret);
+				parcoureur ++;
+				daoTuileRessource.save(maTuile);
+			}
+			
+			for (int i = 0; i<compteurMontagne ; i++) {
+				TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+				maTuile.setType(TypeTuile.Montagne);
+				parcoureur ++;
+				daoTuileRessource.save(maTuile);
+			}
+			
+			for (int i = 0; i<compteurCarriere ; i++) {
+				TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+				maTuile.setType(TypeTuile.Carriere);
+				parcoureur ++;
+				daoTuileRessource.save(maTuile);
+			}
+			
+			TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+			maTuile.setType(TypeTuile.Desert);
+			daoTuileRessource.save(maTuile);
+			
+			
+			
+		}
+		
+		
+		
+		public static void placementNumero () {
+			
+			List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(3);
+			
+			Collections.shuffle(mesTuiles);
+			
+			int parcoureur = 0;
+			int numeroTuile = 0;
+			
+			TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+			maTuile.setNumero(numeroTuile);
+			parcoureur ++;
+			numeroTuile++;
+			daoTuileRessource.save(maTuile);
+			
+			for (int i = 3 ; i< 12 ; i++) {
+				for (int j=0; j<2 ; j++) {
+					maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+					maTuile.setNumero(numeroTuile);
+					parcoureur ++;
+					daoTuileRessource.save(maTuile);
+				}
+				numeroTuile++;
+			}
+			
+			
+			maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+			maTuile.setNumero(numeroTuile);
+			daoTuileRessource.save(maTuile);
+			
+			
+			
+			
+			
+		}
+			
+			
+			
+			
+			
+			
+			
+			
+		
+
 		
 		
 	private static void liaisonTuileCoin() {

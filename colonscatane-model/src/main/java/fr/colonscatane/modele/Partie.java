@@ -37,16 +37,16 @@ public class Partie {
 			for (int i = 0; i < this.lstJoueurs.size(); i++) {
 				switch (i) {
 				case 0:
-					this.lstJoueurs.get(i).setCouleur(Couleur.BLEU);
-					break;
-				case 1:
-					this.lstJoueurs.get(i).setCouleur(Couleur.VERT);
-					break;
-				case 2:
 					this.lstJoueurs.get(i).setCouleur(Couleur.ROUGE);
 					break;
-				case 3:
+				case 1:
+					this.lstJoueurs.get(i).setCouleur(Couleur.BLEU);
+					break;
+				case 2:
 					this.lstJoueurs.get(i).setCouleur(Couleur.NOIR);
+					break;
+				case 3:
+					this.lstJoueurs.get(i).setCouleur(Couleur.VERT);
 					break;
 				}
 			}

@@ -7,6 +7,7 @@ import fr.colonscatane.dao.DAOJoueur;
 import fr.colonscatane.dao.DAOPositionPlateau;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.hibernate.DAOJoueurHibernate;
+import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
@@ -17,8 +18,8 @@ import fr.colonscatane.modele.TuileRessource;
 public class Application {
 	
 		public static Scanner sc = new Scanner(System.in);
-		public static IDAOJoueur daoJoueur = new DAOJoueurHibernate();
-		public static DAOPositionPlateau daoPositionPlateau = new DAOPositionPlateau();
+		public static DAOJoueurHibernate daoJoueur = new DAOJoueurHibernate();
+		public static DAOPositionPlateauHibernate daoPositionPlateau = new DAOPositionPlateauHibernate();
 		public static Partie partieEnCours = new Partie();
 		
 		public static void main(String[] args) {
@@ -33,7 +34,7 @@ public class Application {
 //			
 //			System.out.println(maPos.getId());
 			
-			sc.close();
+			daoJoueur.close();
 
 		
 		}

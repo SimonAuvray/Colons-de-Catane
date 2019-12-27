@@ -6,6 +6,8 @@ import javax.persistence.Query;
 
 import fr.colonscatane.dao.IDAOPositionPlateau;
 import fr.colonscatane.modele.PositionPlateau;
+import fr.colonscatane.modele.TuileRessource;
+import fr.colonscatane.modele.TypePosition;
 
 public class DAOPositionPlateauHibernate extends ConnexionHibernate implements IDAOPositionPlateau {
 
@@ -59,9 +61,36 @@ public class DAOPositionPlateauHibernate extends ConnexionHibernate implements I
 	}
 
 	@Override
-	public List<PositionPlateau> findByType(int type) {
+	public List<PositionPlateau> findByType(TypePosition type) {
+		
 		// TODO Auto-generated method stub
-		return em.createQuery("select p from PositionPlateau p ", PositionPlateau.class).getResultList();
+		
+		try {
+		Query myQuery = em.createQuery("select p from PositionPlateau p where type =:type ");
+		
+		myQuery.setParameter("type", type);
+		
+		List<PositionPlateau> mesPos = myQuery.getResultList();
+		
+		for (PositionPlateau p : mesPos) {
+			System.out.println("La classe : "+p.getClass().getSimpleName());}
+			
+			
+			
+			
+			
+			return mesPos;
+		
+		}
+		
+		catch (Exception e) {
+			System.out.println("erreur");
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
 	}
 
 	@Override

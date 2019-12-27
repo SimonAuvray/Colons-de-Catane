@@ -15,6 +15,7 @@ import fr.colonscatane.modele.Couleur;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.Segment;
+import fr.colonscatane.modele.TypePosition;
 
 /**
  * @author aballenghien
@@ -286,8 +287,10 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 		
 	}
 
+	
+
 	@Override
-	public List<PositionPlateau> findByType(int type) {
+	public List<PositionPlateau> findByType(TypePosition type) {
 		// TODO Auto-generated method stub
 		return null;
 	}

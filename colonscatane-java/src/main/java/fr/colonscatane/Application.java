@@ -30,20 +30,20 @@ public class Application {
 		
 		public static void main(String[] args) {
 			
-			//deleteJeu();
+			deleteJeu();
 			
 			
 			
 			//inscription();
-			//initialisation();
+			initialisation();
 			
 		
 			
 		//daoPositionPlateau.findByType(TypePosition.TuileRessource);
-		placementRessource();
-		placementNumero();
+//		placementRessource();
+//		placementNumero();
 			
-//			liaisonTuileCoin();
+			liaisonTuileCoin();
 			
 //			placementRessource();
 //			placementNumero();
@@ -338,7 +338,7 @@ public class Application {
 			}
 			
 			catch (Exception e) {
-				System.out.println("Erreur dans placement num�ro");
+				System.out.println("Erreur dans placement numero");
 				e.printStackTrace();
 			}
 			
@@ -366,25 +366,30 @@ public class Application {
 		for (PositionPlateau T : mesTuiles) {
 			int x = T.getX();
 			int y = T.getY();
-//			System.out.println("tuile " + x + " "+ y);
 			try {
-//				DAOCoinHibernate daoCoin = new DAOCoinHibernate();
-//				Coin coin = (Coin)daoCoin.findByXY(x-1, y-2);
-//				System.out.println(coin.getClass());
-//				coin.ressources.add((TuileRessource) T);
+				int x1= x-1;
+				int y1 = y-2;
+				DAOCoinHibernate daoCoin = new DAOCoinHibernate();
+				Coin coin = (Coin)daoCoin.findByXY( x1 , y1 );
+				DAOPositionPlateauHibernate daoPos = new DAOPositionPlateauHibernate();
+				PositionPlateau pos = daoPos.findByXY( x1 , y1 );
+				System.out.println(pos.getX());
+//				System.out.println(coin.getClass().getSimpleName());
+//				coin.ressources.add((TuileRessource)T);
 //				Coin coin2 = (Coin)daoCoin.findByXY(x-1, y);
-//				coin2.ressources.add((TuileRessource) T);
+//				coin2.ressources.add((TuileRessource)T);
 //				Coin coin3 = (Coin)daoCoin.findByXY(x-1, y+2);
-//				coin3.ressources.add((TuileRessource) T);
+//				coin3.ressources.add((TuileRessource)T);
 //				
 //				Coin coin4 = (Coin)daoCoin.findByXY(x+1, y-2);
-//				coin4.ressources.add((TuileRessource) T);
+//				coin4.ressources.add((TuileRessource)T);
 //				Coin coin5 = (Coin)daoCoin.findByXY(x+1, y);
-//				coin5.ressources.add((TuileRessource) T);
+//				coin5.ressources.add((TuileRessource)T);
 //				Coin coin6 = (Coin)daoCoin.findByXY(x+1, y+2);
-//				coin6.ressources.add((TuileRessource) T);
+//				coin6.ressources.add((TuileRessource)T);
 			}
-			catch (Exception errPlateau) {
+			catch (Exception e) {
+				e.printStackTrace();
 				System.out.println("erreur de configuration du plateau; liaisonTuileCoin");
 			}
 		}

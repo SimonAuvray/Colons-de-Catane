@@ -57,7 +57,19 @@ public class DAOPositionPlateauHibernate extends ConnexionHibernate implements I
 	@Override
 	public PositionPlateau findByXY(int x, int y) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+				return em
+					.createQuery("select p from PositionPlateau p where x =:myX and y = :myY", PositionPlateau.class)
+					.setParameter("myX", x)
+					.setParameter("myY", y)
+					.getSingleResult();
+		}
+		
+		catch (Exception e) {
+			System.out.println("erreur");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -66,21 +78,11 @@ public class DAOPositionPlateauHibernate extends ConnexionHibernate implements I
 		// TODO Auto-generated method stub
 		
 		try {
-		Query myQuery = em.createQuery("select p from PositionPlateau p where type =:type ");
-		
-		myQuery.setParameter("type", type);
-		
-		List<PositionPlateau> mesPos = myQuery.getResultList();
-		
-		for (PositionPlateau p : mesPos) {
-			System.out.println("La classe : "+p.getClass().getSimpleName());}
-			
-			
-			
-			
+			Query myQuery = em.createQuery("select p from PositionPlateau p where type =:type ");
+			myQuery.setParameter("type", type);
+			List<PositionPlateau> mesPos = myQuery.getResultList();
 			
 			return mesPos;
-		
 		}
 		
 		catch (Exception e) {
@@ -88,9 +90,7 @@ public class DAOPositionPlateauHibernate extends ConnexionHibernate implements I
 			e.printStackTrace();
 			return null;
 		}
-		
-		
-		
+
 	}
 
 	@Override

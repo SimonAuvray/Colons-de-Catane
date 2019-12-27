@@ -33,10 +33,10 @@ public class Application {
 			
 			inscription();
 			initialisation();
-//			liaisonTuileCoin();
+			liaisonTuileCoin();
 			
-			placementRessource();
-			placementNumero();
+//			placementRessource();
+//			placementNumero();
 			
 			
 //			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
@@ -105,7 +105,6 @@ public class Application {
 	    	//pour chaque ligne avec alternance coin/segment
 				// on ne pose la tuile que au X,Y central (donc une case vide sur 2)
 	    	
-			int compteurTuile = -1;
 	    	int nonAchetable = 8; 
 	    	for (int i = 2 ; i < 7 ; i +=2) {
 	    		for (int j = nonAchetable ; j < 29-nonAchetable ; j++) {
@@ -125,11 +124,17 @@ public class Application {
 	    		nonAchetable -= 2 ;
 	    	}
 	    	//pour chaque "ligne de tuile"
+	    	int compteurTuile = -1;
 	    	nonAchetable = 8 ;
 	    	for (int i = 3 ; i < 8 ; i +=2) {
-	    		if ( i == 5) {
 	    			for (int j = nonAchetable ; j < 29-nonAchetable ; j++) {
-	    				int starter = j+2 ;
+	    				int starter;
+	    				if( i == 5) {
+	    					starter = j + 2;
+	    				}
+	    				else {
+	    					starter = j ;
+	    				}
 	        			if ( starter % 4 == 0 ) {
 	            			PositionPlateau positionPlateau = new Segment();
 	        				positionPlateau.setX(i);
@@ -138,27 +143,7 @@ public class Application {
 	            		}
 	        			else {
 	        				//c'est une tuile
-	        				if(compteurTuile % 2 == 0) {
-	        					PositionPlateau positionPlateau = new TuileRessource();
-	        					positionPlateau.setX(i);
-	        					positionPlateau.setY(j);
-	        					daoPositionPlateau.save(positionPlateau);
-	        				}
-	        				compteurTuile += 1 ;	        				
-	        			}
-	    			}
-	    		}
-	    		else {
-	    			for (int j = nonAchetable ; j < 29-nonAchetable ; j++) {
-	        			if ( j % 4 == 0 ) {
-	            			PositionPlateau positionPlateau = new Segment();
-	        				positionPlateau.setX(i);
-	        				positionPlateau.setY(j);
-	        				daoPositionPlateau.save(positionPlateau);
-	            		}
-	        			else {
-	        				//c'est une tuile
-	        				if(compteurTuile % 2 == 0) {
+	        				if(compteurTuile % 3 == 0) {
 	        					PositionPlateau positionPlateau = new TuileRessource();
 	        					positionPlateau.setX(i);
 	        					positionPlateau.setY(j);
@@ -167,8 +152,7 @@ public class Application {
 	        				compteurTuile += 1 ;	
 	        			}
 	    			}
-	    		}
-	    		nonAchetable -= 2;
+	    			nonAchetable -= 2 ;
 	    	}
 	    	
 	    	//pour la "descente" du plateau
@@ -192,6 +176,7 @@ public class Application {
 	    	}
 	    	
 	    	//ligne de tuile 9
+	    	compteurTuile = -1 ;
 	    	for (int j = 6 ; j < 23 ; j++) {
 	    		int starter = j + 2 ;
 	    		if ( starter % 4 == 0 ) {
@@ -202,7 +187,7 @@ public class Application {
 	   			}
 	    		else {
 	    				//c'est une tuile
-	    			if(compteurTuile % 2 == 0) {
+	    			if(compteurTuile % 3 == 0) {
     					PositionPlateau positionPlateau = new TuileRessource();
     					positionPlateau.setX(9);
     					positionPlateau.setY(j);
@@ -213,6 +198,7 @@ public class Application {
 	    		}
 	    	
 	    	//ligne de tuile 11
+	    	compteurTuile = -1 ;
 	    	for (int j = 8 ; j < 21 ; j++) {
 	    		if ( j % 4 == 0 ) {
 	    			PositionPlateau positionPlateau = new Segment();
@@ -222,7 +208,7 @@ public class Application {
 	   			}
 	    		else {
 	    				//c'est une tuile
-	    			if(compteurTuile % 2 == 0) {
+	    			if(compteurTuile % 3 == 0) {
     					PositionPlateau positionPlateau = new TuileRessource();
     					positionPlateau.setX(11);
     					positionPlateau.setY(j);
@@ -346,7 +332,7 @@ public class Application {
 		for (PositionPlateau T : mesTuiles) {
 			int x = T.getX();
 			int y = T.getY();
-			System.out.println("tuile " + x + " "+ y);
+//			System.out.println("tuile " + x + " "+ y);
 			try {
 //				DAOCoinHibernate daoCoin = new DAOCoinHibernate();
 //				Coin coin = (Coin)daoCoin.findByXY(x-1, y-2);

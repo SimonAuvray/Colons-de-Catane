@@ -2,8 +2,9 @@ package fr.colonscatane.hibernate;
 
 import java.util.List;
 
-import fr.colonscatane.dao.IDAOPositionPlateau;
+import javax.persistence.Query;
 
+import fr.colonscatane.dao.IDAOPositionPlateau;
 import fr.colonscatane.modele.PositionPlateau;
 
 public class DAOPositionPlateauHibernate extends ConnexionHibernate implements IDAOPositionPlateau {
@@ -60,14 +61,43 @@ public class DAOPositionPlateauHibernate extends ConnexionHibernate implements I
 	@Override
 	public List<PositionPlateau> findByType(int type) {
 		// TODO Auto-generated method stub
-//		return em.createQuery("select p from PositionPlateau p where p.DTYPE_")
-		return null;
+		return em.createQuery("select p from PositionPlateau p ", PositionPlateau.class).getResultList();
 	}
 
 	@Override
 	public void deleteAll() {
 		// TODO Auto-generated method stub
 		
+		try {
+			em.getTransaction().begin();
+			Query query1 = em.createQuery("DELETE FROM LIENS");
+			query1.executeUpdate();
+			em.getTransaction().commit();
+		}
+		catch(Exception e) {
+			em.getTransaction().rollback();
+		}
+		
+		try {
+			em.getTransaction().begin();
+			Query query2 = em.createQuery("DELETE FROM PositionPlateau");			
+			query2.executeUpdate();
+			em.getTransaction().commit();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		}
+		
+		try {
+			em.getTransaction().begin();
+			Query query3 = em.createNativeQuery("ALTER TABLE position_plateau AUTO_INCREMENT=1");
+			query3.executeUpdate();
+			em.getTransaction().commit();
+		}
+		catch(Exception e) {
+			em.getTransaction().rollback();
+		}
 	}
 
 	@Override

@@ -29,6 +29,9 @@ public abstract class PositionPlateau {
 	@Transient
 	protected Joueur Occupation;
 	
+	@Column (name="POS_TYPE", insertable=false, updatable=false)
+	private TypePosition type;
+	
     public Joueur getOccupation() {
 		return Occupation;
 	}

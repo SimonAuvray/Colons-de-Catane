@@ -18,7 +18,7 @@ public class TuileRessource extends PositionPlateau {
 	private List<Coin> listeCoin;
 	
 	@Column(name="TUILE_RESSOURCE")
-	private TypeTuile type ;
+	private TypeTuile typeRessource ;
 	
 	@Column(name="TUILE_NUMERO")
 	private int numero;
@@ -57,12 +57,12 @@ public class TuileRessource extends PositionPlateau {
 
 
 	public TypeTuile getType() {
-		return type;
+		return typeRessource;
 	}
 
 
 	public void setType(TypeTuile type) {
-		this.type = type;
+		this.typeRessource = type;
 	}
 
 

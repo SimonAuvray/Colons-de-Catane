@@ -11,7 +11,7 @@ public class ConnexionHibernate {
 	
 	public ConnexionHibernate() {
 		if (emf == null) { //Création de EMF si non existant
-			emf = Persistence.createEntityManagerFactory("EMusicUnit");
+			emf = Persistence.createEntityManagerFactory("ColonCatane");
 		}
 		
 		if (emf != null) { //Création de EM pour chaque instance

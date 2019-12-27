@@ -7,15 +7,17 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 @Entity
 @DiscriminatorValue("3")
 public class TuileRessource extends PositionPlateau{
 	
-	List<PositionPlateau> lstPositionsPlateau;
+	@ManyToMany(mappedBy = "ressources")
+	List<Coin> listeCoin;
 	
 	public TuileRessource() {
-		this.lstPositionsPlateau = new ArrayList<PositionPlateau>();
+		this.listeCoin = new ArrayList<Coin>();
 	}
 
 
@@ -24,8 +26,8 @@ public class TuileRessource extends PositionPlateau{
 		this.y = y;
 	}
 	
-	public List<PositionPlateau> getLstPositionsPlateau() {
-		return lstPositionsPlateau;
+	public List<Coin> getLstPositionsPlateau() {
+		return listeCoin;
 	}
 
 	public int getX() {

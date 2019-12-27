@@ -10,8 +10,8 @@
 		<class>fr.colonscatane.modele.Joueur</class>
 		<class>fr.colonscatane.modele.Segment</class>
 		<class>fr.colonscatane.modele.Partie</class>
+		<class>fr.colonscatane.modele.Tour</class>
 		<class>fr.colonscatane.modele.TuileRessource</class>
-		<class>fr.colonscatane.modele.Utilisateur</class>
 				
 		<properties>
 			<property name="hibernate.connection.url" value="jdbc:mysql://172.16.44.108:3306/colon_catane?serverTimezone=UTC" />

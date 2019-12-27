@@ -3,7 +3,11 @@ package fr.colonscatane.modele;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -14,10 +18,15 @@ public class Partie {
 		public static final int NB_JOUEUR_MAX = 4;
 		public static final int NB_JOUEUR_MIN = 2;
 		
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Column(name = "PARTIE_ID")
+		private int id;
+		
 		@OneToMany(mappedBy = "partie")
 		List<Joueur> lstJoueurs;
 		
-		@OneToMany(mappedBy = "partie")
+		@OneToMany(mappedBy = "partieTour")
 		private List<Tour> tours;
 		
 		public Partie() {

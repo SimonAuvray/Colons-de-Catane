@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Table(name = "joueur")
 public class Joueur extends Utilisateur {
 	
+	@Id
 	@Column(name = "J_COULEUR", nullable = false)
 	private Couleur couleur;
 	@Column(name = "J_SCORE")

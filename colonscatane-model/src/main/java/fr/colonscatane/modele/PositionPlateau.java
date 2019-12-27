@@ -6,9 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "posistion_plateau")
+@Table(name = "position_plateau")
 public abstract class PositionPlateau {
 
 	@Id
@@ -19,10 +20,8 @@ public abstract class PositionPlateau {
 	protected int x;
 	protected int y;
 	
+	@Transient
 	protected Joueur Occupation;
-	
-	
-	
 	
     public Joueur getOccupation() {
 		return Occupation;

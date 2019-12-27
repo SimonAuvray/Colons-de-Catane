@@ -1,12 +1,13 @@
 package fr.colonscatane;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
-import fr.colonscatane.dao.DAOJoueur;
-import fr.colonscatane.dao.DAOPositionPlateau;
-import fr.colonscatane.dao.IDAOJoueur;
+import fr.colonscatane.hibernate.ConnexionHibernate;
 import fr.colonscatane.hibernate.DAOJoueurHibernate;
+import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
@@ -17,8 +18,8 @@ import fr.colonscatane.modele.TuileRessource;
 public class Application {
 	
 		public static Scanner sc = new Scanner(System.in);
-		public static IDAOJoueur daoJoueur = new DAOJoueurHibernate();
-		public static DAOPositionPlateau daoPositionPlateau = new DAOPositionPlateau();
+		public static DAOJoueurHibernate daoJoueur = new DAOJoueurHibernate();
+		public static DAOPositionPlateauHibernate daoPositionPlateau = new DAOPositionPlateauHibernate();
 		public static Partie partieEnCours = new Partie();
 		
 		public static void main(String[] args) {
@@ -27,18 +28,19 @@ public class Application {
 			daoPositionPlateau.deleteAll();
 			inscription();
 			initialisation();
+			liaisonTuileCoin();
 			
 			
 //			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
 //			
 //			System.out.println(maPos.getId());
 			
-			sc.close();
+			ConnexionHibernate.close();
 
 		
 		}
-			
-			
+
+
 		/**
 		 * Création de la liste des joueur pour la partie en cours
 		 */
@@ -222,4 +224,11 @@ public class Application {
 	    	
 	    	System.out.println("plateau vide , mais pret");
 	    }
+		
+		
+	private static void liaisonTuileCoin() {
+		// TODO Auto-generated method stub
+		List<TuileRessource> tuiles = new ArrayList<TuileRessource>();
+		
+	}
 }

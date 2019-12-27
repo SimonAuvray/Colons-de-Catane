@@ -3,6 +3,8 @@
  */
 package fr.colonscatane.dao;
 
+import java.util.List;
+
 import fr.colonscatane.modele.PositionPlateau;
 
 /**
@@ -12,7 +14,7 @@ import fr.colonscatane.modele.PositionPlateau;
 public interface IDAOPositionPlateau extends IDAO<PositionPlateau, Integer> {
 	public PositionPlateau findByXY(int x, int y);
 	
-	public PositionPlateau findByType(PositionPlateau type);
+	public List<PositionPlateau> findByType(int type);
 	
 	
 	public void deleteAll();

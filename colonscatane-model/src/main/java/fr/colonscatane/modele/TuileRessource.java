@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 @DiscriminatorValue("3")
-public class TuileRessource extends PositionPlateau{
+public class TuileRessource extends PositionPlateau {
 	
 	@ManyToMany(mappedBy = "ressources")
 	List<Coin> listeCoin;

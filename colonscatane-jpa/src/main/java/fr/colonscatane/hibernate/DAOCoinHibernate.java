@@ -6,7 +6,7 @@ import fr.colonscatane.modele.PositionPlateau;
 
 public class DAOCoinHibernate extends DAOPositionPlateauHibernate{
 	
-	public void delete(PositionPlateau entity) {
+	public void delete(Coin entity) {
 		try {
 			em.getTransaction().begin(); 
 			em.remove(em.merge(entity));

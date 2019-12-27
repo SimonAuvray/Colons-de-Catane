@@ -1,11 +1,13 @@
 package fr.colonscatane.hibernate;
 
-import fr.colonscatane.modele.PositionPlateau;
-import fr.colonscatane.modele.Segment;
+import java.util.List;
 
-public class DAOSegmentHibernate extends DAOPositionPlateauHibernate{
+import fr.colonscatane.modele.PositionPlateau;
+import fr.colonscatane.modele.TuileRessource;
+
+public class DAOTuileRessourceHibernate extends DAOPositionPlateauHibernate{
 	
-	public void delete(Segment entity) {
+	public void delete(TuileRessource entity) {
 		try {
 			em.getTransaction().begin(); 
 			em.remove(em.merge(entity));
@@ -21,10 +23,9 @@ public class DAOSegmentHibernate extends DAOPositionPlateauHibernate{
 	}
 	
 	public void deleteById(Integer id) {
-		PositionPlateau laPositionASupprimer = new Segment();
+		PositionPlateau laPositionASupprimer = new TuileRessource();
 		
 		laPositionASupprimer.setId(id);
 		delete(laPositionASupprimer);
 	}
-
 }

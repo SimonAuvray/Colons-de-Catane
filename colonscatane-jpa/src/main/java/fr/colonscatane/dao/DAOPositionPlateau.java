@@ -287,7 +287,7 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 	}
 
 	@Override
-	public PositionPlateau findByType(PositionPlateau type) {
+	public List<PositionPlateau> findByType(int type) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -397,26 +397,27 @@ public class Application {
 			int x = T.getX();
 			int y = T.getY();
 			try {
-				int x1= x-1;
-				int y1 = y-2;
 				DAOCoinHibernate daoCoin = new DAOCoinHibernate();
-				Coin coin = (Coin)daoCoin.findByXY( x1 , y1 );
-				DAOPositionPlateauHibernate daoPos = new DAOPositionPlateauHibernate();
-				PositionPlateau pos = daoPos.findByXY( x1 , y1 );
-				System.out.println(pos.getX());
-//				System.out.println(coin.getClass().getSimpleName());
-//				coin.ressources.add((TuileRessource)T);
-//				Coin coin2 = (Coin)daoCoin.findByXY(x-1, y);
-//				coin2.ressources.add((TuileRessource)T);
-//				Coin coin3 = (Coin)daoCoin.findByXY(x-1, y+2);
-//				coin3.ressources.add((TuileRessource)T);
-//				
-//				Coin coin4 = (Coin)daoCoin.findByXY(x+1, y-2);
-//				coin4.ressources.add((TuileRessource)T);
-//				Coin coin5 = (Coin)daoCoin.findByXY(x+1, y);
-//				coin5.ressources.add((TuileRessource)T);
-//				Coin coin6 = (Coin)daoCoin.findByXY(x+1, y+2);
-//				coin6.ressources.add((TuileRessource)T);
+				Coin coin = (Coin)daoCoin.findByXY( x-1 , y-2 );
+				coin.ressources.add((TuileRessource)T);
+				Coin coin2 = (Coin)daoCoin.findByXY(x-1, y);
+				coin2.ressources.add((TuileRessource)T);
+				Coin coin3 = (Coin)daoCoin.findByXY(x-1, y+2);
+				coin3.ressources.add((TuileRessource)T);
+				
+				Coin coin4 = (Coin)daoCoin.findByXY(x+1, y-2);
+				coin4.ressources.add((TuileRessource)T);
+				Coin coin5 = (Coin)daoCoin.findByXY(x+1, y);
+				coin5.ressources.add((TuileRessource)T);
+				Coin coin6 = (Coin)daoCoin.findByXY(x+1, y+2);
+				coin6.ressources.add((TuileRessource)T);
+				
+				daoCoin.save(coin);
+				daoCoin.save(coin2);
+				daoCoin.save(coin3);
+				daoCoin.save(coin4);
+				daoCoin.save(coin5);
+				daoCoin.save(coin6);
 			}
 			catch (Exception e) {
 				e.printStackTrace();

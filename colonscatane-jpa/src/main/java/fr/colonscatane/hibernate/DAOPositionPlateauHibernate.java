@@ -92,6 +92,9 @@ public class DAOPositionPlateauHibernate extends ConnexionHibernate implements I
 		
 		
 	}
+	
+	
+	
 
 	@Override
 	public void deleteAll() {

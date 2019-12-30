@@ -36,14 +36,10 @@ public class Application {
 			//inscription();
 			initialisation();
 			
-		//daoPositionPlateau.findByType(TypePosition.TuileRessource);
-//		placementRessource();
-//		placementNumero();
-			
 			liaisonTuileCoin();
 			
-//			placementRessource();
-//			placementNumero();
+			placementRessource();
+			placementNumero();
 			
 			
 //			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);

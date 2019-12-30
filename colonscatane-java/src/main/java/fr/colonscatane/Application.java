@@ -9,6 +9,7 @@ import java.util.Scanner;
 import fr.colonscatane.hibernate.ConnexionHibernate;
 import fr.colonscatane.hibernate.DAOCoinHibernate;
 import fr.colonscatane.hibernate.DAOJoueurHibernate;
+import fr.colonscatane.hibernate.DAOPartieHibernate;
 import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
 import fr.colonscatane.hibernate.DAOTuileRessourceHibernate;
 import fr.colonscatane.modele.Coin;
@@ -33,7 +34,7 @@ public class Application {
 			deleteJeu();		
 			
 			
-			//inscription();
+			inscription();
 			initialisation();
 			
 			liaisonTuileCoin();
@@ -41,10 +42,10 @@ public class Application {
 			placementRessource();
 			placementNumero();
 			
-			
-//			PositionPlateau maPos = daoPositionPlateau.findByXY(1, 1);
-//			
-//			System.out.println(maPos.getId());
+			partieEnCours.ordreSetUp();
+			for (Joueur j : partieEnCours.getLstJoueurs()) {
+				daoJoueur.save(j);
+			}
 			
 			dropLesLiens();
 			
@@ -408,6 +409,8 @@ public class Application {
 
 		DAOPositionPlateauHibernate daoPositionPlateauHibernate = new DAOPositionPlateauHibernate();
 		daoPositionPlateauHibernate.deleteAllPositions();
+		DAOJoueurHibernate daoJoueurHibernate = new DAOJoueurHibernate();
+		daoJoueurHibernate.deleteAll();
 	}
 
 	private static void dropLesLiens() {

@@ -1,6 +1,7 @@
 package fr.colonscatane.modele;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ public class Partie {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "PARTIE_ID")
 		private int id;
-		
+
 		@OneToMany(mappedBy = "partie")
 		List<Joueur> lstJoueurs;
 		
@@ -54,6 +55,20 @@ public class Partie {
 		
 		public List<Joueur> getLstJoueurs(){
 			return this.lstJoueurs;
+		}
+		
+		public void ordreSetUp() {
+			
+			System.out.println(" tirage de l'ordre de passage ");
+			
+			Collections.shuffle(this.getLstJoueurs());
+			int i = 0;
+			
+			for (Joueur j : this.getLstJoueurs()) {
+				j.setOrdre(i);
+				i++;
+			}
+			
 		}
 		
 	}

@@ -17,6 +17,8 @@ public class Joueur extends Utilisateur {
 	@Id
 	@Column(name = "J_COULEUR", nullable = false)
 	private Couleur couleur;
+	@Column(name = "J_ORDRE")
+	private int ordre;
 	@Column(name = "J_SCORE")
 	private int score;
 	@Column(name = "J_BOIS_POSSEDE")
@@ -52,6 +54,14 @@ public class Joueur extends Utilisateur {
 		
 	public void setCouleur(Couleur couleur) {
 		this.couleur = couleur;
+	}
+	
+	public int getOrdre() {
+		return ordre;
+	}
+
+	public void setOrdre(int ordre) {
+		this.ordre = ordre;
 	}
 	
 	public String getNomCouleur () {

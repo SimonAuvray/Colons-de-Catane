@@ -30,14 +30,11 @@ public class Application {
 		
 		public static void main(String[] args) {
 			
-			deleteJeu();
-			
+			deleteJeu();		
 			
 			
 			//inscription();
 			initialisation();
-			
-		
 			
 		//daoPositionPlateau.findByType(TypePosition.TuileRessource);
 //		placementRessource();
@@ -53,13 +50,12 @@ public class Application {
 //			
 //			System.out.println(maPos.getId());
 			
+			dropLesLiens();
 			
 			ConnexionHibernate.close();
 
 		
 		}
-
-
 
 		/**
 		 * Création de la liste des joueur pour la partie en cours
@@ -370,23 +366,8 @@ public class Application {
 			catch (Exception e) {
 				System.out.println("Erreur dans placement numero");
 				e.printStackTrace();
-			}
-			
-			
-			
-			
-			
+			}			
 		}
-			
-			
-			
-			
-			
-			
-			
-			
-		
-
 		
 		
 	private static void liaisonTuileCoin() {
@@ -430,6 +411,13 @@ public class Application {
 	private static void deleteJeu() {
 
 		DAOPositionPlateauHibernate daoPositionPlateauHibernate = new DAOPositionPlateauHibernate();
-		daoPositionPlateauHibernate.deleteAll();
+		daoPositionPlateauHibernate.deleteAllPositions();
+	}
+
+	private static void dropLesLiens() {
+
+		DAOPositionPlateauHibernate daoPositionPlateauHibernate = new DAOPositionPlateauHibernate();
+		daoPositionPlateauHibernate.dropLiens();
+		
 	}
 }

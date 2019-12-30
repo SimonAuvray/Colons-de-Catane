@@ -18,7 +18,7 @@ public interface IDAOPositionPlateau extends IDAO<PositionPlateau, Integer> {
 	public List<PositionPlateau> findByType(TypePosition type);
 	
 	
-	public void deleteAll();
+	void deleteAllPositions();
 	
 
 }

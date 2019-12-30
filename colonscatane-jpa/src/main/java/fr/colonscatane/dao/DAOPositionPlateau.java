@@ -266,7 +266,6 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 			
 	}
 
-	@Override
 	public void deleteAll() {
 		String requeteSQL = "DELETE FROM position_plateau";
 		try {
@@ -293,5 +292,11 @@ public class DAOPositionPlateau extends ConnectionSQL implements IDAOPositionPla
 	public List<PositionPlateau> findByType(TypePosition type) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteAllPositions() {
+		// TODO Auto-generated method stub
+		
 	}
 }

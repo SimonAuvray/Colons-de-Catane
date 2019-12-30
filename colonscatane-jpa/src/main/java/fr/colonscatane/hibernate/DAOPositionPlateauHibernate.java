@@ -94,21 +94,21 @@ public class DAOPositionPlateauHibernate extends ConnexionHibernate implements I
 	}
 	
 	
-	
-
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
+	public void dropLiens() {
 		try {
 			em.getTransaction().begin();
-			Query query1 = em.createQuery("DELETE FROM LIENS");
+			Query query1 = em.createNativeQuery("DROP TABLE LIENS");
 			query1.executeUpdate();
 			em.getTransaction().commit();
 		}
 		catch(Exception e) {
 			em.getTransaction().rollback();
 		}
+	}
+
+	@Override
+	public void deleteAllPositions() {
+		// TODO Auto-generated method stub
 		
 		try {
 			em.getTransaction().begin();

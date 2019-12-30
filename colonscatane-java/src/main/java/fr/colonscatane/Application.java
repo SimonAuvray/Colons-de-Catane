@@ -269,7 +269,7 @@ public class Application {
 			
 			for (int i = 0; i<compteurChamp ; i++) {
 				TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
-				maTuile.setType(TypeTuile.Montagne);
+				maTuile.setType(TypeTuile.Champ);
 				parcoureur ++;
 				daoTuileRessource.save(maTuile);
 			}
@@ -310,6 +310,26 @@ public class Application {
 			
 			Collections.shuffle(mesTuiles);
 			
+			List<TuileRessource> ListDesert = daoTuileRessource.findByRessource(TypeTuile.Desert);
+			
+			TuileRessource desert = ListDesert.get(0);
+			
+			
+			desert.setNumero(0);
+			
+			int idDesert = mesTuiles.indexOf(desert);
+			
+			try {
+			daoTuileRessource.save(desert);
+			mesTuiles.remove(idDesert);
+			}
+			
+			catch (Exception e) {
+				System.out.println("erreur desertique");
+				e.printStackTrace();
+			}
+			
+			
 			int parcoureur = 0;
 			int numeroTuile = 2;
 			
@@ -318,17 +338,27 @@ public class Application {
 			TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
 			maTuile.setNumero(numeroTuile);
 			parcoureur ++;
-			numeroTuile++;
+			
 			daoTuileRessource.save(maTuile);
 			
-			for (int i = 3 ; i< 12 ; i++) {
+			for (numeroTuile = 3 ; numeroTuile< 7 ; numeroTuile++) {
 				for (int j=0; j<2 ; j++) {
 					maTuile = (TuileRessource) mesTuiles.get(parcoureur);
 					maTuile.setNumero(numeroTuile);
 					parcoureur ++;
 					daoTuileRessource.save(maTuile);
 				}
-				numeroTuile++;
+				
+			}
+			
+			for (numeroTuile = 8 ; numeroTuile< 12 ; numeroTuile++) {
+				for (int j=0; j<2 ; j++) {
+					maTuile = (TuileRessource) mesTuiles.get(parcoureur);
+					maTuile.setNumero(numeroTuile);
+					parcoureur ++;
+					daoTuileRessource.save(maTuile);
+				}
+				
 			}
 			
 			

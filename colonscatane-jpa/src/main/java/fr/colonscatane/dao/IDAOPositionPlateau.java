@@ -19,6 +19,8 @@ public interface IDAOPositionPlateau extends IDAO<PositionPlateau, Integer> {
 	
 	
 	public void deleteAll();
+	
+
 }
 
 

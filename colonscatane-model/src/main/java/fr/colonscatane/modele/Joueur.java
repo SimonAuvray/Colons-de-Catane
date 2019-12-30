@@ -125,7 +125,9 @@ public class Joueur extends Utilisateur {
 	public void setCompteurRoute(int compteurRoute) {
 		this.compteurRoute = compteurRoute;
 	}
-	
+	public List<Coin> getCoins() {
+		return coins;
+	}	
 	
 	public Joueur () {
 	}

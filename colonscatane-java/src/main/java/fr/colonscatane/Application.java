@@ -1,7 +1,6 @@
 package fr.colonscatane;
 
-import java.util.ArrayList;
-import java.util.*;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -9,8 +8,8 @@ import java.util.Scanner;
 import fr.colonscatane.hibernate.ConnexionHibernate;
 import fr.colonscatane.hibernate.DAOCoinHibernate;
 import fr.colonscatane.hibernate.DAOJoueurHibernate;
-import fr.colonscatane.hibernate.DAOPartieHibernate;
 import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
+import fr.colonscatane.hibernate.DAOSegmentHibernate;
 import fr.colonscatane.hibernate.DAOTuileRessourceHibernate;
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
@@ -26,6 +25,8 @@ public class Application {
 		public static Scanner sc = new Scanner(System.in);
 		public static DAOJoueurHibernate daoJoueur = new DAOJoueurHibernate();
 		public static DAOPositionPlateauHibernate daoPositionPlateau = new DAOPositionPlateauHibernate();
+		public static DAOCoinHibernate daoCoin = new DAOCoinHibernate();
+		public static DAOSegmentHibernate daoSegment = new DAOSegmentHibernate();
 		public static DAOTuileRessourceHibernate daoTuileRessource = new DAOTuileRessourceHibernate();
 		public static Partie partieEnCours = new Partie();
 		
@@ -46,6 +47,8 @@ public class Application {
 			for (Joueur j : partieEnCours.getLstJoueurs()) {
 				daoJoueur.save(j);
 			}
+			
+			premiersTours();
 			
 			dropLesLiens();
 			
@@ -369,13 +372,11 @@ public class Application {
 		
 	private static void liaisonTuileCoin() {
 		// TODO Auto-generated method stub
-		DAOTuileRessourceHibernate daoTuileRessource = new DAOTuileRessourceHibernate();
 		List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
 		for (PositionPlateau T : mesTuiles) {
 			int x = T.getX();
 			int y = T.getY();
 			try {
-				DAOCoinHibernate daoCoin = new DAOCoinHibernate();
 				Coin coin = (Coin)daoCoin.findByXY( x-1 , y-2 );
 				coin.ressources.add((TuileRessource)T);
 				Coin coin2 = (Coin)daoCoin.findByXY(x-1, y);
@@ -403,20 +404,126 @@ public class Application {
 			}
 		}
 	}
+	
+
+
+	private static void premiersTours() {
+		
+		//pour chaque joueur, choisir un coin ou placer la premiere colonie
+		for (int i = 0 ; i <= partieEnCours.getLstJoueurs().size() - 1 ; i ++) {
+			Joueur joueurTour = partieEnCours.getLstJoueurs().get(i);
+			System.out.println(" Au joueur "+ joueurTour.getCouleur() + " de jouer. ");
+			System.out.println(" Choisissez le lieu de votre première colonie :");
+			
+			int xColonie = 0;
+			int yColonie = 0;
+			boolean saisieOK = false;
+			Coin coin = new Coin();
+			
+			while (!saisieOK) {
+				try {
+					System.out.println(" Ligne : ");
+					xColonie = sc.nextInt();
+					sc.nextLine();
+					System.out.println(" Colonne : ");
+					yColonie = sc.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("ERR : le numéro de Ligne ou de colonne doit etre un entier.");
+					sc.nextLine();
+				}
+				
+				try {
+					coin = (Coin)daoCoin.findByXY(xColonie, yColonie);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Le lieu choisi n'est pas un coin et ne peut recevoir une colonnie !");
+				}
+				
+				//test si coin deja occupé
+					//ajouter tests si coins voisins !!
+					//faire des Pos plateau essayer getOcc?
+				Coin coin1 = new Coin();
+				Coin coin2 = new Coin();
+				Coin coin3 = new Coin();
+				Coin coin4 = new Coin();
+				try {
+					coin1 = (Coin) daoCoin.findByXY(xColonie, yColonie-2);
+				}
+				finally {
+				}
+				try {
+					coin2 = (Coin) daoCoin.findByXY(xColonie, yColonie+2);
+				}
+				finally {
+				}
+				try {
+					coin3 = (Coin) daoCoin.findByXY(xColonie-2, yColonie);
+				}
+				finally {
+				}
+				try {
+					coin4 = (Coin) daoCoin.findByXY(xColonie+2, yColonie);
+				}
+				finally {
+				}
+
+				if (coin.getOccupationCoin() == null ) {
+					coin.setOccupationCoin(joueurTour);
+					daoCoin.save(coin);
+					saisieOK = true;
+				} else {
+					System.out.println("Le lieu choisi est deja occupé !");
+				}
+			}
+			
+			//Disposition d'une route voisine
+			System.out.println(" Choisissez une route :");
+			Boolean saisieRouteOK = false;
+			int xRoute = 0;
+			int yRoute = 0;
+			Segment route = new Segment();
+			
+			while (!saisieRouteOK) {
+				try {
+					System.out.println(" Ligne : ");
+					xRoute = sc.nextInt();
+					sc.nextLine();
+					System.out.println(" Colonne : ");
+					yRoute = sc.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("ERR : le numéro de Ligne ou de colonne doit etre un entier.");
+					sc.nextLine();
+				}
+				
+				try {
+					route = (Segment)daoSegment.findByXY(xRoute, yRoute);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Vous n'avez pas saisi une route !");
+				}
+				
+				if ( (xRoute < xColonie -1) || (xRoute > xColonie +1) || (yRoute < yColonie -1) || (yRoute > yColonie +1) ) {
+					System.out.println("Vous devez choisir une route voisine de votre colonie !");
+				}
+				else {
+					route.setOccupationSegment(joueurTour);
+					daoSegment.save(route);
+					saisieRouteOK = true;
+				}
+			}
+		}
+	}
 
 
 	private static void deleteJeu() {
 
-		DAOPositionPlateauHibernate daoPositionPlateauHibernate = new DAOPositionPlateauHibernate();
-		daoPositionPlateauHibernate.deleteAllPositions();
-		DAOJoueurHibernate daoJoueurHibernate = new DAOJoueurHibernate();
-		daoJoueurHibernate.deleteAll();
+		daoPositionPlateau.deleteAllPositions();
+		daoJoueur.deleteAll();
 	}
 
 	private static void dropLesLiens() {
 
-		DAOPositionPlateauHibernate daoPositionPlateauHibernate = new DAOPositionPlateauHibernate();
-		daoPositionPlateauHibernate.dropLiens();
+		daoPositionPlateau.dropLiens();
 		
 	}
 }

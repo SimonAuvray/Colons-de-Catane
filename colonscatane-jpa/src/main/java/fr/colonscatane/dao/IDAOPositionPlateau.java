@@ -13,14 +13,22 @@ import fr.colonscatane.modele.TypePosition;
  *
  */
 public interface IDAOPositionPlateau extends IDAO<PositionPlateau, Integer> {
-	public PositionPlateau findByXY(int x, int y);
 	
 	public List<PositionPlateau> findByType(TypePosition type);
-	
-	
+
+	PositionPlateau findById(Integer id);
+
+	PositionPlateau save(PositionPlateau entity);
+
+	void delete(PositionPlateau entity);
+
+	void deleteById(Integer id);
+
+	PositionPlateau findByXY(int x, int y);
+
 	void deleteAllPositions();
 	
-
+	
 }
 
 

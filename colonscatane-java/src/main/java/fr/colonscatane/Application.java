@@ -5,12 +5,23 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import fr.colonscatane.hibernate.ConnexionHibernate;
-import fr.colonscatane.hibernate.DAOCoinHibernate;
-import fr.colonscatane.hibernate.DAOJoueurHibernate;
-import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
-import fr.colonscatane.hibernate.DAOSegmentHibernate;
-import fr.colonscatane.hibernate.DAOTuileRessourceHibernate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import fr.colonscatane.dao.IDAOCoin;
+import fr.colonscatane.dao.IDAOJoueur;
+import fr.colonscatane.dao.IDAOPositionPlateau;
+import fr.colonscatane.dao.IDAOSegment;
+import fr.colonscatane.dao.IDAOTuileRessource;
+import fr.colonscatane.dao.IDAOUtilisateur;
+//import fr.colonscatane.hibernate.ConnexionHibernate;
+//import fr.colonscatane.hibernate.DAOCoinHibernate;
+//import fr.colonscatane.hibernate.DAOJoueurHibernate;
+//import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
+//import fr.colonscatane.hibernate.DAOSegmentHibernate;
+//import fr.colonscatane.hibernate.DAOTuileRessourceHibernate;
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
@@ -19,48 +30,105 @@ import fr.colonscatane.modele.Segment;
 import fr.colonscatane.modele.TuileRessource;
 import fr.colonscatane.modele.TypePosition;
 import fr.colonscatane.modele.TypeTuile;
+import fr.colonscatane.service.CoinService;
 
+@Configuration
+@ComponentScan("fr.colonscatane")
 public class Application {
 	
-		public static Scanner sc = new Scanner(System.in);
-		public static DAOJoueurHibernate daoJoueur = new DAOJoueurHibernate();
-		public static DAOPositionPlateauHibernate daoPositionPlateau = new DAOPositionPlateauHibernate();
-		public static DAOCoinHibernate daoCoin = new DAOCoinHibernate();
-		public static DAOSegmentHibernate daoSegment = new DAOSegmentHibernate();
-		public static DAOTuileRessourceHibernate daoTuileRessource = new DAOTuileRessourceHibernate();
-		public static Partie partieEnCours = new Partie();
+	public static Scanner sc = new Scanner(System.in);
+	
+	@Autowired
+	public IDAOJoueur daoJoueur;
+	@Autowired
+	public IDAOUtilisateur daoUtilisateur;
+	@Autowired
+	public IDAOPositionPlateau daoPositionPlateau;
+	@Autowired
+	public IDAOCoin daoCoin;
+	@Autowired
+	public IDAOSegment daoSegment;
+	@Autowired
+	public IDAOTuileRessource daoTuileRessource;
+	@Autowired
+	public CoinService srvCoin;
+	
+	public static Partie partieEnCours = new Partie();
 		
+	public void run(String[] args) {
+				
+		
+//		connexionUtilisateur();
+		
+		inscription();
+		initialisation();
+		
+		liaisonTuileCoin();
+		
+//		placementRessource();
+//		placementNumero();
+		
+		partieEnCours.ordreSetUp();
+		for (Joueur j : partieEnCours.getLstJoueurs()) {
+			daoJoueur.save(j);
+		}
+		
+		dropLesLiens();
+		deleteJeu();
+		
+//		premiersTours();
+		
+//		dropLesLiens();
+		
+	}
+
 		public static void main(String[] args) {
 			
-			deleteJeu();		
+			AnnotationConfigApplicationContext myContext = new AnnotationConfigApplicationContext(Application.class);
+			myContext.getBean("application", Application.class).run(args);
 			
 			
-			inscription();
-			initialisation();
 			
-			liaisonTuileCoin();
 			
-			placementRessource();
-			placementNumero();
-			
-			partieEnCours.ordreSetUp();
-			for (Joueur j : partieEnCours.getLstJoueurs()) {
-				daoJoueur.save(j);
-			}
-			
-			premiersTours();
-			
-			dropLesLiens();
-			
-			ConnexionHibernate.close();
-
+			myContext.close();
+		}
 		
+		private void connexionUtilisateur() {
+			boolean utilisateur;
+			String answer = null;
+			System.out.println(" Etes vous déjà un utilisateur ? :Y/N");
+			while(!answer.contentEquals("Y") || !answer.contentEquals("N")) {
+				try {
+					answer = sc.nextLine();
+				} catch (InputMismatchException e) {
+					System.out.println("Veuillez entrer Y ou N");
+					sc.nextLine();
+				}
+			}
+			if(answer.contentEquals("Y")) {
+				utilisateur = true;
+				Boolean saisieOK = false;
+				String nomUtilisateur = null;
+				String passwordUtilisateur = null;
+				while(!saisieOK) {
+					try {
+						System.out.println(" Votre nom d'utlisateur :");
+						nomUtilisateur = sc.next();
+						System.out.println(" Votre mot de passe :");
+						passwordUtilisateur = sc.next();
+					} catch (InputMismatchException e) {
+						System.out.println("erreur d'entrée");
+						sc.nextLine();
+					}
+				}
+				daoUtilisateur.findByUsernameAndPassword(nomUtilisateur, passwordUtilisateur);
+			}
 		}
 
 		/**
 		 * CrÃ©ation de la liste des joueur pour la partie en cours
 		 */
-		public static void inscription() {
+		public void inscription() {
 			boolean saisieOK = false;
 			int nombreDeJoueurs = 0;
 			while (!saisieOK) {
@@ -105,7 +173,7 @@ public class Application {
 		
 		
 		
-		public static void initialisation() {
+		public void initialisation() {
 		    
 	    	//premiere moitiee de tableau
 	    	//pour chaque ligne avec alternance coin/segment
@@ -230,10 +298,10 @@ public class Application {
 		
 		
 		
-		public static void placementRessource () {
+		public void placementRessource () {
 			
 			List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
-			
+
 			Collections.shuffle(mesTuiles);
 
 			
@@ -300,13 +368,13 @@ public class Application {
 		
 		
 		
-		public static void placementNumero () {
+		public void placementNumero () {
 			
 			List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
 			
 			Collections.shuffle(mesTuiles);
 			
-			List<TuileRessource> ListDesert = daoTuileRessource.findByRessource(TypeTuile.Desert);
+			List<TuileRessource> ListDesert = daoTuileRessource.findByTypeRessource(TypeTuile.Desert);
 			
 			TuileRessource desert = ListDesert.get(0);
 			
@@ -370,33 +438,34 @@ public class Application {
 		}
 		
 		
-	private static void liaisonTuileCoin() {
+	private void liaisonTuileCoin() {
 		// TODO Auto-generated method stub
 		List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
+		srvCoin.findRessources();
 		for (PositionPlateau T : mesTuiles) {
 			int x = T.getX();
 			int y = T.getY();
 			try {
-				Coin coin = (Coin)daoCoin.findByXY( x-1 , y-2 );
-				coin.ressources.add((TuileRessource)T);
-				Coin coin2 = (Coin)daoCoin.findByXY(x-1, y);
-				coin2.ressources.add((TuileRessource)T);
-				Coin coin3 = (Coin)daoCoin.findByXY(x-1, y+2);
-				coin3.ressources.add((TuileRessource)T);
-				
-				Coin coin4 = (Coin)daoCoin.findByXY(x+1, y-2);
-				coin4.ressources.add((TuileRessource)T);
-				Coin coin5 = (Coin)daoCoin.findByXY(x+1, y);
-				coin5.ressources.add((TuileRessource)T);
-				Coin coin6 = (Coin)daoCoin.findByXY(x+1, y+2);
-				coin6.ressources.add((TuileRessource)T);
-				
-				daoCoin.save(coin);
-				daoCoin.save(coin2);
-				daoCoin.save(coin3);
-				daoCoin.save(coin4);
-				daoCoin.save(coin5);
-				daoCoin.save(coin6);
+//				Coin coin = (Coin)daoCoin.findByXAndY( x-1 , y-2 );
+//				coin.getRessources().add((TuileRessource)T);
+//				Coin coin2 = (Coin)daoCoin.findByXAndY(x-1, y);
+//				coin2.getRessources().add((TuileRessource)T);
+//				Coin coin3 = (Coin)daoCoin.findByXAndY(x-1, y+2);
+//				coin3.getRessources().add((TuileRessource)T);
+//				
+//				Coin coin4 = (Coin)daoCoin.findByXAndY(x+1, y-2);
+//				coin4.getRessources().add((TuileRessource)T);
+//				Coin coin5 = (Coin)daoCoin.findByXAndY(x+1, y);
+//				coin5.getRessources().add((TuileRessource)T);
+//				Coin coin6 = (Coin)daoCoin.findByXAndY(x+1, y+2);
+//				coin6.getRessources().add((TuileRessource)T);
+//				
+//				daoCoin.save(coin);
+//				daoCoin.save(coin2);
+//				daoCoin.save(coin3);
+//				daoCoin.save(coin4);
+//				daoCoin.save(coin5);
+//				daoCoin.save(coin6);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -407,7 +476,7 @@ public class Application {
 	
 
 
-	private static void premiersTours() {
+	private void premiersTours() {
 		
 		//pour chaque joueur, choisir un coin ou placer la premiere colonie
 		for (int i = 0 ; i <= partieEnCours.getLstJoueurs().size() - 1 ; i ++) {
@@ -433,7 +502,7 @@ public class Application {
 				}
 				
 				try {
-					coin = (Coin)daoCoin.findByXY(xColonie, yColonie);
+					coin = (Coin)daoCoin.findByXAndY(xColonie, yColonie);
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("Le lieu choisi n'est pas un coin et ne peut recevoir une colonnie !");
@@ -447,22 +516,22 @@ public class Application {
 				Coin coin3 = new Coin();
 				Coin coin4 = new Coin();
 				try {
-					coin1 = (Coin) daoCoin.findByXY(xColonie, yColonie-2);
+					coin1 = (Coin) daoCoin.findByXAndY(xColonie, yColonie-2);
 				}
 				finally {
 				}
 				try {
-					coin2 = (Coin) daoCoin.findByXY(xColonie, yColonie+2);
+					coin2 = (Coin) daoCoin.findByXAndY(xColonie, yColonie+2);
 				}
 				finally {
 				}
 				try {
-					coin3 = (Coin) daoCoin.findByXY(xColonie-2, yColonie);
+					coin3 = (Coin) daoCoin.findByXAndY(xColonie-2, yColonie);
 				}
 				finally {
 				}
 				try {
-					coin4 = (Coin) daoCoin.findByXY(xColonie+2, yColonie);
+					coin4 = (Coin) daoCoin.findByXAndY(xColonie+2, yColonie);
 				}
 				finally {
 				}
@@ -496,7 +565,7 @@ public class Application {
 				}
 				
 				try {
-					route = (Segment)daoSegment.findByXY(xRoute, yRoute);
+					route = (Segment)daoSegment.findByXAndY(xRoute, yRoute);
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("Vous n'avez pas saisi une route !");
@@ -515,13 +584,14 @@ public class Application {
 	}
 
 
-	private static void deleteJeu() {
+	private void deleteJeu() {
 
-		daoPositionPlateau.deleteAllPositions();
+		daoPositionPlateau.deleteAll();
+		daoPositionPlateau.resetIncrement();
 		daoJoueur.deleteAll();
 	}
 
-	private static void dropLesLiens() {
+	private void dropLesLiens() {
 
 		daoPositionPlateau.dropLiens();
 		

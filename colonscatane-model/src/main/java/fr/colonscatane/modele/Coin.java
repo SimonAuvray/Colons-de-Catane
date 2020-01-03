@@ -21,10 +21,10 @@ public class Coin extends PositionPlateau {
 	   	uniqueConstraints = @UniqueConstraint(columnNames = {"LIEN_COIN_ID", "LIEN_TUILE_ID"} ),
 	   	joinColumns = @JoinColumn(name = "LIEN_COIN_ID", referencedColumnName = "POS_ID"),
 	   	inverseJoinColumns = @JoinColumn(name = "LIEN_TUILE_ID", referencedColumnName = "POS_ID"))
-    public List<TuileRessource> ressources;
+    private List<TuileRessource> ressources;
 	    
 	@Column(name = "TAILLE_OCCUPATION")
-	public int taille;
+	private int taille;
 	    
 	@ManyToOne
 	@JoinColumn(name = "COIN_JOUEUR")

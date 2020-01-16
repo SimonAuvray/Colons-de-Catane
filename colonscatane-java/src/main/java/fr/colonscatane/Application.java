@@ -57,7 +57,7 @@ public class Application {
 		
 	public void run(String[] args) {
 				
-		
+//		deleteJeu();
 //		connexionUtilisateur();
 		
 		inscription();
@@ -73,8 +73,8 @@ public class Application {
 			daoJoueur.save(j);
 		}
 		
-		dropLesLiens();
-		deleteJeu();
+//		dropLesLiens();
+		
 		
 //		premiersTours();
 		

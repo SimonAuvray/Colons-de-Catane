@@ -59,6 +59,7 @@ public class Application {
 				
 //		deleteJeu();
 //		connexionUtilisateur();
+//		A checker par Sim
 		
 		inscription();
 		initialisation();

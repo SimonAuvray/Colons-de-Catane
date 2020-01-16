@@ -57,12 +57,8 @@ public class Application {
 		
 	public void run(String[] args) {
 				
-//		deleteJeu();
-//		connexionUtilisateur();
 		
-		
-		
-		initialisation();
+//		initialisation();
 //		inscription();
 //		
 //		liaisonTuileCoin();
@@ -75,13 +71,10 @@ public class Application {
 //			daoJoueur.save(j);
 //		}
 		
-	//	dropLesLiens();
 		deleteJeu();
 		
 		
 //		premiersTours();
-		
-//		dropLesLiens();
 		
 	}
 
@@ -95,38 +88,6 @@ public class Application {
 			
 			myContext.close();
 		}
-		
-//		private void connexionUtilisateur() {
-//			boolean utilisateur;
-//			String answer = null;
-//			System.out.println(" Etes vous d�j� un utilisateur ? :Y/N");
-//			while(!answer.contentEquals("Y") || !answer.contentEquals("N")) {
-//				try {
-//					answer = sc.nextLine();
-//				} catch (InputMismatchException e) {
-//					System.out.println("Veuillez entrer Y ou N");
-//					sc.nextLine();
-//				}
-//			}
-//			if(answer.contentEquals("Y")) {
-//				utilisateur = true;
-//				Boolean saisieOK = false;
-//				String nomUtilisateur = null;
-//				String passwordUtilisateur = null;
-//				while(!saisieOK) {
-//					try {
-//						System.out.println(" Votre nom d'utlisateur :");
-//						nomUtilisateur = sc.next();
-//						System.out.println(" Votre mot de passe :");
-//						passwordUtilisateur = sc.next();
-//					} catch (InputMismatchException e) {
-//						System.out.println("erreur d'entr�e");
-//						sc.nextLine();
-//					}
-//				}
-//				daoUtilisateur.findByUsernameAndPassword(nomUtilisateur, passwordUtilisateur);
-//			}
-//		}
 
 		/**
 		 * Création de la liste des joueur pour la partie en cours
@@ -209,25 +170,6 @@ public class Application {
 			}
 		
 			System.out.println("FIN!!!!!!!!");
-		
-//			int i2 = 1;
-//			while(i2 <= nombreDeJoueurs) {
-//				System.out.println("Quel est le nom du joueur "+i+"?");
-//				String nom = Application.sc.nextLine();
-//				if(nom.equals("")) {
-//					nom = "Toto";
-//				}
-//				
-//				Joueur joueur = new Joueur(nom);
-//				
-//				partieEnCours.getLstJoueurs().add(joueur);
-//				i2++;
-//			}
-//			partieEnCours.attribuerCouleur();
-//			for(Joueur j : partieEnCours.getLstJoueurs()) {
-//				daoJoueur.save(j);
-//				System.out.println(j.toString());
-//			}
 		}
 
 public void inscriptionUt() {
@@ -322,12 +264,7 @@ public void inscriptionUt() {
 			
 		}
 	}
-}
-	
-		
-
-		
-		
+}		
 		
 		public void initialisation() {
 		    
@@ -746,11 +683,5 @@ public void inscriptionUt() {
 		daoPositionPlateau.dropLiens();
 		daoPositionPlateau.resetIncrement();
 		daoJoueur.deleteAll();
-	}
-
-	private void dropLesLiens() {
-
-		daoPositionPlateau.dropLiens();
-		
 	}
 }

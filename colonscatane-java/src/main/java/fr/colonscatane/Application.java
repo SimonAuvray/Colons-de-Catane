@@ -97,7 +97,7 @@ public class Application {
 		private void connexionUtilisateur() {
 			boolean utilisateur;
 			String answer = null;
-			System.out.println(" Etes vous déjà un utilisateur ? :Y/N");
+			System.out.println(" Etes vous dï¿½jï¿½ un utilisateur ? :Y/N");
 			while(!answer.contentEquals("Y") || !answer.contentEquals("N")) {
 				try {
 					answer = sc.nextLine();
@@ -118,7 +118,7 @@ public class Application {
 						System.out.println(" Votre mot de passe :");
 						passwordUtilisateur = sc.next();
 					} catch (InputMismatchException e) {
-						System.out.println("erreur d'entrée");
+						System.out.println("erreur d'entrï¿½e");
 						sc.nextLine();
 					}
 				}
@@ -483,7 +483,7 @@ public class Application {
 		for (int i = 0 ; i <= partieEnCours.getLstJoueurs().size() - 1 ; i ++) {
 			Joueur joueurTour = partieEnCours.getLstJoueurs().get(i);
 			System.out.println(" Au joueur "+ joueurTour.getCouleur() + " de jouer. ");
-			System.out.println(" Choisissez le lieu de votre première colonie :");
+			System.out.println(" Choisissez le lieu de votre premiï¿½re colonie :");
 			
 			int xColonie = 0;
 			int yColonie = 0;
@@ -498,7 +498,7 @@ public class Application {
 					System.out.println(" Colonne : ");
 					yColonie = sc.nextInt();
 				} catch (InputMismatchException e) {
-					System.out.println("ERR : le numéro de Ligne ou de colonne doit etre un entier.");
+					System.out.println("ERR : le numï¿½ro de Ligne ou de colonne doit etre un entier.");
 					sc.nextLine();
 				}
 				
@@ -509,7 +509,7 @@ public class Application {
 					System.out.println("Le lieu choisi n'est pas un coin et ne peut recevoir une colonnie !");
 				}
 				
-				//test si coin deja occupé
+				//test si coin deja occupï¿½
 					//ajouter tests si coins voisins !!
 					//faire des Pos plateau essayer getOcc?
 				Coin coin1 = new Coin();
@@ -542,7 +542,7 @@ public class Application {
 					daoCoin.save(coin);
 					saisieOK = true;
 				} else {
-					System.out.println("Le lieu choisi est deja occupé !");
+					System.out.println("Le lieu choisi est deja occupï¿½ !");
 				}
 			}
 			
@@ -561,7 +561,7 @@ public class Application {
 					System.out.println(" Colonne : ");
 					yRoute = sc.nextInt();
 				} catch (InputMismatchException e) {
-					System.out.println("ERR : le numéro de Ligne ou de colonne doit etre un entier.");
+					System.out.println("ERR : le numï¿½ro de Ligne ou de colonne doit etre un entier.");
 					sc.nextLine();
 				}
 				

@@ -16,20 +16,19 @@ import fr.colonscatane.dao.IDAOPositionPlateau;
 import fr.colonscatane.dao.IDAOSegment;
 import fr.colonscatane.dao.IDAOTuileRessource;
 import fr.colonscatane.dao.IDAOUtilisateur;
-//import fr.colonscatane.hibernate.ConnexionHibernate;
-//import fr.colonscatane.hibernate.DAOCoinHibernate;
-//import fr.colonscatane.hibernate.DAOJoueurHibernate;
-//import fr.colonscatane.hibernate.DAOPositionPlateauHibernate;
-//import fr.colonscatane.hibernate.DAOSegmentHibernate;
-//import fr.colonscatane.hibernate.DAOTuileRessourceHibernate;
+import fr.colonscatane.exception.EmptyLibelleException;
+import fr.colonscatane.exception.NotBooleanException;
+
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
+import fr.colonscatane.modele.ListeRoles;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.Segment;
 import fr.colonscatane.modele.TuileRessource;
 import fr.colonscatane.modele.TypePosition;
 import fr.colonscatane.modele.TypeTuile;
+import fr.colonscatane.modele.Utilisateur;
 import fr.colonscatane.service.CoinService;
 
 @Configuration
@@ -53,28 +52,30 @@ public class Application {
 	@Autowired
 	public CoinService srvCoin;
 	
+	
 	public static Partie partieEnCours = new Partie();
 		
 	public void run(String[] args) {
 				
 //		deleteJeu();
 //		connexionUtilisateur();
-//		A checker par Simon
 		
-		inscription();
-		initialisation();
 		
-		liaisonTuileCoin();
 		
-//		placementRessource();
-//		placementNumero();
+//		initialisation();
+//		inscription();
+//		
+//		liaisonTuileCoin();
+//		
+////		placementRessource();
+////		placementNumero();
+//		
+//		partieEnCours.ordreSetUp();
+//		for (Joueur j : partieEnCours.getLstJoueurs()) {
+//			daoJoueur.save(j);
+//		}
 		
-		partieEnCours.ordreSetUp();
-		for (Joueur j : partieEnCours.getLstJoueurs()) {
-			daoJoueur.save(j);
-		}
-		
-//		dropLesLiens();
+		dropLesLiens();
 		
 		
 //		premiersTours();
@@ -94,37 +95,37 @@ public class Application {
 			myContext.close();
 		}
 		
-		private void connexionUtilisateur() {
-			boolean utilisateur;
-			String answer = null;
-			System.out.println(" Etes vous dï¿½jï¿½ un utilisateur ? :Y/N");
-			while(!answer.contentEquals("Y") || !answer.contentEquals("N")) {
-				try {
-					answer = sc.nextLine();
-				} catch (InputMismatchException e) {
-					System.out.println("Veuillez entrer Y ou N");
-					sc.nextLine();
-				}
-			}
-			if(answer.contentEquals("Y")) {
-				utilisateur = true;
-				Boolean saisieOK = false;
-				String nomUtilisateur = null;
-				String passwordUtilisateur = null;
-				while(!saisieOK) {
-					try {
-						System.out.println(" Votre nom d'utlisateur :");
-						nomUtilisateur = sc.next();
-						System.out.println(" Votre mot de passe :");
-						passwordUtilisateur = sc.next();
-					} catch (InputMismatchException e) {
-						System.out.println("erreur d'entrï¿½e");
-						sc.nextLine();
-					}
-				}
-				daoUtilisateur.findByUsernameAndPassword(nomUtilisateur, passwordUtilisateur);
-			}
-		}
+//		private void connexionUtilisateur() {
+//			boolean utilisateur;
+//			String answer = null;
+//			System.out.println(" Etes vous dï¿½jï¿½ un utilisateur ? :Y/N");
+//			while(!answer.contentEquals("Y") || !answer.contentEquals("N")) {
+//				try {
+//					answer = sc.nextLine();
+//				} catch (InputMismatchException e) {
+//					System.out.println("Veuillez entrer Y ou N");
+//					sc.nextLine();
+//				}
+//			}
+//			if(answer.contentEquals("Y")) {
+//				utilisateur = true;
+//				Boolean saisieOK = false;
+//				String nomUtilisateur = null;
+//				String passwordUtilisateur = null;
+//				while(!saisieOK) {
+//					try {
+//						System.out.println(" Votre nom d'utlisateur :");
+//						nomUtilisateur = sc.next();
+//						System.out.println(" Votre mot de passe :");
+//						passwordUtilisateur = sc.next();
+//					} catch (InputMismatchException e) {
+//						System.out.println("erreur d'entrï¿½e");
+//						sc.nextLine();
+//					}
+//				}
+//				daoUtilisateur.findByUsernameAndPassword(nomUtilisateur, passwordUtilisateur);
+//			}
+//		}
 
 		/**
 		 * CrÃ©ation de la liste des joueur pour la partie en cours
@@ -132,6 +133,17 @@ public class Application {
 		public void inscription() {
 			boolean saisieOK = false;
 			int nombreDeJoueurs = 0;
+			String username = null;
+			String password = null;
+			
+			
+			
+			// inscription éventuelle d'un nouvel utilisateur
+			
+			inscriptionUt();
+			
+		
+			// definition du nombre de joueurs
 			while (!saisieOK) {
 				
 				System.out.println("Combien de joueur ?");
@@ -151,26 +163,168 @@ public class Application {
 				}
 			}
 			
+			// definition des joueurs
+			
 		
 			int i = 1;
 			while(i <= nombreDeJoueurs) {
-				System.out.println("Quel est le nom du joueur "+i+"?");
-				String nom = Application.sc.nextLine();
-				if(nom.equals("")) {
-					nom = "Toto";
+				boolean identification = false ;
+				
+				int idUt = 0;
+				
+			
+				while (!identification) {
+					System.out.println("Quel est le nom d'utilisateur du joueur "+i+"?");
+					username = sc.nextLine();
+					
+					System.out.println("Entrer le mot de passe de l'utilisateur :");
+					password = sc.nextLine();
+					
+					try { 
+						idUt = daoUtilisateur.findByUsernameAndPassword(username, password).getId();
+						identification = true;
+						System.out.println("Identifiction ok ! Bonjour " + username);
+					}
+					
+					catch (Exception ne) {
+						System.out.println("Ce mot de passe ne correspond pas à ce nom d'utilisateur, veuillez réessayer");
+					}
 				}
 				
-				Joueur joueur = new Joueur(nom);
+				Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password);
+				joueur.setRole(ListeRoles.Joueur);
 				
 				partieEnCours.getLstJoueurs().add(joueur);
+				
 				i++;
 			}
+			
+			// attribution d'une couleur à un joueur
 			partieEnCours.attribuerCouleur();
 			for(Joueur j : partieEnCours.getLstJoueurs()) {
+				
 				daoJoueur.save(j);
-				System.out.println(j.toString());
+				
 			}
+		
+			System.out.println("FIN!!!!!!!!");
+		
+//			int i2 = 1;
+//			while(i2 <= nombreDeJoueurs) {
+//				System.out.println("Quel est le nom du joueur "+i+"?");
+//				String nom = Application.sc.nextLine();
+//				if(nom.equals("")) {
+//					nom = "Toto";
+//				}
+//				
+//				Joueur joueur = new Joueur(nom);
+//				
+//				partieEnCours.getLstJoueurs().add(joueur);
+//				i2++;
+//			}
+//			partieEnCours.attribuerCouleur();
+//			for(Joueur j : partieEnCours.getLstJoueurs()) {
+//				daoJoueur.save(j);
+//				System.out.println(j.toString());
+//			}
 		}
+
+public void inscriptionUt() {
+	
+	boolean saisieInscr = false;
+	String instruction = null ;
+	boolean inscrfinie = false;
+	System.out.println("Souhaitez-vous inscrire un nouveau joueur ? (y/n)");
+	
+	while(!saisieInscr || !inscrfinie) {
+		try {
+			instruction = sc.nextLine();
+			
+			if (!instruction.equals("y") && !instruction.equals("n")) {
+				throw new NotBooleanException();
+			}
+			saisieInscr = true;
+			
+			
+		} 
+		
+		catch (InputMismatchException e) {
+			System.out.println("ERR : taper 'y' pour oui, 'n' pour non");
+			e.printStackTrace();
+			sc.nextLine();
+		}
+		
+		catch (NotBooleanException e) {
+			System.out.println("ERR : taper 'y' pour oui, 'n' pour non");
+			sc.nextLine();
+		}
+		
+
+	
+	if (instruction.equals("y")) {
+		Joueur monJoueur = new Joueur();
+		System.out.println("Entrer un nom d'utilisateur :");
+		
+		
+		// definition du nom d'utilisateur
+		try {
+			String username = null;
+			
+			username = sc.nextLine();
+			System.out.println(username);
+			if (username == null) {
+				throw new EmptyLibelleException();
+			}
+			
+			else { monJoueur.setUsername(username);}
+			
+		}
+		
+		catch (EmptyLibelleException e) {
+			System.out.println("");
+		}
+		
+		catch (Exception e) {
+			System.out.println("");
+		}
+		
+		// definition du mot de passe
+		
+		try {
+			String password = null;
+			
+			System.out.println("Entrer un mot de passe :");
+			password = sc.nextLine();
+			if (password == null) {
+				throw new EmptyLibelleException();
+			}
+			
+			else { monJoueur.setPassword(password);}
+			
+		}
+		
+		catch (EmptyLibelleException e) {
+		}
+		
+		catch (Exception e) {
+		}
+		
+		daoJoueur.save(monJoueur);
+		System.out.println("joueur bien créé");
+		
+		// plusieurs inscriptions à la suite ou non
+		System.out.println("Souhaitez-vous inscrire un nouveau joueur ? (y/n)");
+	}
+			
+		if (instruction.equals("n")) {
+			inscrfinie = true;
+			
+		}
+	}
+}
+	
+		
+
 		
 		
 		

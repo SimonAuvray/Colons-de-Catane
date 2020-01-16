@@ -8,13 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "joueur")
+@PrimaryKeyJoinColumn(name="CLI_ID", referencedColumnName = "UT_ID")
 public class Joueur extends Utilisateur {
 	
-	@Column(name = "J_COULEUR", nullable = false, unique = true)
+	
+	
+	@Column(name = "J_COULEUR")
 	private Couleur couleur;
 	@Column(name = "J_ORDRE")
 	private int ordre;
@@ -36,6 +40,8 @@ public class Joueur extends Utilisateur {
 	private int compteurVille;
 	@Column(name = "J_COMPTEUR_ROUTE")
 	private int compteurRoute;
+	@Column(name="J_ROLE")
+	private ListeRoles role;
 	
 	@ManyToOne
 	@JoinColumn(name = "JOUEUR_PARTIE")
@@ -128,6 +134,18 @@ public class Joueur extends Utilisateur {
 		return coins;
 	}	
 	
+	
+	
+	
+
+	public ListeRoles getRole() {
+		return role;
+	}
+
+	public void setRole(ListeRoles role) {
+		this.role = role;
+	}
+
 	public Joueur () {
 	}
 	
@@ -139,6 +157,12 @@ public class Joueur extends Utilisateur {
 		super(nom);
 		this.couleur = couleur;
 	}
+	
+	public Joueur (String username, String mdp) {
+		super(username, mdp);
+	}
+	
+	
 	
 	
 	public Joueur (Couleur couleur, String nom, int score,int boisPossede, int blePossede, int argilePossede, int pierrePossede, int moutonPossede, int compteurColonie, int compteurVille, int compteurRoute) {

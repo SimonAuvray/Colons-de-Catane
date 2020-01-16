@@ -5,10 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class  Utilisateur {
 	
 	@Id
@@ -55,6 +58,28 @@ public abstract class  Utilisateur {
 	public Utilisateur (String nom) {
 		this.nom = nom;
 	}
+	
+	public Utilisateur (String username, String mdp, String nom) {
+		this.username = username;
+		this.password=mdp;
+		this.nom = nom;
+	}
+	
+	public Utilisateur (String username, String mdp) {
+		this.username = username;
+		this.password=mdp;
+		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 	
 	
 	

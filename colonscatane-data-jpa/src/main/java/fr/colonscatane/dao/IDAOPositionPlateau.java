@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.TypePosition;
@@ -16,11 +17,13 @@ public interface IDAOPositionPlateau<T extends PositionPlateau> extends JpaRepos
 	
 	public PositionPlateau findByXAndY(int x, int y);
 	
-	@Query(value = "TRUNCATE TABLE LIENS", nativeQuery = true)
+	@Query(value = "DROP TABLE LIENS", nativeQuery = true)
 	@Modifying
+	@Transactional
 	public void dropLiens();
 	
-	@Query(value = "TRUNCATE TABLE POSITION_PLATEAU", nativeQuery = true)
+	@Query(value = "ALTER TABLE position_plateau AUTO_INCREMENT=1", nativeQuery = true)
 	@Modifying
+	@Transactional
 	public void resetIncrement();
 }

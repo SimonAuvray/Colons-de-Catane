@@ -62,7 +62,7 @@ public class Application {
 		
 		
 		
-//		initialisation();
+		initialisation();
 //		inscription();
 //		
 //		liaisonTuileCoin();
@@ -75,7 +75,8 @@ public class Application {
 //			daoJoueur.save(j);
 //		}
 		
-		dropLesLiens();
+	//	dropLesLiens();
+		deleteJeu();
 		
 		
 //		premiersTours();
@@ -742,6 +743,7 @@ public void inscriptionUt() {
 	private void deleteJeu() {
 
 		daoPositionPlateau.deleteAll();
+		daoPositionPlateau.dropLiens();
 		daoPositionPlateau.resetIncrement();
 		daoJoueur.deleteAll();
 	}

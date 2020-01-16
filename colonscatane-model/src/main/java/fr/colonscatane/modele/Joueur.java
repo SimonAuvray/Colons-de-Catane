@@ -14,8 +14,7 @@ import javax.persistence.Table;
 @Table(name = "joueur")
 public class Joueur extends Utilisateur {
 	
-	@Id
-	@Column(name = "J_COULEUR", nullable = false)
+	@Column(name = "J_COULEUR", nullable = false, unique = true)
 	private Couleur couleur;
 	@Column(name = "J_ORDRE")
 	private int ordre;
@@ -125,7 +124,9 @@ public class Joueur extends Utilisateur {
 	public void setCompteurRoute(int compteurRoute) {
 		this.compteurRoute = compteurRoute;
 	}
-	
+	public List<Coin> getCoins() {
+		return coins;
+	}	
 	
 	public Joueur () {
 	}

@@ -10,11 +10,13 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
+import javax.persistence.CascadeType;
+
 @Entity
 @DiscriminatorValue("3")
 public class TuileRessource extends PositionPlateau {
 	
-	@ManyToMany(mappedBy = "ressources")
+	@ManyToMany(mappedBy = "ressources", cascade = CascadeType.ALL)
 	private List<Coin> listeCoin;
 	
 	@Column(name="TUILE_RESSOURCE")

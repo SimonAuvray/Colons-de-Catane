@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.colonscatane.dao.IDAOCoin;
 import fr.colonscatane.dao.IDAOJoueur;
@@ -57,15 +58,11 @@ public class Application {
 		
 	public void run(String[] args) {
 				
-//		deleteJeu();
-//		connexionUtilisateur();
 		
 		
-		
-		initialisation();
 //		inscription();
-//		
-//		liaisonTuileCoin();
+		initialisation();
+		liaisonTuileCoin();
 //		
 ////		placementRessource();
 ////		placementNumero();
@@ -75,13 +72,10 @@ public class Application {
 //			daoJoueur.save(j);
 //		}
 		
-	//	dropLesLiens();
-		deleteJeu();
+//		deleteJeu();
 		
 		
 //		premiersTours();
-		
-//		dropLesLiens();
 		
 	}
 
@@ -95,38 +89,6 @@ public class Application {
 			
 			myContext.close();
 		}
-		
-//		private void connexionUtilisateur() {
-//			boolean utilisateur;
-//			String answer = null;
-//			System.out.println(" Etes vous d�j� un utilisateur ? :Y/N");
-//			while(!answer.contentEquals("Y") || !answer.contentEquals("N")) {
-//				try {
-//					answer = sc.nextLine();
-//				} catch (InputMismatchException e) {
-//					System.out.println("Veuillez entrer Y ou N");
-//					sc.nextLine();
-//				}
-//			}
-//			if(answer.contentEquals("Y")) {
-//				utilisateur = true;
-//				Boolean saisieOK = false;
-//				String nomUtilisateur = null;
-//				String passwordUtilisateur = null;
-//				while(!saisieOK) {
-//					try {
-//						System.out.println(" Votre nom d'utlisateur :");
-//						nomUtilisateur = sc.next();
-//						System.out.println(" Votre mot de passe :");
-//						passwordUtilisateur = sc.next();
-//					} catch (InputMismatchException e) {
-//						System.out.println("erreur d'entr�e");
-//						sc.nextLine();
-//					}
-//				}
-//				daoUtilisateur.findByUsernameAndPassword(nomUtilisateur, passwordUtilisateur);
-//			}
-//		}
 
 		/**
 		 * Création de la liste des joueur pour la partie en cours
@@ -209,25 +171,6 @@ public class Application {
 			}
 		
 			System.out.println("FIN!!!!!!!!");
-		
-//			int i2 = 1;
-//			while(i2 <= nombreDeJoueurs) {
-//				System.out.println("Quel est le nom du joueur "+i+"?");
-//				String nom = Application.sc.nextLine();
-//				if(nom.equals("")) {
-//					nom = "Toto";
-//				}
-//				
-//				Joueur joueur = new Joueur(nom);
-//				
-//				partieEnCours.getLstJoueurs().add(joueur);
-//				i2++;
-//			}
-//			partieEnCours.attribuerCouleur();
-//			for(Joueur j : partieEnCours.getLstJoueurs()) {
-//				daoJoueur.save(j);
-//				System.out.println(j.toString());
-//			}
 		}
 
 public void inscriptionUt() {
@@ -322,12 +265,7 @@ public void inscriptionUt() {
 			
 		}
 	}
-}
-	
-		
-
-		
-		
+}		
 		
 		public void initialisation() {
 		    
@@ -593,41 +531,8 @@ public void inscriptionUt() {
 			}			
 		}
 		
-		
 	private void liaisonTuileCoin() {
-		// TODO Auto-generated method stub
-		List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
-		srvCoin.findRessources();
-		for (PositionPlateau T : mesTuiles) {
-			int x = T.getX();
-			int y = T.getY();
-			try {
-//				Coin coin = (Coin)daoCoin.findByXAndY( x-1 , y-2 );
-//				coin.getRessources().add((TuileRessource)T);
-//				Coin coin2 = (Coin)daoCoin.findByXAndY(x-1, y);
-//				coin2.getRessources().add((TuileRessource)T);
-//				Coin coin3 = (Coin)daoCoin.findByXAndY(x-1, y+2);
-//				coin3.getRessources().add((TuileRessource)T);
-//				
-//				Coin coin4 = (Coin)daoCoin.findByXAndY(x+1, y-2);
-//				coin4.getRessources().add((TuileRessource)T);
-//				Coin coin5 = (Coin)daoCoin.findByXAndY(x+1, y);
-//				coin5.getRessources().add((TuileRessource)T);
-//				Coin coin6 = (Coin)daoCoin.findByXAndY(x+1, y+2);
-//				coin6.getRessources().add((TuileRessource)T);
-//				
-//				daoCoin.save(coin);
-//				daoCoin.save(coin2);
-//				daoCoin.save(coin3);
-//				daoCoin.save(coin4);
-//				daoCoin.save(coin5);
-//				daoCoin.save(coin6);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("erreur de configuration du plateau; liaisonTuileCoin");
-			}
-		}
+		srvCoin.addRessources();
 	}
 	
 
@@ -746,11 +651,5 @@ public void inscriptionUt() {
 		daoPositionPlateau.dropLiens();
 		daoPositionPlateau.resetIncrement();
 		daoJoueur.deleteAll();
-	}
-
-	private void dropLesLiens() {
-
-		daoPositionPlateau.dropLiens();
-		
 	}
 }

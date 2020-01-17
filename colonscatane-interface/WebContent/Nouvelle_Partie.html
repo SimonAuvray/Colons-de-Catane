@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+	<title>Colons de Catane : Lancer une nouvelle partie</title>
+	<meta name="description" content="Jouez au fameux jeu de plateau et de stratégie Colons de Catane,
+	 colonisez les terrains pour obtenir des ressources, batir vos villes et vos route,
+	  utilisez les cartes de développement pour atteindre la vicoire avant vos adversaires" />
+	<base href="/colonscatane-interface/" />
+	<link rel="stylesheet" type="text/css" href="stylePlateau.css" />
+	
+	<script defer src="nouvellePartie.js"></script>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>	  
+</head>
+<body>
+
+
+	<form id="choixJoueur">
+		<div class="jumbotron jumbotron-fluid">
+	  		<div class="container">
+    			<h1 class="display-4">Colons de Catane</h1>
+    			<p class="lead">Lancer une nouvelle partie</p>
+	  		</div>
+		</div>
+		<div class="bandeau">
+			<h4> Entrer les joueurs</h4>
+		</div>
+  		<div class="form-group">
+    		<label id= "user" >Entrer le nom d'utilisateur du joueur 1</label>
+    		<input type="text" class="form-control" id="saisieUsername">
+    		
+  		</div>
+  		
+  		<div class="form-group">
+    		<button type="submit" class="btn btn-primary saisie_joueur" >Inscription</button>
+  		</div>
+  		<br/>
+  		<br/>
+  		
+  		<table class="table table-striped">
+			 <thead>
+				    <tr>
+				      <th scope="col">Numéro du joueur</th>
+				      <th scope="col">Couleur du joueur</th>
+				      <th scope="col">Nom</th>
+				   
+				    </tr>
+			</thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">Joueur 1</th>
+				      <td> <div class="sqare bleu"> </div>
+				      </td>
+				      <td>Otto</td>
+				      
+				    </tr>
+				    <tr>
+				      <th scope="row">Joueur 2</th>
+				      <td><div class="sqare rouge"> </div>
+				      </td>
+				      <td>Thornton</td>
+				      
+				    </tr>
+				    <tr>
+				      <th scope="row">Joueur 3</th>
+				      <td><div class="sqare vert"> </div>
+				      </td>
+				      <td>the Bird</td>
+				      
+				    </tr>
+				    <tr>
+				      <th scope="row">Joueur 4</th>
+				      <td><div class="sqare jaune"> </div>
+				      </td>
+				      <td>Timmy!!!</td>
+				      
+				    </tr>
+				  </tbody>
+		</table>
+		
+			<br/>
+  			<br/>
+		
+		<a href="Plateau.html"><button type="button" class="btn btn-primary btn-lg btn-block" >LANCER LA PARTIE !</button> </a>
+  		
+  		
+  		
+	</form>
+	
+	
+
+</body>
+</html>

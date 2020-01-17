@@ -21,6 +21,10 @@ body{
 	background-color: #f9e4b7;
 }
 
+#plateau{
+	
+}
+
 .hexagon {
   position: relative;
   display: inline-block;

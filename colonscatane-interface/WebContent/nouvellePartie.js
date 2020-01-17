@@ -1,18 +1,15 @@
 /**
  * 
  */
-//let i = 1;
-//
-//while (i<=4){
-//
-//document.querySelector('.saisie_joueur').addEventListener('click', () => {
-//	
-//	
-//	
-//	document.getElementByID("user").innerHTML = "Entrer le nom du joueur" + i;
-//	
-//	i++;
-//	
-//});
-//}
-
+let numJoueur = 0;
+document.querySelector('.saisie_joueur').addEventListener('click', () => {
+	try {
+		event.preventDefault();
+		document.querySelector(`td[name="nomJoueur${numJoueur}"]`).innerHTML = document.querySelector('input[id="saisieUsername"]').value;
+		numJoueur++;
+	}
+	catch(err){
+		alert("vous ne pouvez pas inscrire plus de 4 joueurs");
+		console.error("vous ne pouvez pas inscrire plus de 4 joueurs");
+	}
+});

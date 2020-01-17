@@ -1,0 +1,22 @@
+@charset "ISO-8859-1";
+
+header{
+	display : block;
+	top : 0px;
+	height : 150px;
+	background-color : #6d071a;
+	
+	
+	
+}
+
+header h2 {
+	color : #c6c6c6;
+	text-align : center;
+	position : relative;
+	top : 50%;
+}
+
+body{
+	background-color: #f9e4b7;
+}

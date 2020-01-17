@@ -64,8 +64,8 @@ public class Application {
 		initialisation();
 		liaisonTuileCoin();
 //		
-////		placementRessource();
-////		placementNumero();
+		placementRessource();
+		placementNumero();
 //		
 //		partieEnCours.ordreSetUp();
 //		for (Joueur j : partieEnCours.getLstJoueurs()) {
@@ -412,7 +412,7 @@ public void inscriptionUt() {
 			
 			for (int i = 0; i<compteurPrairie ; i++) {
 				TuileRessource maTuile = (TuileRessource) mesTuiles.get(parcoureur);
-				maTuile.setType(TypeTuile.Prairie);
+				maTuile.setType(TypeTuile.Prairie); 
 				parcoureur ++;
 				daoTuileRessource.save(maTuile);
 			}
@@ -454,9 +454,6 @@ public void inscriptionUt() {
 			catch (Exception e) {
 				System.out.println("Erreur dans placementRessource");
 				e.printStackTrace();}
-			
-			
-			
 			
 		}
 		

@@ -20,3 +20,37 @@ header h2 {
 body{
 	background-color: #f9e4b7;
 }
+
+.hexagon {
+  position: relative;
+  display: inline-block;
+  width: 300px; 
+  height: 173.21px;
+  background-color: #64C7CC;
+  margin: 86.60px 0;
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 86.60px solid #64C7CC;
+}
+
+.hexagon:after {
+  top: 100%;
+  width: 0;
+  border-top: 86.60px solid #64C7CC;
+}
+
+.line2{
+	margin-top: -86.60px;
+	margin-left: 150px;
+}

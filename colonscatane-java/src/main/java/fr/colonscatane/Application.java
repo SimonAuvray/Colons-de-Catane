@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.colonscatane.dao.IDAOCoin;
 import fr.colonscatane.dao.IDAOJoueur;
@@ -58,10 +59,10 @@ public class Application {
 	public void run(String[] args) {
 				
 		
-//		initialisation();
+		
 //		inscription();
-//		
-//		liaisonTuileCoin();
+		initialisation();
+		liaisonTuileCoin();
 //		
 ////		placementRessource();
 ////		placementNumero();
@@ -71,7 +72,7 @@ public class Application {
 //			daoJoueur.save(j);
 //		}
 		
-		deleteJeu();
+//		deleteJeu();
 		
 		
 //		premiersTours();
@@ -530,41 +531,8 @@ public void inscriptionUt() {
 			}			
 		}
 		
-		
 	private void liaisonTuileCoin() {
-		// TODO Auto-generated method stub
-		List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
-		srvCoin.findRessources();
-		for (PositionPlateau T : mesTuiles) {
-			int x = T.getX();
-			int y = T.getY();
-			try {
-//				Coin coin = (Coin)daoCoin.findByXAndY( x-1 , y-2 );
-//				coin.getRessources().add((TuileRessource)T);
-//				Coin coin2 = (Coin)daoCoin.findByXAndY(x-1, y);
-//				coin2.getRessources().add((TuileRessource)T);
-//				Coin coin3 = (Coin)daoCoin.findByXAndY(x-1, y+2);
-//				coin3.getRessources().add((TuileRessource)T);
-//				
-//				Coin coin4 = (Coin)daoCoin.findByXAndY(x+1, y-2);
-//				coin4.getRessources().add((TuileRessource)T);
-//				Coin coin5 = (Coin)daoCoin.findByXAndY(x+1, y);
-//				coin5.getRessources().add((TuileRessource)T);
-//				Coin coin6 = (Coin)daoCoin.findByXAndY(x+1, y+2);
-//				coin6.getRessources().add((TuileRessource)T);
-//				
-//				daoCoin.save(coin);
-//				daoCoin.save(coin2);
-//				daoCoin.save(coin3);
-//				daoCoin.save(coin4);
-//				daoCoin.save(coin5);
-//				daoCoin.save(coin6);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("erreur de configuration du plateau; liaisonTuileCoin");
-			}
-		}
+		srvCoin.addRessources();
 	}
 	
 

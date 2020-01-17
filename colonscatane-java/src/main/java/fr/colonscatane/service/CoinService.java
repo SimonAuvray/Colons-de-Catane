@@ -22,12 +22,28 @@ public class CoinService {
 	private IDAOCoin daoCoin;
 	
 	@Transactional
-	public void findRessources() {
+	public void addRessources() {
 		try {
 			daoTuileRessource.findAll().forEach(new Consumer<TuileRessource>() {
 				public void accept(TuileRessource t) {
-					t.getListeCoin().add((Coin) daoCoin.findByXAndY(t.getX() -1, t.getY()-1));
-					daoTuileRessource.save(t);
+					Coin coin = (Coin)daoCoin.findByXAndY(t.getX()-1, t.getY()-2);
+					coin.getRessources().add(t);
+					daoCoin.save(coin);
+					coin = (Coin)daoCoin.findByXAndY(t.getX()-1, t.getY());
+					coin.getRessources().add(t);
+					daoCoin.save(coin);
+					coin = (Coin)daoCoin.findByXAndY(t.getX()-1, t.getY()+2);
+					coin.getRessources().add(t);
+					daoCoin.save(coin);
+					coin = (Coin)daoCoin.findByXAndY(t.getX()+1, t.getY()-2);
+					coin.getRessources().add(t);
+					daoCoin.save(coin);
+					coin = (Coin)daoCoin.findByXAndY(t.getX()+1, t.getY());
+					coin.getRessources().add(t);
+					daoCoin.save(coin);
+					coin = (Coin)daoCoin.findByXAndY(t.getX()+1, t.getY()+2);
+					coin.getRessources().add(t);
+					daoCoin.save(coin);
 				}
 			});
 		} catch (Exception e) {

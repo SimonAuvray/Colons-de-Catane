@@ -100,7 +100,7 @@ public class Application {
 			
 			
 			
-			// inscription éventuelle d'un nouvel utilisateur
+			// inscription ï¿½ventuelle d'un nouvel utilisateur
 			
 			inscriptionUt();
 			
@@ -149,7 +149,7 @@ public class Application {
 					}
 					
 					catch (Exception ne) {
-						System.out.println("Ce mot de passe ne correspond pas à ce nom d'utilisateur, veuillez réessayer");
+						System.out.println("Ce mot de passe ne correspond pas ï¿½ ce nom d'utilisateur, veuillez rï¿½essayer");
 					}
 				}
 				
@@ -161,7 +161,7 @@ public class Application {
 				i++;
 			}
 			
-			// attribution d'une couleur à un joueur
+			// attribution d'une couleur ï¿½ un joueur
 			partieEnCours.attribuerCouleur();
 			for(Joueur j : partieEnCours.getLstJoueurs()) {
 				
@@ -253,9 +253,9 @@ public void inscriptionUt() {
 		}
 		
 		daoJoueur.save(monJoueur);
-		System.out.println("joueur bien créé");
+		System.out.println("joueur bien crï¿½ï¿½");
 		
-		// plusieurs inscriptions à la suite ou non
+		// plusieurs inscriptions ï¿½ la suite ou non
 		System.out.println("Souhaitez-vous inscrire un nouveau joueur ? (y/n)");
 	}
 			

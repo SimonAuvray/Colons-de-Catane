@@ -466,8 +466,6 @@ public void inscriptionUt() {
 			List<TuileRessource> ListDesert = daoTuileRessource.findByTypeRessource(TypeTuile.Desert);
 			
 			TuileRessource desert = ListDesert.get(0);
-			System.out.println("desID " + desert.getId() +" index " + ListDesert.indexOf(desert) +" index2 " + mesTuiles.indexOf(desert));
-			System.out.println(desert.getClass().getSimpleName());
 			
 			desert.setNumero(0);
 			

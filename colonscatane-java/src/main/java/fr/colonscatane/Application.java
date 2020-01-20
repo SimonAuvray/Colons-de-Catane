@@ -576,7 +576,10 @@ public void inscriptionUt() {
 				Coin coin4 = new Coin();
 				Joueur joueur;
 				
+				
 				if(daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() != null) {
+					System.out.println("occupant Id :" + daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation().getId());
+					System.out.println("obfe");
 //					testVoisin = true;
 				}
 				

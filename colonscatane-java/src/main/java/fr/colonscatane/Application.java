@@ -467,10 +467,15 @@ public void inscriptionUt() {
 			List<TuileRessource> ListDesert = daoTuileRessource.findByTypeRessource(TypeTuile.Desert);
 			
 			TuileRessource desert = ListDesert.get(0);
-			System.out.println("desID " + desert.getId() +" index " + ListDesert.indexOf(desert) +" index2 " + mesTuiles.indexOf(desert));
-			System.out.println(desert.getClass().getSimpleName());
 			
 			desert.setNumero(0);
+			try {
+				daoTuileRessource.save(desert);	
+			}
+			catch (Exception e) {
+				System.out.println("erreur desertique");
+				e.printStackTrace();
+			}
 			
 			try {
 				for (PositionPlateau p : mesTuiles) {
@@ -478,11 +483,10 @@ public void inscriptionUt() {
 						mesTuiles.remove(p);
 					}
 				}
-				daoTuileRessource.save(desert);			
 			}
 			catch (Exception e) {
-				System.out.println("erreur desertique");
-				e.printStackTrace();
+					System.out.println("erreur desertique");
+					e.printStackTrace();
 			}
 			
 			
@@ -577,7 +581,8 @@ public void inscriptionUt() {
 				Coin coin4 = new Coin();
 				Joueur joueur;
 							
-				if(daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() != null) {
+				if( (daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() == null) ) {
+					System.out.println(" test voisin !!!!!");
 //					testVoisin = true;
 				}
 				

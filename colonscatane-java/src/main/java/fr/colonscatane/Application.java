@@ -3,6 +3,7 @@ package fr.colonscatane;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +100,7 @@ public class Application {
 			
 			
 			
-			// inscription éventuelle d'un nouvel utilisateur
+			// inscription ï¿½ventuelle d'un nouvel utilisateur
 			
 			inscriptionUt();
 			
@@ -148,7 +149,7 @@ public class Application {
 					}
 					
 					catch (Exception ne) {
-						System.out.println("Ce mot de passe ne correspond pas à ce nom d'utilisateur, veuillez réessayer");
+						System.out.println("Ce mot de passe ne correspond pas ï¿½ ce nom d'utilisateur, veuillez rï¿½essayer");
 					}
 				}
 				
@@ -160,7 +161,7 @@ public class Application {
 				i++;
 			}
 			
-			// attribution d'une couleur à un joueur
+			// attribution d'une couleur ï¿½ un joueur
 			partieEnCours.attribuerCouleur();
 			for(Joueur j : partieEnCours.getLstJoueurs()) {
 				
@@ -252,9 +253,9 @@ public void inscriptionUt() {
 		}
 		
 		daoJoueur.save(monJoueur);
-		System.out.println("joueur bien créé");
+		System.out.println("joueur bien crï¿½ï¿½");
 		
-		// plusieurs inscriptions à la suite ou non
+		// plusieurs inscriptions ï¿½ la suite ou non
 		System.out.println("Souhaitez-vous inscrire un nouveau joueur ? (y/n)");
 	}
 			
@@ -466,10 +467,15 @@ public void inscriptionUt() {
 			List<TuileRessource> ListDesert = daoTuileRessource.findByTypeRessource(TypeTuile.Desert);
 			
 			TuileRessource desert = ListDesert.get(0);
-			System.out.println("desID " + desert.getId() +" index " + ListDesert.indexOf(desert) +" index2 " + mesTuiles.indexOf(desert));
-			System.out.println(desert.getClass().getSimpleName());
 			
 			desert.setNumero(0);
+			try {
+				daoTuileRessource.save(desert);	
+			}
+			catch (Exception e) {
+				System.out.println("erreur desertique");
+				e.printStackTrace();
+			}
 			
 			try {
 				for (PositionPlateau p : mesTuiles) {
@@ -477,11 +483,10 @@ public void inscriptionUt() {
 						mesTuiles.remove(p);
 					}
 				}
-				daoTuileRessource.save(desert);			
 			}
 			catch (Exception e) {
-				System.out.println("erreur desertique");
-				e.printStackTrace();
+					System.out.println("erreur desertique");
+					e.printStackTrace();
 			}
 			
 			
@@ -575,11 +580,9 @@ public void inscriptionUt() {
 				Coin coin3 = new Coin();
 				Coin coin4 = new Coin();
 				Joueur joueur;
-				
-				
-				if(daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() != null) {
-					System.out.println("occupant Id :" + daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation().getId());
-					System.out.println("obfe");
+							
+				if( (daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() == null) ) {
+					System.out.println(" test voisin !!!!!");
 //					testVoisin = true;
 				}
 				

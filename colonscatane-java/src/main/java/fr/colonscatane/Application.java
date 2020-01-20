@@ -3,6 +3,7 @@ package fr.colonscatane;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -575,7 +576,7 @@ public void inscriptionUt() {
 				Coin coin3 = new Coin();
 				Coin coin4 = new Coin();
 				Joueur joueur;
-				
+							
 				if(daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() != null) {
 //					testVoisin = true;
 				}

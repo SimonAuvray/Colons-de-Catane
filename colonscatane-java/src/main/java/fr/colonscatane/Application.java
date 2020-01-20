@@ -60,22 +60,20 @@ public class Application {
 				
 		
 		
-//		inscription();
+		inscription();
 		initialisation();
 		liaisonTuileCoin();
-//		
 		placementRessource();
 		placementNumero();
-//		
-//		partieEnCours.ordreSetUp();
-//		for (Joueur j : partieEnCours.getLstJoueurs()) {
-//			daoJoueur.save(j);
-//		}
 		
-//		deleteJeu();
+		partieEnCours.ordreSetUp();
+		for (Joueur j : partieEnCours.getLstJoueurs()) {
+			daoJoueur.save(j);
+		}
 		
+		premiersTours();
 		
-//		premiersTours();
+		deleteJeu();
 		
 	}
 
@@ -468,17 +466,19 @@ public void inscriptionUt() {
 			List<TuileRessource> ListDesert = daoTuileRessource.findByTypeRessource(TypeTuile.Desert);
 			
 			TuileRessource desert = ListDesert.get(0);
-			
+			System.out.println("desID " + desert.getId() +" index " + ListDesert.indexOf(desert) +" index2 " + mesTuiles.indexOf(desert));
+			System.out.println(desert.getClass().getSimpleName());
 			
 			desert.setNumero(0);
 			
-			int idDesert = mesTuiles.indexOf(desert);
-			
 			try {
-			daoTuileRessource.save(desert);
-			mesTuiles.remove(idDesert);
+				for (PositionPlateau p : mesTuiles) {
+					if(p.getId() == desert.getId()) {
+						mesTuiles.remove(p);
+					}
+				}
+				daoTuileRessource.save(desert);			
 			}
-			
 			catch (Exception e) {
 				System.out.println("erreur desertique");
 				e.printStackTrace();
@@ -540,7 +540,7 @@ public void inscriptionUt() {
 		for (int i = 0 ; i <= partieEnCours.getLstJoueurs().size() - 1 ; i ++) {
 			Joueur joueurTour = partieEnCours.getLstJoueurs().get(i);
 			System.out.println(" Au joueur "+ joueurTour.getCouleur() + " de jouer. ");
-			System.out.println(" Choisissez le lieu de votre premi�re colonie :");
+			System.out.println(" Choisissez le lieu de votre premiere colonie :");
 			
 			int xColonie = 0;
 			int yColonie = 0;
@@ -555,7 +555,7 @@ public void inscriptionUt() {
 					System.out.println(" Colonne : ");
 					yColonie = sc.nextInt();
 				} catch (InputMismatchException e) {
-					System.out.println("ERR : le num�ro de Ligne ou de colonne doit etre un entier.");
+					System.out.println("ERR : le numero de Ligne ou de colonne doit etre un entier.");
 					sc.nextLine();
 				}
 				
@@ -569,37 +569,47 @@ public void inscriptionUt() {
 				//test si coin deja occup�
 					//ajouter tests si coins voisins !!
 					//faire des Pos plateau essayer getOcc?
+				boolean testVoisin = false;
 				Coin coin1 = new Coin();
 				Coin coin2 = new Coin();
 				Coin coin3 = new Coin();
 				Coin coin4 = new Coin();
+				Joueur joueur;
+				
+				
+				if(daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() != null) {
+					System.out.println("occupant Id :" + daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation().getId());
+					System.out.println("obfe");
+//					testVoisin = true;
+				}
+				
 				try {
-					coin1 = (Coin) daoCoin.findByXAndY(xColonie, yColonie-2);
+//					joueur = daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation();
+//					System.out.println(joueur.getNomCouleur());
+//					testVoisin = true;
 				}
-				finally {
-				}
+				finally {}
 				try {
 					coin2 = (Coin) daoCoin.findByXAndY(xColonie, yColonie+2);
 				}
-				finally {
-				}
+				finally {}
 				try {
 					coin3 = (Coin) daoCoin.findByXAndY(xColonie-2, yColonie);
 				}
-				finally {
-				}
+				finally {}
 				try {
 					coin4 = (Coin) daoCoin.findByXAndY(xColonie+2, yColonie);
 				}
-				finally {
-				}
+				finally {}
 
-				if (coin.getOccupationCoin() == null ) {
+				if (coin.getOccupationCoin() == null && !testVoisin) {
 					coin.setOccupationCoin(joueurTour);
 					daoCoin.save(coin);
 					saisieOK = true;
-				} else {
-					System.out.println("Le lieu choisi est deja occup� !");
+				} else if (coin.getOccupationCoin() != null) {
+					System.out.println("Le lieu choisi est deja occupe !");
+				} else if (testVoisin) {
+					System.out.println("Cette position est trop proche d'une colonie");
 				}
 			}
 			

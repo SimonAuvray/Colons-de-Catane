@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -100,7 +101,7 @@ public class Application {
 			
 			
 			
-			// inscription ï¿½ventuelle d'un nouvel utilisateur
+			// inscription éventuelle d'un nouvel utilisateur
 			
 			inscriptionUt();
 			
@@ -149,7 +150,7 @@ public class Application {
 					}
 					
 					catch (Exception ne) {
-						System.out.println("Ce mot de passe ne correspond pas ï¿½ ce nom d'utilisateur, veuillez rï¿½essayer");
+						System.out.println("Ce mot de passe ne correspond pas à ce nom d'utilisateur, veuillez réessayer");
 					}
 				}
 				
@@ -161,7 +162,7 @@ public class Application {
 				i++;
 			}
 			
-			// attribution d'une couleur ï¿½ un joueur
+			// attribution d'une couleur à un joueur
 			partieEnCours.attribuerCouleur();
 			for(Joueur j : partieEnCours.getLstJoueurs()) {
 				
@@ -253,9 +254,9 @@ public void inscriptionUt() {
 		}
 		
 		daoJoueur.save(monJoueur);
-		System.out.println("joueur bien crï¿½ï¿½");
+		System.out.println("joueur bien créé");
 		
-		// plusieurs inscriptions ï¿½ la suite ou non
+		// plusieurs inscriptions à la suite ou non
 		System.out.println("Souhaitez-vous inscrire un nouveau joueur ? (y/n)");
 	}
 			
@@ -580,9 +581,16 @@ public void inscriptionUt() {
 				Coin coin3 = new Coin();
 				Coin coin4 = new Coin();
 				Joueur joueur;
-							
-				if( (daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() == null) ) {
+				
+				Optional<Joueur> joueurVoisin1 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie+2).getOccupation());
+				
+				if( joueurVoisin1 != null) {
 					System.out.println(" test voisin !!!!!");
+					testVoisin = true;
+				}
+				
+				if( daoPositionPlateau.findByXAndY(xColonie, yColonie+2).getOccupation() !=null ) {
+//					System.out.println(" test voisin !!!!!");
 //					testVoisin = true;
 				}
 				

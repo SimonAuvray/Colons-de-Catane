@@ -75,7 +75,7 @@ public class Application {
 		
 		premiersTours();
 		
-		deleteJeu();
+//		deleteJeu();
 		
 	}
 
@@ -583,37 +583,27 @@ public void inscriptionUt() {
 				Joueur joueur;
 				
 				Optional<Joueur> joueurVoisin1 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie+2).getOccupation());
-				
 				if( joueurVoisin1 != null) {
 					System.out.println(" test voisin !!!!!");
 					testVoisin = true;
 				}
-				
-				if( daoPositionPlateau.findByXAndY(xColonie, yColonie+2).getOccupation() !=null ) {
-//					System.out.println(" test voisin !!!!!");
-//					testVoisin = true;
+				Optional<Joueur> joueurVoisin2 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie+2, yColonie).getOccupation());
+				if( joueurVoisin2 != null) {
+					System.out.println(" test voisin !!!!!");
+					testVoisin = true;
 				}
-				
-				try {
-//					joueur = daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation();
-//					System.out.println(joueur.getNomCouleur());
-//					testVoisin = true;
+				Optional<Joueur> joueurVoisin3 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie-2, yColonie).getOccupation());
+				if( joueurVoisin3 != null) {
+					System.out.println(" test voisin !!!!!");
+					testVoisin = true;
 				}
-				finally {}
-				try {
-					coin2 = (Coin) daoCoin.findByXAndY(xColonie, yColonie+2);
+				Optional<Joueur> joueurVoisin4 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie-2).getOccupation());
+				if( joueurVoisin4 != null) {
+					System.out.println(" test voisin !!!!!");
+					testVoisin = true;
 				}
-				finally {}
-				try {
-					coin3 = (Coin) daoCoin.findByXAndY(xColonie-2, yColonie);
-				}
-				finally {}
-				try {
-					coin4 = (Coin) daoCoin.findByXAndY(xColonie+2, yColonie);
-				}
-				finally {}
 
-				if (coin.getOccupationCoin() == null && !testVoisin) {
+				if (coin.getOccupationCoin() == null && testVoisin == false) {
 					coin.setOccupationCoin(joueurTour);
 					daoCoin.save(coin);
 					saisieOK = true;

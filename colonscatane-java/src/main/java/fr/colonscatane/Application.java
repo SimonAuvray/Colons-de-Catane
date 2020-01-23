@@ -550,68 +550,50 @@ public void inscriptionUt() {
 			
 			int xColonie = 0;
 			int yColonie = 0;
+			boolean choixOK = false;
 			boolean saisieOK = false;
 			Coin coin = new Coin();
 			
-			while (!saisieOK) {
-				try {
-					System.out.println(" Ligne : ");
-					xColonie = sc.nextInt();
-					sc.nextLine();
-					System.out.println(" Colonne : ");
-					yColonie = sc.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("ERR : le numero de Ligne ou de colonne doit etre un entier.");
-					sc.nextLine();
+			while (!choixOK) {
+				
+				entrezCoin(xColonie, yColonie, saisieOK);
+								
+				checkVoisin(xColonie, yColonie);
+				
+				if( saisieOK == true) {
+					if(checkCoin(xColonie, yColonie) != null) {
+						if(checkVoisin(xColonie, yColonie) == true) {
+							choixOK = true;
+						} else {
+							System.out.println("Il ya des colonies trop proches");
+						}
+					} else {
+						System.out.println(" Ce coin est déjà occupé");
+					}
+				} else {
+					System.out.println("veuillez saisir un coin");
 				}
 				
-				try {
-					coin = (Coin)daoCoin.findByXAndY(xColonie, yColonie);
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("Le lieu choisi n'est pas un coin et ne peut recevoir une colonnie !");
-				}
-				
-				//test si coin deja occupï¿½
-					//ajouter tests si coins voisins !!
-					//faire des Pos plateau essayer getOcc?
-				boolean testVoisin = false;
-				Coin coin1 = new Coin();
-				Coin coin2 = new Coin();
-				Coin coin3 = new Coin();
-				Coin coin4 = new Coin();
-				Joueur joueur;
-				
-				Optional<Joueur> joueurVoisin1 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie+2).getOccupation());
-				if( joueurVoisin1 != null) {
-					System.out.println(" test voisin !!!!!");
-					testVoisin = true;
-				}
-				Optional<Joueur> joueurVoisin2 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie+2, yColonie).getOccupation());
-				if( joueurVoisin2 != null) {
-					System.out.println(" test voisin !!!!!");
-					testVoisin = true;
-				}
-				Optional<Joueur> joueurVoisin3 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie-2, yColonie).getOccupation());
-				if( joueurVoisin3 != null) {
-					System.out.println(" test voisin !!!!!");
-					testVoisin = true;
-				}
-				Optional<Joueur> joueurVoisin4 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie-2).getOccupation());
-				if( joueurVoisin4 != null) {
-					System.out.println(" test voisin !!!!!");
-					testVoisin = true;
-				}
-
-				if (coin.getOccupationCoin() == null && testVoisin == false) {
-					coin.setOccupationCoin(joueurTour);
-					daoCoin.save(coin);
-					saisieOK = true;
-				} else if (coin.getOccupationCoin() != null) {
-					System.out.println("Le lieu choisi est deja occupe !");
-				} else if (testVoisin) {
-					System.out.println("Cette position est trop proche d'une colonie");
-				}
+//				Optional<Joueur> joueurVoisin1 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie+2).getOccupation());
+//				if( joueurVoisin1 != null) {
+//					System.out.println(" test voisin !!!!!");
+//					testVoisin = true;
+//				}
+//				Optional<Joueur> joueurVoisin2 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie+2, yColonie).getOccupation());
+//				if( joueurVoisin2 != null) {
+//					System.out.println(" test voisin !!!!!");
+//					testVoisin = true;
+//				}
+//				Optional<Joueur> joueurVoisin3 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie-2, yColonie).getOccupation());
+//				if( joueurVoisin3 != null) {
+//					System.out.println(" test voisin !!!!!");
+//					testVoisin = true;
+//				}
+//				Optional<Joueur> joueurVoisin4 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie-2).getOccupation());
+//				if( joueurVoisin4 != null) {
+//					System.out.println(" test voisin !!!!!");
+//					testVoisin = true;
+//				}
 			}
 			
 			//Disposition d'une route voisine
@@ -652,6 +634,53 @@ public void inscriptionUt() {
 		}
 	}
 
+	private boolean entrezCoin(int xColonie, int yColonie, boolean saisieOK) {
+		Coin coinSaisi = new Coin();
+		while(!saisieOK) {
+			try {
+				System.out.println(" Ligne : ");
+				xColonie = sc.nextInt();
+				sc.nextLine();
+				System.out.println(" Colonne : ");
+				yColonie = sc.nextInt();
+				coinSaisi = checkCoin(xColonie, yColonie);
+				checkLibre(coinSaisi);
+				saisieOK = true;
+			} catch (InputMismatchException e) {
+				System.out.println("ERR : le numero de Ligne ou de colonne doit etre un entier.");
+				sc.nextLine();
+			}
+		}
+		return saisieOK;
+	}
+
+	private Coin checkCoin(int xColonie, int yColonie) {
+		Coin coin = new Coin();
+		try {
+			coin = (Coin)daoCoin.findByXAndY(xColonie, yColonie);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Le lieu choisi n'est pas un coin et ne peut recevoir une colonnie !");
+			coin = null;
+		}
+		return coin;
+	}
+
+
+
+	private Coin checkLibre(Coin coin) {
+		Coin coinVide = new Coin();
+		if(coin.getOccupation() == null) {
+			coinVide = coin;
+		} else {
+			coinVide = null;
+		}
+		return coinVide;
+	}
+	private boolean checkVoisin(int xColonie, int yColonie) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	private void deleteJeu() {
 

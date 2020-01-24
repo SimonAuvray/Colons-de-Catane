@@ -26,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer{
 	public SpringResourceTemplateResolver templateResolver() {
 		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
 		
-		templateResolver.setPrefix("/WEB-INF/views/Tymeleaf/");
+		templateResolver.setPrefix("/WEB-INF/views/Thymeleaf/");
 		templateResolver.setSuffix(".html");
 		
 		return templateResolver;

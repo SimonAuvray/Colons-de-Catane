@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@ComponentScan("fr.colonscatane")
 @EnableTransactionManagement
 @EnableJpaRepositories("fr.colonscatane.dao")
+@ComponentScan("fr.formation")
 public class AppConfig {
 	
 	@Autowired

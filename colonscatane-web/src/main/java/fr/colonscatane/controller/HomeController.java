@@ -43,5 +43,9 @@ public class HomeController {
 			return "redirect:menu";
 		}
 	}
-
+	
+	@GetMapping("/inscription")
+	public String inscription() {	
+		return "inscription";
+	}
 }

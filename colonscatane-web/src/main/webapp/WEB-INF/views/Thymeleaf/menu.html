@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{ layout.html :: layout(~{::title} , ~{ ::body }) }">
+<head>
+<title>Menu Colons Catane</title>
+</head>
+<body>
+	<nav th:replace="navigation.html"></nav>
+</body>
+</html>

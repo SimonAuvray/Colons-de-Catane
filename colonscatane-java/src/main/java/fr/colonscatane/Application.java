@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -74,7 +75,7 @@ public class Application {
 		
 		premiersTours();
 		
-		deleteJeu();
+//		deleteJeu();
 		
 	}
 
@@ -100,7 +101,7 @@ public class Application {
 			
 			
 			
-			// inscription ï¿½ventuelle d'un nouvel utilisateur
+			// inscription éventuelle d'un nouvel utilisateur
 			
 			inscriptionUt();
 			
@@ -149,7 +150,7 @@ public class Application {
 					}
 					
 					catch (Exception ne) {
-						System.out.println("Ce mot de passe ne correspond pas ï¿½ ce nom d'utilisateur, veuillez rï¿½essayer");
+						System.out.println("Ce mot de passe ne correspond pas à ce nom d'utilisateur, veuillez réessayer");
 					}
 				}
 				
@@ -161,7 +162,7 @@ public class Application {
 				i++;
 			}
 			
-			// attribution d'une couleur ï¿½ un joueur
+			// attribution d'une couleur à un joueur
 			partieEnCours.attribuerCouleur();
 			for(Joueur j : partieEnCours.getLstJoueurs()) {
 				
@@ -253,9 +254,9 @@ public void inscriptionUt() {
 		}
 		
 		daoJoueur.save(monJoueur);
-		System.out.println("joueur bien crï¿½ï¿½");
+		System.out.println("joueur bien créé");
 		
-		// plusieurs inscriptions ï¿½ la suite ou non
+		// plusieurs inscriptions à la suite ou non
 		System.out.println("Souhaitez-vous inscrire un nouveau joueur ? (y/n)");
 	}
 			
@@ -549,70 +550,26 @@ public void inscriptionUt() {
 			
 			int xColonie = 0;
 			int yColonie = 0;
+			boolean choixOK = false;
 			boolean saisieOK = false;
 			Coin coin = new Coin();
 			
-			while (!saisieOK) {
-				try {
-					System.out.println(" Ligne : ");
-					xColonie = sc.nextInt();
-					sc.nextLine();
-					System.out.println(" Colonne : ");
-					yColonie = sc.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("ERR : le numero de Ligne ou de colonne doit etre un entier.");
-					sc.nextLine();
-				}
+			while (!choixOK) {
 				
-				try {
-					coin = (Coin)daoCoin.findByXAndY(xColonie, yColonie);
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("Le lieu choisi n'est pas un coin et ne peut recevoir une colonnie !");
-				}
-				
-				//test si coin deja occupï¿½
-					//ajouter tests si coins voisins !!
-					//faire des Pos plateau essayer getOcc?
-				boolean testVoisin = false;
-				Coin coin1 = new Coin();
-				Coin coin2 = new Coin();
-				Coin coin3 = new Coin();
-				Coin coin4 = new Coin();
-				Joueur joueur;
-							
-				if( (daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation() == null) ) {
-					System.out.println(" test voisin !!!!!");
-//					testVoisin = true;
-				}
-				
-				try {
-//					joueur = daoCoin.findByXAndY(xColonie, yColonie-2).getOccupation();
-//					System.out.println(joueur.getNomCouleur());
-//					testVoisin = true;
-				}
-				finally {}
-				try {
-					coin2 = (Coin) daoCoin.findByXAndY(xColonie, yColonie+2);
-				}
-				finally {}
-				try {
-					coin3 = (Coin) daoCoin.findByXAndY(xColonie-2, yColonie);
-				}
-				finally {}
-				try {
-					coin4 = (Coin) daoCoin.findByXAndY(xColonie+2, yColonie);
-				}
-				finally {}
-
-				if (coin.getOccupationCoin() == null && !testVoisin) {
-					coin.setOccupationCoin(joueurTour);
-					daoCoin.save(coin);
-					saisieOK = true;
-				} else if (coin.getOccupationCoin() != null) {
-					System.out.println("Le lieu choisi est deja occupe !");
-				} else if (testVoisin) {
-					System.out.println("Cette position est trop proche d'une colonie");
+				entrezCoin(xColonie, yColonie, saisieOK);
+										
+				if( saisieOK == true) {
+					if(checkCoin(xColonie, yColonie) != null) {
+						if(checkVoisin(xColonie, yColonie) == true) {
+							choixOK = true;
+						} else {
+							System.out.println("Il ya des colonies trop proches");
+						}
+					} else {
+						System.out.println(" Ce coin est déjà occupé");
+					}
+				} else {
+					System.out.println("veuillez saisir un coin");
 				}
 			}
 			
@@ -654,6 +611,76 @@ public void inscriptionUt() {
 		}
 	}
 
+	private boolean entrezCoin(int xColonie, int yColonie, boolean saisieOK) {
+		Coin coinSaisi = new Coin();
+		while(!saisieOK) {
+			try {
+				System.out.println(" Ligne : ");
+				xColonie = sc.nextInt();
+				sc.nextLine();
+				System.out.println(" Colonne : ");
+				yColonie = sc.nextInt();
+				coinSaisi = checkCoin(xColonie, yColonie);
+				checkLibre(coinSaisi);
+				saisieOK = true;
+			} catch (InputMismatchException e) {
+				System.out.println("ERR : le numero de Ligne ou de colonne doit etre un entier.");
+				sc.nextLine();
+			}
+		}
+		return saisieOK;
+	}
+
+	private Coin checkCoin(int xColonie, int yColonie) {
+		Coin coin = new Coin();
+		try {
+			coin = (Coin)daoCoin.findByXAndY(xColonie, yColonie);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Le lieu choisi n'est pas un coin et ne peut recevoir une colonnie !");
+			coin = null;
+		}
+		return coin;
+	}
+
+
+
+	private Coin checkLibre(Coin coin) {
+		Coin coinVide = new Coin();
+		if(coin.getOccupation() == null) {
+			coinVide = coin;
+		} else {
+			coinVide = null;
+		}
+		return coinVide;
+	}
+	private boolean checkVoisin(int xColonie, int yColonie) {
+		if( daoCoin.findByXAndY(xColonie+2, yColonie ) != null) {
+			Coin coin1 = (Coin) daoCoin.findByXAndY(xColonie+2, yColonie );
+			if( coin1.getOccupation() != null) {
+				return true;
+			}
+		}
+		if( daoCoin.findByXAndY(xColonie, yColonie) != null) {
+			Coin coin2 = (Coin) daoCoin.findByXAndY(xColonie-2, yColonie );
+			if ( coin2.getOccupation() != null){
+				return true;
+			}
+		}
+		if( daoCoin.findByXAndY(xColonie, yColonie +2) != null) {
+			Coin coin3 = (Coin) daoCoin.findByXAndY(xColonie, yColonie +2);
+			if ( coin3.getOccupation() != null ) {
+				return true;
+			}
+		}
+		if( daoCoin.findByXAndY(xColonie, yColonie -2) != null) {
+			Coin coin4 = (Coin) daoCoin.findByXAndY(xColonie, yColonie -2);
+			if ( coin4.getOccupation() != null ) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private void deleteJeu() {
 

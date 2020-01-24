@@ -555,21 +555,23 @@ public void inscriptionUt() {
 			Coin coin = new Coin();
 			
 			while (!choixOK) {
-				
-				entrezCoin(xColonie, yColonie, saisieOK);
-										
-				if( saisieOK == true) {
-					if(checkCoin(xColonie, yColonie) != null) {
-						if(checkVoisin(xColonie, yColonie) == true) {
-							choixOK = true;
+						
+				if( entrezLocation(xColonie, yColonie) == true) {
+					if(checkCoin(xColonie, yColonie) == true) {
+						if(checkLibre(xColonie, yColonie) == true) {
+							if(checkVoisin(xColonie, yColonie) == true) {
+								choixOK = true;
+							} else {
+								System.out.println("Il ya des colonies trop proches");
+							}
 						} else {
-							System.out.println("Il ya des colonies trop proches");
+							System.out.println("Ce coin est déjà occupé");
 						}
 					} else {
-						System.out.println(" Ce coin est déjà occupé");
+						System.out.println("Veuillez saisir un coin");
 					}
 				} else {
-					System.out.println("veuillez saisir un coin");
+					System.out.println("mauvaise saisie");
 				}
 			}
 			
@@ -611,48 +613,37 @@ public void inscriptionUt() {
 		}
 	}
 
-	private boolean entrezCoin(int xColonie, int yColonie, boolean saisieOK) {
-		Coin coinSaisi = new Coin();
-		while(!saisieOK) {
+	private boolean entrezLocation(int xColonie, int yColonie) { {
 			try {
 				System.out.println(" Ligne : ");
 				xColonie = sc.nextInt();
 				sc.nextLine();
 				System.out.println(" Colonne : ");
 				yColonie = sc.nextInt();
-				coinSaisi = checkCoin(xColonie, yColonie);
-				checkLibre(coinSaisi);
-				saisieOK = true;
+				return true;
 			} catch (InputMismatchException e) {
 				System.out.println("ERR : le numero de Ligne ou de colonne doit etre un entier.");
 				sc.nextLine();
 			}
 		}
-		return saisieOK;
+		return false;
 	}
 
-	private Coin checkCoin(int xColonie, int yColonie) {
-		Coin coin = new Coin();
-		try {
-			coin = (Coin)daoCoin.findByXAndY(xColonie, yColonie);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Le lieu choisi n'est pas un coin et ne peut recevoir une colonnie !");
-			coin = null;
+	private boolean checkCoin(int xColonie, int yColonie) {
+		if((Coin)daoCoin.findByXAndY(xColonie, yColonie) != null) {
+			return true;
 		}
-		return coin;
+		return false;
 	}
 
 
 
-	private Coin checkLibre(Coin coin) {
-		Coin coinVide = new Coin();
+	private boolean checkLibre(int xColonie, int yColonie) {
+		Coin coin = (Coin)daoCoin.findByXAndY(xColonie, yColonie);
 		if(coin.getOccupation() == null) {
-			coinVide = coin;
-		} else {
-			coinVide = null;
-		}
-		return coinVide;
+			return true;
+		} 
+		return false;
 	}
 	private boolean checkVoisin(int xColonie, int yColonie) {
 		if( daoCoin.findByXAndY(xColonie+2, yColonie ) != null) {

@@ -557,9 +557,7 @@ public void inscriptionUt() {
 			while (!choixOK) {
 				
 				entrezCoin(xColonie, yColonie, saisieOK);
-								
-				checkVoisin(xColonie, yColonie);
-				
+										
 				if( saisieOK == true) {
 					if(checkCoin(xColonie, yColonie) != null) {
 						if(checkVoisin(xColonie, yColonie) == true) {
@@ -573,27 +571,6 @@ public void inscriptionUt() {
 				} else {
 					System.out.println("veuillez saisir un coin");
 				}
-				
-//				Optional<Joueur> joueurVoisin1 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie+2).getOccupation());
-//				if( joueurVoisin1 != null) {
-//					System.out.println(" test voisin !!!!!");
-//					testVoisin = true;
-//				}
-//				Optional<Joueur> joueurVoisin2 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie+2, yColonie).getOccupation());
-//				if( joueurVoisin2 != null) {
-//					System.out.println(" test voisin !!!!!");
-//					testVoisin = true;
-//				}
-//				Optional<Joueur> joueurVoisin3 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie-2, yColonie).getOccupation());
-//				if( joueurVoisin3 != null) {
-//					System.out.println(" test voisin !!!!!");
-//					testVoisin = true;
-//				}
-//				Optional<Joueur> joueurVoisin4 = Optional.ofNullable(daoPositionPlateau.findByXAndY(xColonie, yColonie-2).getOccupation());
-//				if( joueurVoisin4 != null) {
-//					System.out.println(" test voisin !!!!!");
-//					testVoisin = true;
-//				}
 			}
 			
 			//Disposition d'une route voisine
@@ -678,7 +655,30 @@ public void inscriptionUt() {
 		return coinVide;
 	}
 	private boolean checkVoisin(int xColonie, int yColonie) {
-		// TODO Auto-generated method stub
+		if( daoCoin.findByXAndY(xColonie+2, yColonie ) != null) {
+			Coin coin1 = (Coin) daoCoin.findByXAndY(xColonie+2, yColonie );
+			if( coin1.getOccupation() != null) {
+				return true;
+			}
+		}
+		if( daoCoin.findByXAndY(xColonie, yColonie) != null) {
+			Coin coin2 = (Coin) daoCoin.findByXAndY(xColonie-2, yColonie );
+			if ( coin2.getOccupation() != null){
+				return true;
+			}
+		}
+		if( daoCoin.findByXAndY(xColonie, yColonie +2) != null) {
+			Coin coin3 = (Coin) daoCoin.findByXAndY(xColonie, yColonie +2);
+			if ( coin3.getOccupation() != null ) {
+				return true;
+			}
+		}
+		if( daoCoin.findByXAndY(xColonie, yColonie -2) != null) {
+			Coin coin4 = (Coin) daoCoin.findByXAndY(xColonie, yColonie -2);
+			if ( coin4.getOccupation() != null ) {
+				return true;
+			}
+		}
 		return false;
 	}
 

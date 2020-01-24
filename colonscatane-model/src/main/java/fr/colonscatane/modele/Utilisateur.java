@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "utilisateur")
@@ -23,9 +24,11 @@ public abstract class  Utilisateur {
 	protected String nom;
 	
 	@Column(name = "UT_USERNAME", unique = true)
+	@NotBlank(message = "Vous devez entrer votre nom d'utilisateur")
 	protected String username;
 	
 	@Column(name = "UT_PASSWORD")
+	@NotBlank(message = "Vous devez entrer votre mot de passe")
 	protected String password;	
 	
 	public String getNom() {

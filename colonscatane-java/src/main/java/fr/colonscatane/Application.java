@@ -144,7 +144,7 @@ public class Application {
 					password = sc.nextLine();
 					
 					try { 
-						idUt = daoUtilisateur.findByUsernameAndPassword(username, password).getId();
+						idUt = daoUtilisateur.findByUsernameAndPassword(username, password).orElse(null).getId();
 						identification = true;
 						System.out.println("Identifiction ok ! Bonjour " + username);
 					}
@@ -154,7 +154,7 @@ public class Application {
 					}
 				}
 				
-				Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password);
+				Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password).orElse(null);
 				joueur.setRole(ListeRoles.Joueur);
 				
 				partieEnCours.getLstJoueurs().add(joueur);

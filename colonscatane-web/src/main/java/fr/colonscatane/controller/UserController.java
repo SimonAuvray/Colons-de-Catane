@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.colonscatane.dao.IDAOUtilisateur;
 import fr.colonscatane.modele.Joueur;
-import fr.colonscatane.modele.ListeRoles;
+import fr.colonscatane.modele.ROLE;
 
 @Controller
 public class UserController {
@@ -41,7 +41,7 @@ public class UserController {
 		}
 			
 		else {
-			joueur.setRole(ListeRoles.Inactif);
+			joueur.setRole(ROLE.Inactif);
 			daoUtilisateur.save(joueur);
 			return "redirect:home";
 		}

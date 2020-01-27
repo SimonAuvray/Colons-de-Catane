@@ -59,9 +59,7 @@ public class Application {
 	public static Partie partieEnCours = new Partie();
 		
 	public void run(String[] args) {
-				
-		
-		
+	
 		inscription();
 		initialisation();
 		liaisonTuileCoin();

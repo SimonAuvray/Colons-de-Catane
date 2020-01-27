@@ -210,7 +210,6 @@ body{
 .sommetH{
 	top : -53px;
 	left : 63px;
-	
 }
 
 .sommetHD{
@@ -224,6 +223,34 @@ body{
 	left : -11px;
 }
 
+.cercleRoute {
+	position : absolute;
+	display : inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 16px;
+    background: green;
+}
 
+.routeHD{
+	top : -11px;
+	left : 139px;
+	z-index : 1;
+}
+
+.routeHD{
+	top : -42px;
+	left : 97px;
+}
+
+.routeHG{
+	top : -42px;
+	left : 21px;
+}
+
+.routeG{
+	top : 27px;
+	left : -19px;
+}
 
 

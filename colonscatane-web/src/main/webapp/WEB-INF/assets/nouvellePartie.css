@@ -1,0 +1,28 @@
+@charset "ISO-8859-1";
+
+
+.sqare{
+	display:block;
+	width:130px;
+	height:20px;
+	
+}
+
+.bleu{
+	background:#069;
+}
+
+.rouge{
+	background:red;
+}
+
+.vert{
+	background:lightgreen;
+}
+
+.jaune{
+	background:yellow;
+}
+
+
+

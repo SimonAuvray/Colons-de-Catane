@@ -2,6 +2,7 @@ package fr.colonscatane.controller;
 
 
 
+import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import javax.validation.Valid;
 
@@ -18,7 +19,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOUtilisateur;
 import fr.colonscatane.modele.Joueur;
-import fr.colonscatane.modele.ListeRoles;
+import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.Utilisateur;
 
 @Controller
@@ -61,7 +62,8 @@ public class HomeController {
 	@PostMapping("/inscription")
 	public String enregistrementUtilisateur (
 			@Valid @ModelAttribute Joueur joueur,
-			BindingResult result
+			BindingResult result,
+			HttpSession session
 			
 			) {
 		
@@ -79,8 +81,10 @@ public class HomeController {
 			
 		else {
 			
-			joueur.setRole(ListeRoles.Inactif);
+			joueur.setRole(ROLE.Inactif);
 			daoUtilisateur.save(joueur);
+			session.setAttribute("joueurConnecte", joueur);
+			
 			return "redirect:home";
 			
 		}

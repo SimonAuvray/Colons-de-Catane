@@ -39,7 +39,7 @@ public class Joueur extends Utilisateur {
 	@Column(name = "J_COMPTEUR_ROUTE")
 	private int compteurRoute;
 	@Column(name="J_ROLE")
-	private ListeRoles role;
+	private ROLE role;
 	
 	@ManyToOne
 	@JoinColumn(name = "JOUEUR_PARTIE")
@@ -136,11 +136,11 @@ public class Joueur extends Utilisateur {
 	
 	
 
-	public ListeRoles getRole() {
+	public ROLE getRole() {
 		return role;
 	}
 
-	public void setRole(ListeRoles role) {
+	public void setRole(ROLE role) {
 		this.role = role;
 	}
 

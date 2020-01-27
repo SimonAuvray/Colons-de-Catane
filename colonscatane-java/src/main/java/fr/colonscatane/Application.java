@@ -24,7 +24,7 @@ import fr.colonscatane.exception.NotBooleanException;
 
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
-import fr.colonscatane.modele.ListeRoles;
+import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.Segment;
@@ -155,7 +155,7 @@ public class Application {
 				}
 				
 				Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password);
-				joueur.setRole(ListeRoles.Joueur);
+				joueur.setRole(ROLE.Joueur);
 				
 				partieEnCours.getLstJoueurs().add(joueur);
 				

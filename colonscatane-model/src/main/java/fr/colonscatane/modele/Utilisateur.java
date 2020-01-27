@@ -23,11 +23,11 @@ public abstract class  Utilisateur {
 	@Column(name = "UT_NOM")
 	protected String nom;
 	
-	@Column(name = "UT_USERNAME", unique = true)
+	@Column(name = "UT_USERNAME", unique = true, nullable=false)
 	@NotBlank(message = "Vous devez entrer votre nom d'utilisateur")
 	protected String username;
 	
-	@Column(name = "UT_PASSWORD")
+	@Column(name = "UT_PASSWORD", nullable=false)
 	@NotBlank(message = "Vous devez entrer votre mot de passe")
 	protected String password;	
 	

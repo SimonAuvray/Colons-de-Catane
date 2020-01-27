@@ -40,26 +40,17 @@ public class MenuController {
 	public String getNouvellePartie(Model model, HttpSession session) {
 	
 		model.addAttribute("joueurConnecte", session.getAttribute("joueurConnecte"));
-		List<Joueur> listeJoueurs = new ArrayList<Joueur>();
-		
-		
-		
-			
+		List<Joueur> listeJoueurs = new ArrayList<Joueur>();			
 		listeJoueurs = daoJoueur.findByRole(ROLE.Joueur).orElse(null);
-		
 		
 		if (listeJoueurs != null) {
 				int i = 1;
-				
 				for (Joueur j : listeJoueurs) {
 					System.out.println("joueur"+i);
 				model.addAttribute("joueur" + i, j);
 				i++;
-				
 				}
 		}
-			
-		
 		return "nouvellepartie";
 	}
 	
@@ -70,33 +61,22 @@ public class MenuController {
 		
 		if (daoJoueur.findByRole(ROLE.Joueur).get().size() >= 4) {
 			return "nouvellepartie";
-			
 		}
 		
 		if ( nom == null) {
-			
 			int taille = daoJoueur.findByRole(ROLE.Joueur).get().size();
 			Optional<Joueur> monJoueur = daoJoueur.findByNom("Joueur" + taille +1);
-			
 			monJoueur.get().setRole(ROLE.Joueur);
-			daoJoueur.save(monJoueur.get());
-			
-				
-			
+			daoJoueur.save(monJoueur.get());		
 		}
 		
 		else {	
 			
 			Optional<Joueur> monJoueur = daoJoueur.findByNom(nom);
-			
-			
 			monJoueur.get().setRole(ROLE.Joueur);
 			daoJoueur.save(monJoueur.get());
-			
 		}
-		
 		return "nouvellepartie";
-		
 	}
 		
 	

@@ -1,0 +1,229 @@
+@charset "ISO-8859-1";
+
+header{
+	display : block;
+	position : relative;
+	top : 0px;
+	height : 150px;
+	background-color : #6d071a;
+
+	
+	
+	
+}
+
+header h2 {
+	color : #c6c6c6;
+	text-align : center;
+	position : relative;
+	top : 40%;
+	bottom : 60%;
+}
+
+body{
+	background-color: #f9e4b7;
+	
+}
+
+
+
+#plateau {
+	margin : auto ;
+	width : 100%;
+	min-width : 1500px;
+	
+	
+	
+}
+
+
+
+.line {
+	margin-left : 500px;
+	
+	
+}
+
+.line2{
+	
+	margin-left : 422.8px;
+	margin-top : -130px;
+	
+	
+}
+
+
+.line3{
+	margin-left : 347px;
+	margin-top : -130px;
+}
+
+.line4{
+	margin-left : 270px;
+	margin-top : -130px;
+}
+
+.linefin{
+	margin-left : 500px;
+	margin-top : -130px;
+}
+
+
+.eau{
+
+	background-color : blue;
+	
+}
+
+.eau:before{
+	border-bottom: 43.3px solid blue;
+}
+
+.eau:after{
+	border-top: 43.3px solid blue;
+}
+
+.foret{
+
+	background-color : darkgreen;
+}
+
+.foret:before{
+	border-bottom: 43.3px solid darkgreen;
+}
+
+.foret:after{
+	border-top: 43.3px solid darkgreen;
+}
+
+.plaine{
+
+	background-color : lightgreen;
+}
+
+.plaine:before{
+	border-bottom: 43.3px solid lightgreen;
+}
+
+.plaine:after{
+	border-top: 43.3px solid lightgreen;
+}
+
+.champs{
+
+	background-color : #e8d630;
+}
+
+.champs:before{
+	border-bottom: 43.3px solid #e8d630;
+}
+
+.champs:after{
+	border-top: 43.3px solid #e8d630;
+}
+
+.argile{
+
+	background-color : #b38266;
+}
+
+.argile:before{
+	border-bottom: 43.3px solid #b38266;
+}
+
+.argile:after{
+	border-top: 43.3px solid #b38266;
+}
+
+.montagne{
+
+	background-color : #b7b7b7;
+}
+
+.montagne:before{
+	border-bottom: 43.3px solid #b7b7b7;
+}
+
+.montagne:after{
+	border-top: 43.3px solid #b7b7b7;
+}
+
+
+.desert{
+
+	background-color : black;
+}
+
+.desert:before{
+	border-bottom: 43.3px solid black;
+}
+
+.desert:after{
+	border-top: 43.3px solid black;
+}
+.hexagon {
+  display : inline-block;
+  content : "3";
+  color : black;
+  position: relative;
+  width: 150px; 
+  height: 86.6px;
+  
+  margin: 86.60px 0;
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+ 
+}
+
+.hexagon:after {
+  top: 100%;
+  width: 0;
+  
+}
+
+.conteneur {
+	display : grid;
+	position : relative;
+	top : 10px;
+}
+
+.cercle {
+	position : absolute;
+	display : inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 16px;
+    background: green;
+}
+
+.sommetH{
+	top : -53px;
+	left : 63px;
+	
+}
+
+.sommetHD{
+	top : -11px;
+	left : 139px;
+	z-index : 1;
+}
+
+.sommetHG {
+	top : -11px;
+	left : -11px;
+}
+
+
+
+

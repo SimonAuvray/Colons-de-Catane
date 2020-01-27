@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer{
 	
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+		registry.addResourceHandler("/assets/**").addResourceLocations("/WEB-INF/assets/");
 	}
 	
 	

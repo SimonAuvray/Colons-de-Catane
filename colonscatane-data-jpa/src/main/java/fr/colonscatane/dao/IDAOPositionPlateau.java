@@ -1,6 +1,7 @@
 package fr.colonscatane.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +16,7 @@ import fr.colonscatane.modele.TypePosition;
 public interface IDAOPositionPlateau<T extends PositionPlateau> extends JpaRepository<T, Integer>{
 	public List<PositionPlateau> findByType(TypePosition type);
 	
-	public PositionPlateau findByXAndY(int x, int y);
+	public Optional<PositionPlateau> findByXAndY(int x, int y);
 	
 	@Query(value = "DROP TABLE LIENS", nativeQuery = true)
 	@Modifying

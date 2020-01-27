@@ -2,7 +2,6 @@ package fr.colonscatane.modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.InputMismatchException;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.omg.CORBA.portable.ApplicationException;
 
 @Entity
 @Table(name = "Partie")
@@ -37,6 +34,9 @@ public class Partie {
 			this.lstJoueurs = new ArrayList<Joueur>();
 		}
 	
+		/**
+		 * Attribution d'une couleur à chaque joueur
+		 */
 		public void attribuerCouleur() {
 			for (int i = 0; i < this.lstJoueurs.size(); i++) {
 				switch (i) {
@@ -60,6 +60,10 @@ public class Partie {
 			return this.lstJoueurs;
 		}
 		
+		
+		/**
+		 * L'ordre de passage est tiré au sort
+		 */
 		public void ordreSetUp() {
 			
 			System.out.println(" tirage de l'ordre de passage ");

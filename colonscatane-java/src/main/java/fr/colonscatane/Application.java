@@ -3,15 +3,12 @@ package fr.colonscatane;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.Transactional;
 
 import fr.colonscatane.dao.IDAOCoin;
 import fr.colonscatane.dao.IDAOJoueur;
@@ -21,7 +18,6 @@ import fr.colonscatane.dao.IDAOTuileRessource;
 import fr.colonscatane.dao.IDAOUtilisateur;
 import fr.colonscatane.exception.EmptyLibelleException;
 import fr.colonscatane.exception.NotBooleanException;
-
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.ListeRoles;
@@ -31,7 +27,6 @@ import fr.colonscatane.modele.Segment;
 import fr.colonscatane.modele.TuileRessource;
 import fr.colonscatane.modele.TypePosition;
 import fr.colonscatane.modele.TypeTuile;
-import fr.colonscatane.modele.Utilisateur;
 import fr.colonscatane.service.CoinService;
 
 @Configuration
@@ -124,7 +119,6 @@ public class Application {
 		while (i <= nombreDeJoueurs) {
 			boolean identification = false;
 
-			int idUt = 0;
 
 			while (!identification) {
 				System.out.println("Quel est le nom d'utilisateur du joueur " + i + "?");
@@ -134,7 +128,7 @@ public class Application {
 				password = sc.nextLine();
 
 				try {
-					idUt = daoUtilisateur.findByUsernameAndPassword(username, password).getId();
+					int idUt = daoUtilisateur.findByUsernameAndPassword(username, password).orElse(null).getId();
 					identification = true;
 					System.out.println("Identifiction ok ! Bonjour " + username);
 				}
@@ -144,7 +138,7 @@ public class Application {
 				}
 			}
 
-			Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password);
+			Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password).orElse(null);
 			joueur.setRole(ListeRoles.Joueur);
 			if(partieEnCours.getLstJoueurs()
 					.stream()
@@ -543,7 +537,6 @@ public class Application {
 			int xColonie = 0;
 			int yColonie = 0;
 			boolean choixOK = false;
-			Coin coin = new Coin();
 
 			while (!choixOK) {
 				try {
@@ -666,25 +659,25 @@ public class Application {
 	private boolean checkVoisin(int xColonie, int yColonie) {
 		if (daoCoin.findByXAndY(xColonie + 2, yColonie) != null) {
 			Coin coin1 = (Coin) daoCoin.findByXAndY(xColonie + 2, yColonie);
-			if (coin1.getOccupation() != null) {
+			if (coin1 != null && coin1.getOccupation() != null) {
 				return true;
 			}
 		}
 		if (daoCoin.findByXAndY(xColonie, yColonie) != null) {
 			Coin coin2 = (Coin) daoCoin.findByXAndY(xColonie - 2, yColonie);
-			if (coin2.getOccupation() != null) {
+			if (coin2 != null && coin2.getOccupation() != null) {
 				return true;
 			}
 		}
 		if (daoCoin.findByXAndY(xColonie, yColonie + 2) != null) {
 			Coin coin3 = (Coin) daoCoin.findByXAndY(xColonie, yColonie + 2);
-			if (coin3.getOccupation() != null) {
+			if (coin3 != null && coin3.getOccupation() != null) {
 				return true;
 			}
 		}
 		if (daoCoin.findByXAndY(xColonie, yColonie - 2) != null) {
 			Coin coin4 = (Coin) daoCoin.findByXAndY(xColonie, yColonie - 2);
-			if (coin4.getOccupation() != null) {
+			if (coin4 != null && coin4.getOccupation() != null) {
 				return true;
 			}
 		}

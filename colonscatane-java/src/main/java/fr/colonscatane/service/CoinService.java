@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.colonscatane.dao.IDAOCoin;
-import fr.colonscatane.dao.IDAOPositionPlateau;
 import fr.colonscatane.dao.IDAOTuileRessource;
 import fr.colonscatane.modele.Coin;
-import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.TuileRessource;
 
 @Service

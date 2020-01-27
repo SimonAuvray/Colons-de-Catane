@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource("classpath:data-source.properties")
-//@ComponentScan("fr.colonscatane")
 @EnableTransactionManagement
 @EnableJpaRepositories("fr.colonscatane.dao")
 @ComponentScan("fr.colonscatane")

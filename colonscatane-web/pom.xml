@@ -16,15 +16,6 @@
   
  <dependencies>
  
-   	<dependency>
-  	
-  		<groupId>fr.colonscatane</groupId>
-		<artifactId>colonscatane-model</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-  	
-  	</dependency>
- 
- 
  	<dependency>
   	
   		<groupId>fr.colonscatane</groupId>

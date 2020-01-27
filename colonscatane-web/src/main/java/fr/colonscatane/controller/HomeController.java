@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.annotation.ApplicationScope;
 
+import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOUtilisateur;
+import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Utilisateur;
 
 @Controller
@@ -23,6 +25,8 @@ public class HomeController {
 	
 	@Autowired
 	IDAOUtilisateur daoUtilisateur;
+	@Autowired
+	IDAOJoueur daoJoueur;
 	
 	@GetMapping("/home")
 	public String home() {	
@@ -30,16 +34,16 @@ public class HomeController {
 	}
 	
 	@PostMapping("/home")
-	public String connexion(@Valid @ModelAttribute Utilisateur user,
-			BindingResult result,
-			HttpRequest req
+	public String connexion(@Valid @ModelAttribute Joueur user,
+			BindingResult result
 			) {
 		if(result.hasErrors()) {
 			return "home";
 		}
 		if( daoUtilisateur.findByUsernameAndPassword(user.getUsername(), user.getPassword() ) == null ) {
 			return "home";
-		} else {
+		}
+		else {
 			return "redirect:menu";
 		}
 	}

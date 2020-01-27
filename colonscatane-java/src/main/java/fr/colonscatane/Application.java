@@ -148,7 +148,7 @@ public class Application {
 
 			}
 			Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password).orElse(null);
-			joueur.setRole(ListeRoles.Joueur);
+			joueur.setRole(ROLE.Joueur);
 			if (partieEnCours.getLstJoueurs().stream().filter(j -> j.getUsername().equals(joueur.getUsername()))
 					.count() > 0) {
 				System.out.println("Les joueurs doivent tous �tre des utilisateurs diff�rents");

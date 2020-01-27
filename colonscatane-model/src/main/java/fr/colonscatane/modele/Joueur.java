@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "joueur")
-@PrimaryKeyJoinColumn(name="CLI_ID", referencedColumnName = "UT_ID")
+@PrimaryKeyJoinColumn(name="JOUEUR_ID", referencedColumnName = "UT_ID")
 public class Joueur extends Utilisateur {
 	
 	

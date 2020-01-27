@@ -2,6 +2,7 @@ package fr.colonscatane.controller;
 
 
 
+import javax.swing.JOptionPane;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.annotation.ApplicationScope;
 
+import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOUtilisateur;
+import fr.colonscatane.modele.Joueur;
+import fr.colonscatane.modele.ListeRoles;
 import fr.colonscatane.modele.Utilisateur;
 
 @Controller
@@ -23,6 +27,9 @@ public class HomeController {
 	
 	@Autowired
 	IDAOUtilisateur daoUtilisateur;
+	
+	@Autowired
+	IDAOJoueur daoJoueur;
 	
 	@GetMapping("/home")
 	public String home() {	
@@ -49,5 +56,39 @@ public class HomeController {
 	public String inscription() {
 		return "inscription";
 	}
+	
+	@PostMapping("/inscription")
+	public String enregistrementUtilisateur (
+			@Valid @ModelAttribute Joueur joueur,
+			BindingResult result
+			
+			) {
+		
+		if (daoUtilisateur.findByUsername(joueur.getUsername()).isPresent()) {
+			 
+			 JOptionPane.showMessageDialog(null, "Utilisateur déjà créé"); 
+			return "home"; 
+		}
+		
+		if (result.hasErrors()) {
+			 
+			 JOptionPane.showMessageDialog(null, "Erreur"); 
+			return "home"; 
+		}
+			
+		else {
+			
+			joueur.setRole(ListeRoles.Inactif);
+			daoUtilisateur.save(joueur);
+			return "redirect:home";
+			
+		}
+			
+			
+		
+		
+		
+	}
+			
 
 }

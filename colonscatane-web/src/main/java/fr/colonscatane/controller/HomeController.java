@@ -67,7 +67,7 @@ public class HomeController {
 		
 		if (daoUtilisateur.findByUsername(joueur.getUsername()).isPresent()) {
 			 
-			 JOptionPane.showMessageDialog(null, "Utilisateur d�j� cr��"); 
+			 JOptionPane.showMessageDialog(null, "UTILISATEUR DEJA CREE"); 
 			return "home"; 
 		}
 		

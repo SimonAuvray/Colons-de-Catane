@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.SessionScope;
 
 import fr.colonscatane.dao.IDAOJoueur;
@@ -46,7 +48,7 @@ public class MenuController {
 		if (listeJoueurs != null) {
 				int i = 1;
 				for (Joueur j : listeJoueurs) {
-					System.out.println("joueur"+i);
+					
 				model.addAttribute("joueur" + i, j);
 				i++;
 				}
@@ -56,10 +58,11 @@ public class MenuController {
 	
 	@PostMapping("/nouvellepartie")
 	public String ajoutJoueur(
-			@RequestAttribute String nom
+			@RequestParam String nom
 			) {
 		
 		if (daoJoueur.findByRole(ROLE.Joueur).get().size() >= 4) {
+			 JOptionPane.showMessageDialog(null, "Vous avez atteint le nombre maximal de joueurs");
 			return "nouvellepartie";
 		}
 		
@@ -76,7 +79,7 @@ public class MenuController {
 			monJoueur.get().setRole(ROLE.Joueur);
 			daoJoueur.save(monJoueur.get());
 		}
-		return "nouvellepartie";
+		return "redirect:nouvellepartie";
 	}
 		
 	

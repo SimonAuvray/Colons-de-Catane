@@ -2,6 +2,9 @@ package fr.colonscatane.controller;
 
 
 
+import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import javax.validation.Valid;
 
@@ -13,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 import fr.colonscatane.dao.IDAOJoueur;
@@ -39,15 +43,19 @@ public class HomeController {
 	
 	@PostMapping("/home")
 	public String connexion(@Valid @ModelAttribute Joueur user,
-			BindingResult result
+			BindingResult result,
+			HttpSession session
 			) {
 		if(result.hasErrors()) {
 			return "home";
 		}
-		if( daoUtilisateur.findByUsernameAndPassword(user.getUsername(), user.getPassword() ) == null ) {
+		if( daoUtilisateur.findByUsernameAndPassword(user.getUsername(), user.getPassword() ).orElse(null) == null ) {
 			return "home";
 		}
 		else {
+			int monId = daoUtilisateur.findByUsername(user.getUsername()).get().getId();
+			session.setAttribute("user", user.getUsername());
+			session.setAttribute("userId", monId);
 			return "redirect:menu";
 		}
 	}
@@ -56,40 +64,6 @@ public class HomeController {
 	@GetMapping("/inscription")
 	public String inscription() {
 		return "inscription";
-	}
-	
-	@PostMapping("/inscription")
-	public String enregistrementUtilisateur (
-			@Valid @ModelAttribute Joueur joueur,
-			BindingResult result
-			
-			) {
-		
-		if (daoUtilisateur.findByUsername(joueur.getUsername()).isPresent()) {
-			 
-			 JOptionPane.showMessageDialog(null, "UTILISATEUR DEJA CREE"); 
-			return "home"; 
-		}
-		
-		if (result.hasErrors()) {
-			 
-			 JOptionPane.showMessageDialog(null, "Erreur"); 
-			return "home"; 
-		}
-			
-		else {
-			
-			joueur.setRole(ListeRoles.Inactif);
-			daoUtilisateur.save(joueur);
-			return "redirect:home";
-			
-		}
-			
-			
-		
-		
-		
-	}
-			
+	}	
 
 }

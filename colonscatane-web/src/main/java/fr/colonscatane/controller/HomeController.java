@@ -22,7 +22,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOUtilisateur;
 import fr.colonscatane.modele.Joueur;
-import fr.colonscatane.modele.ListeRoles;
+import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.Utilisateur;
 
 @Controller

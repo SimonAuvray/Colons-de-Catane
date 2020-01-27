@@ -85,7 +85,7 @@ public class Application {
 	}
 
 	/**
-	 * Création de la liste des joueur pour la partie en cours
+	 * Crï¿½ation de la liste des joueur pour la partie en cours
 	 */
 	public void inscription() {
 		boolean saisieOK = false;
@@ -93,7 +93,7 @@ public class Application {
 		String username = null;
 		String password = null;
 
-		// inscription éventuelle d'un nouvel utilisateur
+		// inscription ï¿½ventuelle d'un nouvel utilisateur
 
 		inscriptionUt();
 
@@ -105,14 +105,14 @@ public class Application {
 				nombreDeJoueurs = sc.nextInt();
 				saisieOK = true;
 			} catch (InputMismatchException e) {
-				System.out.println("ERR : Le nombre de joueur doit être un entier");
+				System.out.println("ERR : Le nombre de joueur doit ï¿½tre un entier");
 				sc.nextLine();
 			}
 			if (saisieOK) {
 				if (nombreDeJoueurs > Partie.NB_JOUEUR_MAX || nombreDeJoueurs < Partie.NB_JOUEUR_MIN) {
 					saisieOK = false;
 					System.out.println(
-							"ERR : Le nombre de joueur pour la partie ne peut pas être supérieur à  4 ou inférieur à  2");
+							"ERR : Le nombre de joueur pour la partie ne peut pas ï¿½tre supï¿½rieur ï¿½ 4 ou infï¿½rieur ï¿½ 2");
 				}
 				sc.nextLine();
 			}
@@ -140,7 +140,7 @@ public class Application {
 				}
 
 				catch (Exception ne) {
-					System.out.println("Ce mot de passe ne correspond pas à ce nom d'utilisateur, veuillez réessayer");
+					System.out.println("Ce mot de passe ne correspond pas ï¿½ ce nom d'utilisateur, veuillez rï¿½essayer");
 				}
 			}
 
@@ -149,7 +149,7 @@ public class Application {
 			if(partieEnCours.getLstJoueurs()
 					.stream()
 					.filter(j -> j.getUsername().equals(joueur.getUsername())).count()>0) {
-				System.out.println("Les joueurs doivent tous être des utilisateurs différents");
+				System.out.println("Les joueurs doivent tous ï¿½tre des utilisateurs diffï¿½rents");
 				System.out.println("Saisissez un autre nom pour le joueur "+i);
 			}else {
 				partieEnCours.getLstJoueurs().add(joueur);
@@ -158,7 +158,7 @@ public class Application {
 
 		}
 
-		// attribution d'une couleur à un joueur
+		// attribution d'une couleur ï¿½ un joueur
 		partieEnCours.attribuerCouleur();
 		for (Joueur j : partieEnCours.getLstJoueurs()) {
 
@@ -171,7 +171,7 @@ public class Application {
 
 	/**
 	 * Inscription d'un nouvel utilisateur avec un identifiant et un mot passe
-	 * L'utilisateur peut participer à plusieurs partie
+	 * L'utilisateur peut participer ï¿½ plusieurs partie
 	 */
 	public void inscriptionUt() {
 
@@ -254,9 +254,9 @@ public class Application {
 				}
 
 				daoJoueur.save(monJoueur);
-				System.out.println("joueur bien créé");
+				System.out.println("joueur bien crï¿½ï¿½");
+				// plusieurs inscriptions ï¿½ la suite ou non
 
-				// plusieurs inscriptions à la suite ou non
 				System.out.println("Souhaitez-vous inscrire un nouveau joueur ? (y/n)");
 			}
 
@@ -268,7 +268,7 @@ public class Application {
 	}
 
 	/**
-	 * Initilisation du plateau La plateau et constitué d'un ensemble d'hexagone
+	 * Initilisation du plateau La plateau et constituï¿½ d'un ensemble d'hexagone
 	 * format des routes et des coins
 	 */
 	public void initialisation() {
@@ -388,7 +388,7 @@ public class Application {
 	}
 
 	/**
-	 * Attribution d'un type de ressources à chaque tuile
+	 * Attribution d'un type de ressources ï¿½ chaque tuile
 	 */
 	public void placementRessource() {
 
@@ -454,7 +454,7 @@ public class Application {
 	}
 
 	/**
-	 * Attribution d'un nombre à chaque tuile ressource
+	 * Attribution d'un nombre ï¿½ chaque tuile ressource
 	 */
 	public void placementNumero() {
 
@@ -525,7 +525,7 @@ public class Application {
 	}
 
 	/**
-	 * association de 3 tuiles à chaque coin
+	 * association de 3 tuiles ï¿½ chaque coin
 	 */
 	private void liaisonTuileCoin() {
 		srvCoin.addRessources();
@@ -581,7 +581,7 @@ public class Application {
 					System.out.println(" Colonne : ");
 					yRoute = sc.nextInt();
 				} catch (InputMismatchException e) {
-					System.out.println("ERR : le numéro de Ligne ou de colonne doit etre un entier.");
+					System.out.println("ERR : le numï¿½ro de Ligne ou de colonne doit etre un entier.");
 					sc.nextLine();
 				}
 
@@ -618,7 +618,7 @@ public class Application {
 					return false;
 				}
 			} else {
-				System.out.println("ERR : Ce coin est déjà occupé");
+				System.out.println("ERR : Ce coin est dï¿½jï¿½ occupï¿½");
 				return false;
 			}
 		} else {
@@ -629,13 +629,13 @@ public class Application {
 	}
 
 	/**
-	 * Vérifie si les coordonnées correspondent à un coin
+	 * Vï¿½rifie si les coordonnï¿½es correspondent ï¿½ un coin
 	 * @param xColonie
 	 * @param yColonie
 	 * @return
 	 */
 	private boolean checkCoin(int xColonie, int yColonie) {
-		System.out.println("INF : Vérification de la validité du coin");
+		System.out.println("INF : Vï¿½rification de la validitï¿½ du coin");
 		if ((Coin) daoCoin.findByXAndY(xColonie, yColonie) != null) {
 			return true;
 		}
@@ -643,13 +643,13 @@ public class Application {
 	}
 
 	/**
-	 * Vérifie si le coin est libre de tout joueur
+	 * Vï¿½rifie si le coin est libre de tout joueur
 	 * @param xColonie
 	 * @param yColonie
 	 * @return
 	 */
 	private boolean checkLibre(int xColonie, int yColonie) {
-		System.out.println("INF : Vérification de la libre occupation du coin");
+		System.out.println("INF : Vï¿½rification de la libre occupation du coin");
 		Coin coin = (Coin) daoCoin.findByXAndY(xColonie, yColonie);
 		if (coin.getOccupation() == null) {
 			return true;
@@ -658,7 +658,7 @@ public class Application {
 	}
 
 	/** 
-	 * return true si les coins sont occupés
+	 * return true si les coins sont occupï¿½s
 	 * @param xColonie
 	 * @param yColonie
 	 * @return

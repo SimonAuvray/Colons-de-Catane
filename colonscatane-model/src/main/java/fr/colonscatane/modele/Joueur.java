@@ -13,10 +13,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@PrimaryKeyJoinColumn(name="CLI_ID", referencedColumnName = "UT_ID")
+@PrimaryKeyJoinColumn(name="JOUEUR_ID", referencedColumnName = "UT_ID")
 public class Joueur extends Utilisateur {
-	
-	
 	
 	@Column(name = "J_COULEUR")
 	private Couleur couleur;

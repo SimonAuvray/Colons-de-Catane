@@ -66,13 +66,6 @@ public class MenuController {
 			return "nouvellepartie";
 		}
 		
-		if ( nom == null) {
-			int taille = daoJoueur.findByRole(ROLE.Joueur).get().size();
-			Optional<Joueur> monJoueur = daoJoueur.findByNom("Joueur" + taille +1);
-			monJoueur.get().setRole(ROLE.Joueur);
-			daoJoueur.save(monJoueur.get());		
-		}
-		
 		else {	
 			
 			Optional<Joueur> monJoueur = daoJoueur.findByNom(nom);

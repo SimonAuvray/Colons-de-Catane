@@ -60,15 +60,15 @@ public class Application {
 	public void run(String[] args) {
 
 		inscription();
-		// initialisation();
-		// liaisonTuileCoin();
-		// placementRessource();
-		// placementNumero();
+		initialisation();
+		liaisonTuileCoin();
+		placementRessource();
+		placementNumero();
 
 		partieEnCours.ordreSetUp();
-//		for (Joueur j : partieEnCours.getLstJoueurs()) {
-//			daoJoueur.save(j);
-//		}
+		for (Joueur j : partieEnCours.getLstJoueurs()) {
+			daoJoueur.save(j);
+		}
 
 		premiersTours();
 
@@ -105,14 +105,14 @@ public class Application {
 				nombreDeJoueurs = sc.nextInt();
 				saisieOK = true;
 			} catch (InputMismatchException e) {
-				System.out.println("ERR : Le nombre de joueur doit Ãªtre un entier");
+				System.out.println("ERR : Le nombre de joueur doit être un entier");
 				sc.nextLine();
 			}
 			if (saisieOK) {
 				if (nombreDeJoueurs > Partie.NB_JOUEUR_MAX || nombreDeJoueurs < Partie.NB_JOUEUR_MIN) {
 					saisieOK = false;
 					System.out.println(
-							"ERR : Le nombre de joueur pour la partie ne peut pas Ãªtre supÃ©rieur Ã  4 ou infÃ©rieur Ã  2");
+							"ERR : Le nombre de joueur pour la partie ne peut pas être supérieur à  4 ou inférieur à  2");
 				}
 				sc.nextLine();
 			}
@@ -146,10 +146,16 @@ public class Application {
 
 			Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password);
 			joueur.setRole(ListeRoles.Joueur);
+			if(partieEnCours.getLstJoueurs()
+					.stream()
+					.filter(j -> j.getUsername().equals(joueur.getUsername())).count()>0) {
+				System.out.println("Les joueurs doivent tous être des utilisateurs différents");
+				System.out.println("Saisissez un autre nom pour le joueur "+i);
+			}else {
+				partieEnCours.getLstJoueurs().add(joueur);
+				i++;
+			}
 
-			partieEnCours.getLstJoueurs().add(joueur);
-
-			i++;
 		}
 
 		// attribution d'une couleur à un joueur
@@ -590,7 +596,7 @@ public class Application {
 						|| (yRoute > yColonie + 1)) {
 					System.out.println("ERR : Vous devez choisir une route voisine de votre colonie !");
 				} else {
-					route.setOccupationSegment(joueurTour);
+					route.setOccupation(joueurTour);
 					daoSegment.save(route);
 					saisieRouteOK = true;
 				}
@@ -602,9 +608,9 @@ public class Application {
 
 		if (checkCoin(xColonie, yColonie)) {
 			if (checkLibre(xColonie, yColonie)) {
-				if (checkVoisin(xColonie, yColonie)) {
+				if (!checkVoisin(xColonie, yColonie)) {
 					Coin leCoinSelectionne = (Coin) daoCoin.findByXAndY(xColonie, yColonie);
-					leCoinSelectionne.setOccupationCoin(occupation);
+					leCoinSelectionne.setOccupation(occupation);
 					daoCoin.save(leCoinSelectionne);
 					return true;
 				} else {
@@ -622,14 +628,28 @@ public class Application {
 
 	}
 
+	/**
+	 * Vérifie si les coordonnées correspondent à un coin
+	 * @param xColonie
+	 * @param yColonie
+	 * @return
+	 */
 	private boolean checkCoin(int xColonie, int yColonie) {
+		System.out.println("INF : Vérification de la validité du coin");
 		if ((Coin) daoCoin.findByXAndY(xColonie, yColonie) != null) {
 			return true;
 		}
 		return false;
 	}
 
+	/**
+	 * Vérifie si le coin est libre de tout joueur
+	 * @param xColonie
+	 * @param yColonie
+	 * @return
+	 */
 	private boolean checkLibre(int xColonie, int yColonie) {
+		System.out.println("INF : Vérification de la libre occupation du coin");
 		Coin coin = (Coin) daoCoin.findByXAndY(xColonie, yColonie);
 		if (coin.getOccupation() == null) {
 			return true;
@@ -637,6 +657,12 @@ public class Application {
 		return false;
 	}
 
+	/** 
+	 * return true si les coins sont occupés
+	 * @param xColonie
+	 * @param yColonie
+	 * @return
+	 */
 	private boolean checkVoisin(int xColonie, int yColonie) {
 		if (daoCoin.findByXAndY(xColonie + 2, yColonie) != null) {
 			Coin coin1 = (Coin) daoCoin.findByXAndY(xColonie + 2, yColonie);

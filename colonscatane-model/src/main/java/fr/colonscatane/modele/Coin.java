@@ -25,11 +25,7 @@ public class Coin extends PositionPlateau {
 	    
 	@Column(name = "TAILLE_OCCUPATION")
 	private int taille;
-	    
-	@ManyToOne
-	@JoinColumn(name = "COIN_JOUEUR")
-	protected Joueur occupationCoin;
-	
+
 
 	public Coin() {
     }
@@ -50,15 +46,7 @@ public class Coin extends PositionPlateau {
 		this.taille = taille;
 	}
 
-	public Joueur getOccupationCoin() {
-		return occupationCoin;
-	}
 
-	public void setOccupationCoin(Joueur occupationCoin) {
-		this.occupationCoin = occupationCoin;
-	}
-
-	
     
    
 	

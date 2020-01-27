@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -26,18 +28,19 @@ public abstract class PositionPlateau {
 	protected int x;
 	protected int y;
 	
-	@Transient
-	protected Joueur Occupation;
+	@ManyToOne
+	@JoinColumn(name = "POS_JOUEUR", nullable=true)
+	protected Joueur occupation;
 	
 	@Column (name="POS_TYPE", insertable=false, updatable=false)
 	private TypePosition type;
 	
     public Joueur getOccupation() {
-		return Occupation;
+		return this.occupation;
 	}
 
 	public void setOccupation(Joueur occupation) {
-		Occupation = occupation;
+		this.occupation = occupation;
 	}
 
 	/**

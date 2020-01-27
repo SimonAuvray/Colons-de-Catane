@@ -1,6 +1,7 @@
 package fr.colonscatane.modele;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "joueur")
 @PrimaryKeyJoinColumn(name="CLI_ID", referencedColumnName = "UT_ID")
 public class Joueur extends Utilisateur {
 	
@@ -47,11 +47,8 @@ public class Joueur extends Utilisateur {
 	@JoinColumn(name = "JOUEUR_PARTIE")
 	private Partie partie;
 	
-	@OneToMany(mappedBy = "occupationCoin")
-	private List<Coin> coins;
-	
-	@OneToMany(mappedBy = "occupationSegment")
-	private List<Segment> segments;
+	@OneToMany(mappedBy = "occupation",targetEntity = Coin.class)
+	private List<PositionPlateau> occupations;
 	
 	public Couleur getCouleur() {
 		return couleur;
@@ -130,11 +127,19 @@ public class Joueur extends Utilisateur {
 	public void setCompteurRoute(int compteurRoute) {
 		this.compteurRoute = compteurRoute;
 	}
-	public List<Coin> getCoins() {
-		return coins;
+	public List<PositionPlateau> getOccupations() {
+		return occupations;
 	}	
 	
+	public List<Coin> getCoins(){
+		return this.occupations.stream().filter(Coin.class::isInstance).map(c -> (Coin) c).collect(Collectors.toList());
+				
+	}
 	
+	public List<Segment> getSegments(){
+		return this.occupations.stream().filter(Segment.class::isInstance).map(s -> (Segment) s).collect(Collectors.toList());
+				
+	}
 	
 	
 

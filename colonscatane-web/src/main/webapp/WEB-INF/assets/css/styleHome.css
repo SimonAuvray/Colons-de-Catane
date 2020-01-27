@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+
+.jumbotron {
+	background-image: url('../ferme.jpg');
+	position: relative;
+	background-size: cover;
+	background-position: center;
+}
+
+@media screen and (min-width: 600px) {
+	.form-group {
+		position: center;
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+}

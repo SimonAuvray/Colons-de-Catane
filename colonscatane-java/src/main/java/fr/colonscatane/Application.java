@@ -155,7 +155,7 @@ public class Application {
 				}
 				
 				Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password).orElse(null);
-				joueur.setRole(ListeRoles.Joueur);
+				joueur.setRole(ROLE.Joueur);
 				
 				partieEnCours.getLstJoueurs().add(joueur);
 				

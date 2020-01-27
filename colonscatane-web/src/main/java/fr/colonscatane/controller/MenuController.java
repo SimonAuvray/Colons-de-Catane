@@ -20,7 +20,6 @@ import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.ROLE;
 
 @Controller
-@SessionScope
 public class MenuController {
 	
 	@Autowired
@@ -101,5 +100,9 @@ public class MenuController {
 	}
 		
 	
+	@GetMapping("/parametres")
+	public String getParametres() {
+		return "parametres";
+	}
 
 }

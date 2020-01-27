@@ -101,7 +101,7 @@ public class Application {
 			
 			
 			
-			// inscription éventuelle d'un nouvel utilisateur
+			// inscription ï¿½ventuelle d'un nouvel utilisateur
 			
 			inscriptionUt();
 			
@@ -144,25 +144,25 @@ public class Application {
 					password = sc.nextLine();
 					
 					try { 
-						idUt = daoUtilisateur.findByUsernameAndPassword(username, password).getId();
+						idUt = daoUtilisateur.findByUsernameAndPassword(username, password).orElse(null).getId();
 						identification = true;
 						System.out.println("Identifiction ok ! Bonjour " + username);
 					}
 					
 					catch (Exception ne) {
-						System.out.println("Ce mot de passe ne correspond pas à ce nom d'utilisateur, veuillez réessayer");
+						System.out.println("Ce mot de passe ne correspond pas ï¿½ ce nom d'utilisateur, veuillez rï¿½essayer");
 					}
 				}
 				
-				Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password);
-				joueur.setRole(ROLE.Joueur);
+				Joueur joueur = (Joueur) daoUtilisateur.findByUsernameAndPassword(username, password).orElse(null);
+				joueur.setRole(ListeRoles.Joueur);
 				
 				partieEnCours.getLstJoueurs().add(joueur);
 				
 				i++;
 			}
 			
-			// attribution d'une couleur à un joueur
+			// attribution d'une couleur ï¿½ un joueur
 			partieEnCours.attribuerCouleur();
 			for(Joueur j : partieEnCours.getLstJoueurs()) {
 				
@@ -254,9 +254,9 @@ public void inscriptionUt() {
 		}
 		
 		daoJoueur.save(monJoueur);
-		System.out.println("joueur bien créé");
+		System.out.println("joueur bien crï¿½ï¿½");
 		
-		// plusieurs inscriptions à la suite ou non
+		// plusieurs inscriptions ï¿½ la suite ou non
 		System.out.println("Souhaitez-vous inscrire un nouveau joueur ? (y/n)");
 	}
 			
@@ -565,7 +565,7 @@ public void inscriptionUt() {
 								System.out.println("Il ya des colonies trop proches");
 							}
 						} else {
-							System.out.println("Ce coin est déjà occupé");
+							System.out.println("Ce coin est dï¿½jï¿½ occupï¿½");
 						}
 					} else {
 						System.out.println("Veuillez saisir un coin");

@@ -27,8 +27,7 @@ public class HomeController {
 	
 	@Autowired
 	IDAOUtilisateur daoUtilisateur;
-	@Autowired
-	IDAOJoueur daoJoueur;
+
 	
 	@Autowired
 	IDAOJoueur daoJoueur;

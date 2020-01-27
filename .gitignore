@@ -1,5 +1,7 @@
 .project
 .classpath
 .settings/
+.metadata/
 build/
 target/
+Servers/

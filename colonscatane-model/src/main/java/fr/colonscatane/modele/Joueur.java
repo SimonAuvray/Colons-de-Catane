@@ -16,8 +16,6 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name="JOUEUR_ID", referencedColumnName = "UT_ID")
 public class Joueur extends Utilisateur {
 	
-	
-	
 	@Column(name = "J_COULEUR")
 	private Couleur couleur;
 	@Column(name = "J_ORDRE")

@@ -27,6 +27,8 @@ public class HomeController {
 	
 	@Autowired
 	IDAOUtilisateur daoUtilisateur;
+	@Autowired
+	IDAOJoueur daoJoueur;
 	
 	@Autowired
 	IDAOJoueur daoJoueur;
@@ -37,16 +39,16 @@ public class HomeController {
 	}
 	
 	@PostMapping("/home")
-	public String connexion(@Valid @ModelAttribute Utilisateur user,
-			BindingResult result,
-			HttpRequest req
+	public String connexion(@Valid @ModelAttribute Joueur user,
+			BindingResult result
 			) {
 		if(result.hasErrors()) {
 			return "home";
 		}
 		if( daoUtilisateur.findByUsernameAndPassword(user.getUsername(), user.getPassword() ) == null ) {
 			return "home";
-		} else {
+		}
+		else {
 			return "redirect:menu";
 		}
 	}
@@ -66,7 +68,7 @@ public class HomeController {
 		
 		if (daoUtilisateur.findByUsername(joueur.getUsername()).isPresent()) {
 			 
-			 JOptionPane.showMessageDialog(null, "Utilisateur déjà créé"); 
+			 JOptionPane.showMessageDialog(null, "Utilisateur dï¿½jï¿½ crï¿½ï¿½"); 
 			return "home"; 
 		}
 		

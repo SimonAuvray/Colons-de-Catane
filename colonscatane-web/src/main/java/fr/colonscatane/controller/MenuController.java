@@ -35,9 +35,6 @@ public class MenuController {
 		return "menu";
 	}
 	
-	
-	
-	
 	@GetMapping("/nouvellepartie")
 	public String getNouvellePartie(Model model, HttpSession session) {
 	
@@ -53,25 +50,6 @@ public class MenuController {
 				}
 		}
 		return "nouvellepartie";
-	}
-	
-	@PostMapping("/nouvellepartie")
-	public String ajoutJoueur(
-			@RequestParam String nom
-			) {
-		
-		if (daoJoueur.findByRole(ROLE.Joueur).get().size() >= 4) {
-			 JOptionPane.showMessageDialog(null, "Vous avez atteint le nombre maximal de joueurs");
-			return "nouvellepartie";
-		}
-		
-		else {	
-			
-			Optional<Joueur> monJoueur = daoJoueur.findByNom(nom);
-			monJoueur.get().setRole(ROLE.Joueur);
-			daoJoueur.save(monJoueur.get());
-		}
-		return "redirect:nouvellepartie";
 	}
 		
 	

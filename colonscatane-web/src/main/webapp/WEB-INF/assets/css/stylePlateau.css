@@ -83,82 +83,82 @@ body{
 	border-top: 43.3px solid blue;
 }
 
-.foret{
+.Foret{
 
 	background-color : darkgreen;
 }
 
-.foret:before{
+.Foret:before{
 	border-bottom: 43.3px solid darkgreen;
 }
 
-.foret:after{
+.Foret:after{
 	border-top: 43.3px solid darkgreen;
 }
 
-.plaine{
+.Prairie{
 
 	background-color : lightgreen;
 }
 
-.plaine:before{
+.Prairie:before{
 	border-bottom: 43.3px solid lightgreen;
 }
 
-.plaine:after{
+.Prairie:after{
 	border-top: 43.3px solid lightgreen;
 }
 
-.champs{
+.Champ{
 
 	background-color : #e8d630;
 }
 
-.champs:before{
+.Champ:before{
 	border-bottom: 43.3px solid #e8d630;
 }
 
-.champs:after{
+.Champ:after{
 	border-top: 43.3px solid #e8d630;
 }
 
-.argile{
+.Carriere{
 
 	background-color : #b38266;
 }
 
-.argile:before{
+.Carriere:before{
 	border-bottom: 43.3px solid #b38266;
 }
 
-.argile:after{
+.Carriere:after{
 	border-top: 43.3px solid #b38266;
 }
 
-.montagne{
+.Montagne{
 
 	background-color : #b7b7b7;
 }
 
-.montagne:before{
+.Montagne:before{
 	border-bottom: 43.3px solid #b7b7b7;
 }
 
-.montagne:after{
+.Montagne:after{
 	border-top: 43.3px solid #b7b7b7;
 }
 
 
-.desert{
+.Desert{
 
 	background-color : black;
 }
 
-.desert:before{
+.Desert:before{
 	border-bottom: 43.3px solid black;
 }
 
-.desert:after{
+.Desert:after{
 	border-top: 43.3px solid black;
 }
 .hexagon {

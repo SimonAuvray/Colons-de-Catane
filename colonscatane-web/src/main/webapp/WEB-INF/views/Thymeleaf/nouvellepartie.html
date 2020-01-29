@@ -13,7 +13,7 @@
     			<p class="lead">Lancer une nouvelle partie</p>
 	  		</div>
 		</div>
-		<div class="bandeau">
+		<div class="form-group">
 			<h4> Entrer les joueurs</h4>
 		</div>
   		<div class="form-group">
@@ -21,7 +21,7 @@
     		<input type="text" class="form-control" id="saisieUsername" name = "nom">
   		</div>
   		<div class="form-group">
-    		<button type="submit" class="btn btn-primary saisie_joueur" >Inscription</button>
+    		<button type="submit" class="btn btn-primary saisie_joueur" >Inviter</button>
   		</div>
   	</form>
   		
@@ -44,6 +44,7 @@
 			      <td> <div class="sqare bleu"> </div>
 			      </td>
 			      <td name="nomJoueur0">[[${joueur1?.username}]]</td>
+			      <td name="statusJoueur0"></td>
 			  	</tr>
 				<tr>
 					<th scope="row">Joueur 2</th>

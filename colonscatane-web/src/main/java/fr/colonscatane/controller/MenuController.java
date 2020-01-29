@@ -41,7 +41,6 @@ public class MenuController {
 	@GetMapping("/nouvellepartie")
 	public String getNouvellePartie(Model model, HttpSession session) {
 	
-		model.addAttribute("joueurConnecte", session.getAttribute("joueurConnecte"));
 		List<Joueur> listeJoueurs = new ArrayList<Joueur>();			
 		listeJoueurs = daoJoueur.findByRole(ROLE.Joueur).orElse(null);
 		

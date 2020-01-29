@@ -58,6 +58,14 @@ public class Joueur extends Utilisateur {
 		return ordre;
 	}
 
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+
 	public void setOrdre(int ordre) {
 		this.ordre = ordre;
 	}

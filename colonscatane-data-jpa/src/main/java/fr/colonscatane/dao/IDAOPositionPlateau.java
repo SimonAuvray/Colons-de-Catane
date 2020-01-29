@@ -14,9 +14,9 @@ import fr.colonscatane.modele.TypePosition;
 
 @Primary
 public interface IDAOPositionPlateau<T extends PositionPlateau> extends JpaRepository<T, Integer>{
-	public List<PositionPlateau> findByType(TypePosition type);
+	public List<T> findByType(TypePosition type);
 	
-	public Optional<PositionPlateau> findByXAndY(int x, int y);
+	public Optional<T> findByXAndY(int x, int y);
 	
 	@Query(value = "DROP TABLE LIENS", nativeQuery = true)
 	@Modifying

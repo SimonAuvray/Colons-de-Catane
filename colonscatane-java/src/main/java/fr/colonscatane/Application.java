@@ -64,7 +64,7 @@ public class Application {
 
 	public void run(String[] args) {
 
-		inscription();
+		//inscription();
 		servPositionPlateau.initialisationPlateau();
 		servCoin.addRessources();
 		servTuileRessource.placementRessource();

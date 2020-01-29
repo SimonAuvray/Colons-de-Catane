@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 	<title>Colons de Catane : Partie en cours</title>
@@ -9,6 +9,7 @@
 <body>
 	<header>
 		<h2> Tour du joueur 1</h2>
+		
 	</header>
 	<section id="plateau">
 		<div class="board">
@@ -25,30 +26,33 @@
 			<div class="line2">
 				<div class="hexagon eau">
   				</div>
-  				<div class="hexagon montagne">
+  				<div th:class="'hexagon ' + ${Tuile53.type}" >
   								<div class = "cercle sommetHG"> </div>
 								<div class = "cercle sommetH"> </div>
 								<div class = "cercle sommetHD"> </div>
 								<div class = "cercleRoute routeHD"> </div>
 								<div class = "cercleRoute routeHG"> </div>
 								<div class = "cercleRoute routeG"> </div>
+								<p class = "de"> [[${Tuile53.numero}]] </p>
 							
   				</div>
-  				<div class="hexagon foret">
+  				<div th:class="'hexagon ' + ${Tuile55.type}">
   				  				<div class = "cercle sommetHG"> </div>
 								<div class = "cercle sommetH"> </div>
 								<div class = "cercle sommetHD"> </div>
 								<div class = "cercleRoute routeHD"> </div>
 								<div class = "cercleRoute routeHG"> </div>
+								<p class = "de"> [[${Tuile55.numero}]] </p>
 						
   				</div>	
-  				<div class="hexagon plein plaine">
+  				<div th:class="'hexagon ' + ${Tuile57.type}">
    							
 								<div class = "cercle sommetH"> </div>
 								<div class = "cercle routeHD"> </div>
 								<div class = "cercle sommetHD"> </div>
 								<div class = "cercleRoute routeHD"> </div>
 								<div class = "cercleRoute routeHG"> </div>
+								<p class = "de"> [[${Tuile57.numero}]] </p>
 							
   				</div>
   				<div class="hexagon eau">
@@ -58,30 +62,38 @@
 			<div class="line3">
 				<div class="hexagon eau">
   				</div>
-  				<div class="hexagon plein desert">
+  				<div th:class="'hexagon ' + ${Tuile60.type}">
    								<div class = "cercle sommetH"> </div>
 								
 								<div class = "cercle sommetHD"> </div>
 								
 								<div class = "cercle sommetHG"> </div>
+								
+								<p class = "de"> [[${Tuile60.numero}]] </p>
 						
   				</div>
-  				<div class="hexagon argile">
+  				<div th:class="'hexagon ' + ${Tuile62.type}">
    								
 								<div class = "cercle sommetH"> </div>
 								
 								<div class = "cercle sommetHD"> </div>
+								
+								<p class = "de"> [[${Tuile62.numero}]] </p>
 							
   				</div>	
-  				<div class="hexagon champs">
+  				<div th:class="'hexagon ' + ${Tuile64.type}">
    								<div class = "cercle sommetH"> </div>
 								
 								<div class = "cercle sommetHD"> </div>
+								
+								<p class = "de"> [[${Tuile64.numero}]] </p>
   				</div>	
-  				<div class="hexagon foret">
+  				<div th:class="'hexagon ' + ${Tuile66.type}">
    							<div class = "cercle sommetH"> </div>
 								
 							<div class = "cercle sommetHD"> </div>
+							
+							<p class = "de"> [[${Tuile66.numero}]] </p>
 							
 							
   				</div>
@@ -92,32 +104,42 @@
 			<div class="line4">
 				<div class="hexagon eau">
   				</div>
-  				<div class="hexagon plaine">
+  				<div th:class="'hexagon ' + ${Tuile69.type}">
   								<div class = "cercle sommetH"> </div>
 								
 								<div class = "cercle sommetHD"> </div>
 								
 								<div class = "cercle sommetHG"> </div>
+								
+								<p class = "de"> [[${Tuile69.numero}]] </p>
   				</div>
-  				<div class="hexagon plaine">
+  				<div th:class="'hexagon ' + ${Tuile71.type}">
 								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div>  				
+								<div class = "cercle sommetHD"> </div>
+								
+								<p class = "de"> [[${Tuile71.numero}]] </p>  				
   				</div>
-  				<div class="hexagon champs">
+  				<div th:class="'hexagon ' + ${Tuile73.type}">
 								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div>  				
+								<div class = "cercle sommetHD"> </div>  
+								
+								<p class = "de"> [[${Tuile73.numero}]] </p>				
   				</div>	
-  				<div class="hexagon plaine">
+  				<div th:class="'hexagon ' + ${Tuile75.type}">
 								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div>  				
+								<div class = "cercle sommetHD"> </div>  
+								
+								<p class = "de"> [[${Tuile75.numero}]] </p>					
   				</div>	
-  				<div class="hexagon champs">
+  				<div th:class="'hexagon ' + ${Tuile77.type}">
  								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div> 				
+								<div class = "cercle sommetHD"> </div> 	
+								
+								<p class = "de"> [[${Tuile77.numero}]] </p>			
   				</div>
   				<div class="hexagon eau">
   				</div>
@@ -128,27 +150,35 @@
 								<div class = "cercle sommetH"> </div>				
 
   				</div>
-  				<div class="hexagon montagne">
+  				<div th:class="'hexagon ' + ${Tuile131.type}">
 								<div class = "cercle sommetH"> </div>
 								
 								<div class = "cercle sommetHD"> </div>
 								
-								<div class = "cercle sommetHG"> </div>		  				
+								<div class = "cercle sommetHG"> </div>	
+								
+								<p class = "de"> [[${Tuile131.numero}]] </p>	  				
   				</div>
-  				<div class="hexagon foret">
+  				<div th:class="'hexagon ' + ${Tuile133.type}">
 								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div>  				  				
+								<div class = "cercle sommetHD"> </div>  
+								
+								<p class = "de"> [[${Tuile133.numero}]] </p>					  				
   				</div>	
-  				<div class="hexagon argile">
+  				<div th:class="'hexagon ' + ${Tuile135.type}">
 								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div>  				  				
+								<div class = "cercle sommetHD"> </div>  	
+								
+								<p class = "de"> [[${Tuile135.numero}]] </p>				  				
   				</div>	
-  				<div class="hexagon foret">
+  				<div th:class="'hexagon ' + ${Tuile137.type}">
 								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div>  				  				
+								<div class = "cercle sommetHD"> </div> 
+								
+								<p class = "de"> [[${Tuile137.numero}]] </p>	 				  				
   				</div>
   				<div class="hexagon eau">
 								<div class = "cercle sommetH"> </div>  				
@@ -160,22 +190,28 @@
 								<div class = "cercle sommetH"> </div>				
 				
   				</div>
-  				<div class="hexagon montagne">
+  				<div th:class="'hexagon ' + ${Tuile140.type}">
 								<div class = "cercle sommetH"> </div>
 								
 								<div class = "cercle sommetHD"> </div>
 								
 								<div class = "cercle sommetHG"> </div>
+								
+								<p class = "de"> [[${Tuile140.numero}]] </p>	
   				</div>
-  				<div class="hexagon champs">
+  				<div th:class="'hexagon ' + ${Tuile142.type}">
 								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div>    				
+								<div class = "cercle sommetHD"> </div> 
+								
+								<p class = "de"> [[${Tuile142.numero}]] </p>	   				
   				</div>	
-  				<div class="hexagon argile">
+  				<div th:class="'hexagon ' + ${Tuile144.type}">
 								<div class = "cercle sommetH"> </div>
 								
-								<div class = "cercle sommetHD"> </div>    				
+								<div class = "cercle sommetHD"> </div>  
+								
+								<p class = "de"> [[${Tuile144.numero}]] </p>	  				
   				</div>
   				<div class="hexagon eau">
 								<div class = "cercle sommetH"> </div>  				

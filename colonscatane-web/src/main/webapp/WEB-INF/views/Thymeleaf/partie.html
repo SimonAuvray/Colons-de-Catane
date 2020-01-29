@@ -2,213 +2,205 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-	<title>Colons de Catane : Partie en cours</title>
-	<meta name="description" content="A vous de jouer" />
-	<link rel="stylesheet" type="text/css" href="assets/css/stylePlateau.css" />
+<title>Colons de Catane : Partie en cours</title>
+<meta name="description" content="A vous de jouer" />
+<link rel="stylesheet" type="text/css"
+	href="assets/css/stylePlateau.css" />
 </head>
 <body>
+
 	<header>
-		<h2> Tour du joueur 1</h2>
+		<h2>Tour du joueur 1</h2>
 	</header>
 	<section id="plateau">
 		<div class="board">
 			<div class="line">
-				<div class="hexagon eau">
-  				</div>
-  				<div class="hexagon eau">
-  				</div>
-  				<div class="hexagon eau">
-  				</div>	
-  				<div class="hexagon eau">
-  				</div>	
+				<div class="hexagon eau"></div>
+				<div class="hexagon eau"></div>
+				<div class="hexagon eau"></div>
+				<div class="hexagon eau"></div>
 			</div>
 			<div class="line2">
-				<div class="hexagon eau">
-  				</div>
-  				<div class="hexagon montagne">
-  								<a th:href="@{ partie/coin/{x}/{y}(x=2,y=8) }"><div class = "cercle sommetHG"> </div></a>
-								<div class = "cercle sommetH"> </div>
-								<div class = "cercle sommetHD"> </div>
-								<div class = "cercleRoute routeHD"> </div>
-								<div class = "cercleRoute routeHG"> </div>
-								<div class = "cercleRoute routeG"> </div>
-							
-  				</div>
-  				<div class="hexagon foret">
-  				  				<div class = "cercle sommetHG"> </div>
-								<div class = "cercle sommetH"> </div>
-								<div class = "cercle sommetHD"> </div>
-								<div class = "cercleRoute routeHD"> </div>
-								<div class = "cercleRoute routeHG"> </div>
-						
-  				</div>	
-  				<div class="hexagon plein plaine">
-   							
-								<div class = "cercle sommetH"> </div>
-								<div class = "cercle routeHD"> </div>
-								<div class = "cercle sommetHD"> </div>
-								<div class = "cercleRoute routeHD"> </div>
-								<div class = "cercleRoute routeHG"> </div>
-							
-  				</div>
-  				<div class="hexagon eau">
-  				</div>
+				<div class="hexagon eau"></div>
+				<div class="hexagon montagne">
+					<div class="cercle sommetHG" id="coin 2 8"></div>
+					<div class="cercle sommetH" id="coin 2 10"></div>
+					<div class="cercle sommetHD" id="coin 2 12"></div>
+					<div class="cercleRoute routeHG" id="segment 2 11"></div>
+					<div class="cercleRoute routeG" id="segment 3 8"></div>					
+					<div class="cercleRoute routeHD" id="segment 2 9"></div>
+
+				</div>
+				<div class="hexagon foret">
+					<div class="cercle sommetHG"  id="coin 2 12"></div>
+					<div class="cercle sommetH"  id="coin 2 14"></div>
+					<div class="cercle sommetHD"  id="coin 2 16"></div>					
+					<div class="cercleRoute routeG" id="segment 3 12"></div>
+					<div class="cercleRoute routeHG" id="segment 2 13"></div>
+					<div class="cercleRoute routeHD" id="segment 2 15"></div>
+
+				</div>
+				<div class="hexagon plein plaine">
+					<div class="cercle sommetHG"  id="coin 2 16"></div>
+					<div class="cercle sommetH"  id="coin 2 18"></div>
+					<div class="cercle sommetHD"  id="coin 2 20"></div>					
+					<div class="cercleRoute routeG" id="segment 3 16"></div>
+					<div class="cercleRoute routeHG" id="segment 2 17"></div>
+					<div class="cercleRoute routeHD" id="segment 2 19"></div>								
+					<div class="cercleRoute routeD" id="segment 3 20"></div>
+
+				</div>
+				<div class="hexagon eau"></div>
 			</div>
-			
+
+			<div class="line3">
+				<div class="hexagon eau"></div>
+				<div class="hexagon plein desert">
+					<div class="cercle sommetHG" id="coin 4 6"></div>
+					<div class="cercle sommetH" id="coin 4 8"></div>
+					<div class="cercle sommetHD" id="coin 4 10"></div>					
+					<div class="cercleRoute routeG" id="segment 5 6"></div>
+					<div class="cercleRoute routeHG" id="segment 4 7"></div>					
+					<div class="cercleRoute routeHD" id="segment 4 9"></div>
+
+				</div>
+				<div class="hexagon argile">
+
+					<div class="cercle sommetH"></div>
+					<div class="cercle sommetHD"></div>
+
+				</div>
+				<div class="hexagon champs">
+					<div class="cercle sommetH"></div>
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon foret">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+
+
+				</div>
+				<div class="hexagon eau"></div>
+			</div>
+
+			<div class="line4">
+				<div class="hexagon eau"></div>
+				<div class="hexagon plaine">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+
+					<div class="cercle sommetHG"></div>
+				</div>
+				<div class="hexagon plaine">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon champs">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon plaine">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon champs">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon eau"></div>
+			</div>
+
 			<div class="line3">
 				<div class="hexagon eau">
-  				</div>
-  				<div class="hexagon plein desert">
-   								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>
-								
-								<div class = "cercle sommetHG"> </div>
-						
-  				</div>
-  				<div class="hexagon argile">
-   								
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>
-							
-  				</div>	
-  				<div class="hexagon champs">
-   								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>
-  				</div>	
-  				<div class="hexagon foret">
-   							<div class = "cercle sommetH"> </div>
-								
-							<div class = "cercle sommetHD"> </div>
-							
-							
-  				</div>
-  				<div class="hexagon eau">
-  				</div>
-			</div>
-			
-			<div class="line4">
-				<div class="hexagon eau">
-  				</div>
-  				<div class="hexagon plaine">
-  								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>
-								
-								<div class = "cercle sommetHG"> </div>
-  				</div>
-  				<div class="hexagon plaine">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>  				
-  				</div>
-  				<div class="hexagon champs">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>  				
-  				</div>	
-  				<div class="hexagon plaine">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>  				
-  				</div>	
-  				<div class="hexagon champs">
- 								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div> 				
-  				</div>
-  				<div class="hexagon eau">
-  				</div>
-			</div>
-			
-				<div class="line3">
-				<div class="hexagon eau">
-								<div class = "cercle sommetH"> </div>				
+					<div class="cercle sommetH"></div>
 
-  				</div>
-  				<div class="hexagon montagne">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>
-								
-								<div class = "cercle sommetHG"> </div>		  				
-  				</div>
-  				<div class="hexagon foret">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>  				  				
-  				</div>	
-  				<div class="hexagon argile">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>  				  				
-  				</div>	
-  				<div class="hexagon foret">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>  				  				
-  				</div>
-  				<div class="hexagon eau">
-								<div class = "cercle sommetH"> </div>  				
-  				</div>
-			</div>
-			
-				<div class="line2">
+				</div>
+				<div class="hexagon montagne">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+
+					<div class="cercle sommetHG"></div>
+				</div>
+				<div class="hexagon foret">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon argile">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon foret">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
 				<div class="hexagon eau">
-								<div class = "cercle sommetH"> </div>				
-				
-  				</div>
-  				<div class="hexagon montagne">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>
-								
-								<div class = "cercle sommetHG"> </div>
-  				</div>
-  				<div class="hexagon champs">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>    				
-  				</div>	
-  				<div class="hexagon argile">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>    				
-  				</div>
-  				<div class="hexagon eau">
-								<div class = "cercle sommetH"> </div>  				
-  				</div>
+					<div class="cercle sommetH"></div>
+				</div>
 			</div>
-			
+
+			<div class="line2">
+				<div class="hexagon eau">
+					<div class="cercle sommetH"></div>
+
+				</div>
+				<div class="hexagon montagne">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+
+					<div class="cercle sommetHG"></div>
+				</div>
+				<div class="hexagon champs">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon argile">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon eau">
+					<div class="cercle sommetH"></div>
+				</div>
+			</div>
+
 			<div class="linefin">
 				<div class="hexagon eau">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>  				
-				
-				
-  				</div>
-  				<div class="hexagon eau">
-								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>    				
-  				</div>
-  				<div class="hexagon eau">
- 								<div class = "cercle sommetH"> </div>
-								
-								<div class = "cercle sommetHD"> </div>   				
-  				</div>	
-  				<div class="hexagon eau">
-								<div class = "cercle sommetH"> </div>
- 					
-  				</div>	
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+
+
+				</div>
+				<div class="hexagon eau">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon eau">
+					<div class="cercle sommetH"></div>
+
+					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon eau">
+					<div class="cercle sommetH"></div>
+
+				</div>
 			</div>
-		
+
 		</div>
 	</section>
-
+<script src="assets/js/main.js"></script>
 </body>
-</html>
 </html>

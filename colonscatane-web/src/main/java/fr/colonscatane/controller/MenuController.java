@@ -2,24 +2,19 @@ package fr.colonscatane.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.annotation.SessionScope;
 
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOUtilisateur;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.ROLE;
+import fr.colonscatane.modele.Utilisateur;
 
 @Controller
 public class MenuController {
@@ -28,7 +23,7 @@ public class MenuController {
 	private IDAOJoueur daoJoueur;
 	
 	@Autowired
-	private IDAOUtilisateur daoUtilisateur;
+	private IDAOUtilisateur<Utilisateur> daoUtilisateur;
 	
 	@GetMapping("/menu")
 	public String getMenu() {

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.colonscatane.dao.IDAOTuileRessource;
-import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.TuileRessource;
 import fr.colonscatane.modele.TypePosition;
 import fr.colonscatane.modele.TypeTuile;

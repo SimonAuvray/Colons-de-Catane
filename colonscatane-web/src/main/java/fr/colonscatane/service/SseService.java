@@ -3,18 +3,20 @@ package fr.colonscatane.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+@Service
 public class SseService {
 	
 	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();
 	
-	@GetMapping("/sse")
+
 	public SseEmitter gestionEmitters(){
 		SseEmitter emitter = new SseEmitter();
 		
-		//action � faire quand l'event est complet
+		//action a faire quand l'event est complet
 		// runnable : fonction qui n'attend rien et qui ne retourne rien
 		emitter.onCompletion(() -> {
 			// synchronized permet de signaler qu'il faut attendre que la liste soit disponible avant d'agirr dessus.

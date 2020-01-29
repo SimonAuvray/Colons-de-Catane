@@ -10,32 +10,59 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.colonscatane.views.Views;
+
 @Entity
 @PrimaryKeyJoinColumn(name="JOUEUR_ID", referencedColumnName = "UT_ID")
 public class Joueur extends Utilisateur {
 	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_COULEUR")
 	private Couleur couleur;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_ORDRE")
 	private int ordre;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_SCORE")
 	private int score;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_BOIS_POSSEDE")
 	private int boisPossede;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_BLE_POSSEDE")
 	private int blePossede;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_ARGILE_POSSEDE")
 	private int argilePossede;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_PIERRE_POSSEDE")
 	private int pierrePossede;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_MOUTON_POSSEDE")
 	private int moutonPossede;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_COMPTEUR_COLONIES")
 	private int compteurColonie;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_COMPTEUR_VILLE")
 	private int compteurVille;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name = "J_COMPTEUR_ROUTE")
 	private int compteurRoute;
+	
+	@JsonView({Views.Joueur.class,Views.PositionPlateauWithJoueur.class})
 	@Column(name="J_ROLE")
 	private ROLE role;
 	
@@ -44,6 +71,7 @@ public class Joueur extends Utilisateur {
 	private Partie partie;
 	
 	@OneToMany(mappedBy = "occupation",targetEntity = Coin.class)
+	@JsonView(Views.JoueurWithPositionsPlateau.class)
 	private List<PositionPlateau> occupations;
 	
 	public Couleur getCouleur() {

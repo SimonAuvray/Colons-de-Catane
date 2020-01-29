@@ -253,4 +253,13 @@ body{
 	left : -19px;
 }
 
+.de{
+	position : absolute;
+	display : inline-block;
+	top : 5px;
+	left : 68px;
+	font-size : x-large;
+	
+}
+
 

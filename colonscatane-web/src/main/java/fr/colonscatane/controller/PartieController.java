@@ -37,6 +37,7 @@ public class PartieController {
 		for (TuileRessource t : mesTuiles) {
 			model.addAttribute("Tuile"+t.getId(), t);
 			
+			
 			//System.out.println( "RessourceTuile"+t.getId() +" "+t.getType().toString());
 		}
 		return "partie";

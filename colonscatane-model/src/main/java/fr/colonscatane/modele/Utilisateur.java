@@ -31,6 +31,25 @@ public abstract class  Utilisateur {
 	@NotBlank(message = "Vous devez entrer votre mot de passe")
 	protected String password;	
 	
+	@Column(name="UT_PASSWORD", nullable = false)
+	protected String password;
+	
+	@Column(name="UT_NOM")
+	protected String nom;
+	
+
+	
+	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNom() {
 		return nom;
 	}

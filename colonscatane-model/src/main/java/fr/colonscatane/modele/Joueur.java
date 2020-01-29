@@ -39,6 +39,8 @@ public class Joueur extends Utilisateur {
 	@Column(name="J_ROLE")
 	private ROLE role;
 	
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "JOUEUR_PARTIE")
 	private Partie partie;
@@ -160,6 +162,15 @@ public class Joueur extends Utilisateur {
 	
 	public Joueur (String nom) {
 		this.nom = nom;
+	}
+	
+	public Joueur (int id) {
+		super(id);
+	}
+	
+	public Joueur (int id, String nom) {
+		super(id, nom);
+		
 	}
 	
 	public Joueur (Couleur couleur, String nom) {

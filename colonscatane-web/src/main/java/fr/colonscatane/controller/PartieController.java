@@ -1,5 +1,6 @@
 package fr.colonscatane.controller;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +13,11 @@ import javax.transaction.Transactional;
 import org.hibernate.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +30,7 @@ import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.TuileRessource;
+
 
 
 @Controller

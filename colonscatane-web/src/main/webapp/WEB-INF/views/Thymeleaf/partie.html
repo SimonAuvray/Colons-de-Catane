@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
@@ -27,7 +27,8 @@
 				<div class="hexagon eau">
   				</div>
   				<div th:class="'hexagon ' + ${Tuile53.type}" >
-  								<div class = "cercle sommetHG"> </div>
+  								<a th:href="@{ partie/coin/{x}/{y}(x=2,y=8) }"><div class = "cercle sommetHG"> </div></a>
+
 								<div class = "cercle sommetH"> </div>
 								
 								<div class = "cercleRoute routeHD"> </div>

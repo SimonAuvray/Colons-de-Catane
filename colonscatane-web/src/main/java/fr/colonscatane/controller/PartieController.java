@@ -10,10 +10,12 @@ import javax.swing.JOptionPane;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,9 +28,11 @@ import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.TuileRessource;
 
+
 @Controller
 public class PartieController {
 	
+
 	@Autowired
 	private IDAOJoueur daoJoueur;
 	@Autowired
@@ -47,8 +51,11 @@ public class PartieController {
 			
 			//System.out.println( "RessourceTuile"+t.getId() +" "+t.getType().toString());
 		}
+
 		return "partie";
 	}
+	
+	
 
 
 	@PostMapping("/nouvellepartie")

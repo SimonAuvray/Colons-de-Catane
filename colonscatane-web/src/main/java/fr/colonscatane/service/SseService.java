@@ -13,7 +13,7 @@ public class SseService {
 	@GetMapping("/sse")
 	public SseEmitter gestionEmitters(){
 		SseEmitter emitter = new SseEmitter();
-		
+
 		//action a faire quand l'event est complet
 		// runnable : fonction qui n'attend rien et qui ne retourne rien
 		emitter.onCompletion(() -> {
@@ -24,9 +24,9 @@ public class SseService {
 			this.emitters.remove(emitter);
 			}
 		});
-		
-		// action � faire quand l'event est en timeout
-		// la fonction complete d�clenche onCompletion
+
+		// action a faire quand l'event est en timeout
+		// la fonction complete declenche onCompletion
 		emitter.onTimeout(() -> {
 			emitter.complete();
 		});
@@ -39,6 +39,7 @@ public class SseService {
 	// Fonction pour transmettre un message au client 
 	// le message peut etre un string ou un objet.
 	// avec Jackson, c'est objet devrait etre automatiquement transcrit au format json
+
 	public void emissionObjet(Object o) {
 		this.emitters.forEach(emitter -> {
 			try {

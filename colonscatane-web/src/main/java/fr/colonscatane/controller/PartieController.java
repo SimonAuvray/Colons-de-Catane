@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import fr.colonscatane.application.PartieContextLoader;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOPartie;
+import fr.colonscatane.dao.IDAOTuileRessource;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.ROLE;
+import fr.colonscatane.modele.TuileRessource;
 
 @Controller
 public class PartieController {
@@ -31,11 +33,23 @@ public class PartieController {
 	private IDAOJoueur daoJoueur;
 	@Autowired
 	private IDAOPartie daoPartie;
+	@Autowired
+	private IDAOTuileRessource daoTuile;
 	
-	@GetMapping("partie")
-	public String lancerpartie() {
+	@GetMapping("/partie")
+	public String lancerpartie(Model model) {
+		
+		List<TuileRessource> mesTuiles =  daoTuile.findAll();
+		
+		for (TuileRessource t : mesTuiles) {
+			model.addAttribute("Tuile"+t.getId(), t);
+			
+			
+			//System.out.println( "RessourceTuile"+t.getId() +" "+t.getType().toString());
+		}
 		return "partie";
 	}
+
 
 	@PostMapping("/nouvellepartie")
 	@Transactional

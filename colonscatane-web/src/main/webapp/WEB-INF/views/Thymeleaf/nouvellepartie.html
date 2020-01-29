@@ -33,6 +33,7 @@
 					<th scope="col"></th>
 				    <th scope="col">Couleur</th>
 				   	<th scope="col">Nom</th>
+				   	<th scope="col">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,18 +50,21 @@
 				    <td><div class="sqare rouge"> </div>
 				    </td>
 				    <td name="nomJoueur1">[[${joueur2?.username}]]</td>
+				    <td name="statusJoueur1"></td>
 				</tr>
 				<tr>
 					<th scope="row">Joueur 3</th>
 				    <td><div class="sqare vert"> </div>
 				    </td>
 				    <td name="nomJoueur2">[[${joueur3?.username}]]</td>
+				    <td name="statusJoueur2"></td>
 				</tr>
 				<tr>
 					<th scope="row">Joueur 4</th>
 				    <td><div class="sqare jaune"> </div>
 				    </td>
 				    <td name="nomJoueur3">[[${joueur4?.username}]]</td>
+				    <td name="statusJoueur3"></td>
 				</tr>
 			</tbody>
 		</table>

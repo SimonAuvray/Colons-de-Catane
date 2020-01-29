@@ -229,7 +229,7 @@ body{
     width: 35px;
     height: 35px;
     border-radius: 16px;
-    background: green;
+    border:2px solid green;
 }
 
 .routeHD{

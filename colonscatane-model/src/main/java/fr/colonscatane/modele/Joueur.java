@@ -164,14 +164,7 @@ public class Joueur extends Utilisateur {
 		this.nom = nom;
 	}
 	
-	public Joueur (int id) {
-		super(id);
-	}
-	
-	public Joueur (int id, String nom) {
-		super(id, nom);
-		
-	}
+
 	
 	public Joueur (Couleur couleur, String nom) {
 		super(nom);

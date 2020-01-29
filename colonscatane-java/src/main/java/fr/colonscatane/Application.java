@@ -27,6 +27,7 @@ import fr.colonscatane.modele.Segment;
 import fr.colonscatane.modele.TuileRessource;
 import fr.colonscatane.modele.TypePosition;
 import fr.colonscatane.modele.TypeTuile;
+import fr.colonscatane.modele.Utilisateur;
 import fr.colonscatane.service.CoinService;
 import fr.colonscatane.service.PositionPlateauService;
 import fr.colonscatane.service.SegmentService;
@@ -39,7 +40,7 @@ public class Application {
 	public static Scanner sc = new Scanner(System.in);
 
 	@Autowired
-	private IDAOUtilisateur daoUtilisateur;
+	private IDAOUtilisateur<Utilisateur> daoUtilisateur;
 
 	@Autowired
 	private IDAOJoueur daoJoueur;

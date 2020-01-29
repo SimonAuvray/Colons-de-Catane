@@ -23,7 +23,7 @@ public class TuileRessourceService {
 	 */
 	public void placementRessource() {
 
-		List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
+		List<TuileRessource> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
 
 		Collections.shuffle(mesTuiles);
 
@@ -89,7 +89,7 @@ public class TuileRessourceService {
 	 */
 	public void placementNumero() {
 
-		List<PositionPlateau> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
+		List<TuileRessource> mesTuiles = daoTuileRessource.findByType(TypePosition.TuileRessource);
 
 		Collections.shuffle(mesTuiles);
 

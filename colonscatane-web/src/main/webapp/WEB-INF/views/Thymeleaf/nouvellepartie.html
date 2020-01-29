@@ -18,7 +18,7 @@
 		</div>
   		<div class="form-group">
     		<label id= "user" >Entrer le nom d'utilisateur du joueur</label>
-    		<input type="text" class="form-control" id="saisieUsername" name = "nom">
+    		<input type="text" class="form-control" id="saisieUsername" name = "username">
   		</div>
   		<div class="form-group">
     		<button type="submit" class="btn btn-primary saisie_joueur" >Inviter</button>
@@ -43,29 +43,29 @@
 			      <th scope="row">Joueur 1</th>
 			      <td> <div class="sqare bleu"> </div>
 			      </td>
-			      <td name="nomJoueur0">[[${joueur1?.username}]]</td>
-			      <td name="statusJoueur0"></td>
+			      <td name="nomJoueur0">[[${session.user}]]</td>
+			      <td name="statusJoueur0">[[${joueur0?.role}]]</td>
 			  	</tr>
 				<tr>
 					<th scope="row">Joueur 2</th>
 				    <td><div class="sqare rouge"> </div>
 				    </td>
-				    <td name="nomJoueur1">[[${joueur2?.username}]]</td>
-				    <td name="statusJoueur1"></td>
+				    <td name="nomJoueur1">[[${joueur1?.username}]]</td>
+				    <td name="statusJoueur1">[[${joueur1?.role}]]</td>
 				</tr>
 				<tr>
 					<th scope="row">Joueur 3</th>
 				    <td><div class="sqare vert"> </div>
 				    </td>
-				    <td name="nomJoueur2">[[${joueur3?.username}]]</td>
-				    <td name="statusJoueur2"></td>
+				    <td name="nomJoueur2">[[${joueur2?.username}]]</td>
+				    <td name="statusJoueur2">[[${joueur2?.role}]]</td>
 				</tr>
 				<tr>
 					<th scope="row">Joueur 4</th>
 				    <td><div class="sqare jaune"> </div>
 				    </td>
-				    <td name="nomJoueur3">[[${joueur4?.username}]]</td>
-				    <td name="statusJoueur3"></td>
+				    <td name="nomJoueur3">[[${joueur3?.username}]]</td>
+				    <td name="statusJoueur3">[[${joueur2?.role}]]</td>
 				</tr>
 			</tbody>
 		</table>

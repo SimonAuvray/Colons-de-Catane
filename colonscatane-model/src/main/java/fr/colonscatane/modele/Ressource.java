@@ -2,6 +2,6 @@ package fr.colonscatane.modele;
 
 public enum Ressource {
 	
-	Mouton, Blé, Bois, Pierre, Argile
+	Mouton, Bois, Ble,  Pierre, Argile
 
 }

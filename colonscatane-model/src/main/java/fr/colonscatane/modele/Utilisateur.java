@@ -31,6 +31,15 @@ public abstract class  Utilisateur {
 	@NotBlank(message = "Vous devez entrer votre mot de passe")
 	protected String password;	
 	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -74,13 +83,6 @@ public abstract class  Utilisateur {
 		
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	
 	

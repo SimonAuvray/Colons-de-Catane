@@ -156,6 +156,7 @@ public class Application {
 				System.out.println("Saisissez un autre nom pour le joueur " + i);
 			} else {
 				partieEnCours.getLstJoueurs().add(joueur);
+				joueur.setPassword("tedt");
 				i++;
 			}
 

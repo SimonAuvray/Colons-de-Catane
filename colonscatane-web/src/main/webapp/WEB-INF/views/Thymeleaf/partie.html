@@ -2,16 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Colons de Catane : Partie en cours</title>
-<meta name="description" content="A vous de jouer" />
-<link rel="stylesheet" type="text/css"
-	href="assets/css/stylePlateau.css" />
+	<title>Colons de Catane : Partie en cours</title>
+	<meta name="description" content="A vous de jouer" />
+	<link rel="stylesheet" type="text/css" href="assets/css/stylePlateau.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>	  
 </head>
 <body>
-
-	<header>
-		<h2>Tour du joueur 1</h2>
-	</header>
+	<section class="sticky-top">
+		<div class="text-light bg-dark">scores</div>
+		<div>Tour du joueur: </div>
+		<div>
+			<div th:each="joueur : ${joueurs}" name="joueurStatus">
+				[[${joueur.username}]]
+			</div>
+		</div>
+	</section>
+	<div class="container">
+		<a class="quiter" th:href="@{menu/retour}" name="quiter">
+			Log-out <img src="assets/icons-deconnexion-50.png">
+		</a>
+	</div>
 	<section id="plateau">
 		<div class="board">
 			<div class="line">
@@ -22,149 +35,180 @@
 			</div>
 			<div class="line2">
 				<div class="hexagon eau"></div>
-
 				<div th:class="'hexagon ' + ${Tuile53.type}">
-
-					<div class="cercle sommetHG" id="coin 2 8"></div>
-					<div class="cercle sommetH" id="coin 2 10"></div>
-					<div class="cercle sommetHD" id="coin 2 12"></div>
-					<div class="cercleRoute routeHG" id="segment 2 9"></div>
-					<div class="cercleRoute routeG" id="segment 3 8"></div>
-					<div class="cercleRoute routeHD" id="segment 2 11"></div>
+					<div class="cercle sommet sommetHG" id="coin 2 8"></div>
+					<div class="cercle sommet sommetH" id="coin 2 10"></div>
+					<div class="cercle sommet sommetHD" id="coin 2 12"></div>
+					<div class="cercle route routeG" id="segment 3 8"></div>
+					<div class="cercle route route routeHG" id="segment 2 9"></div>
+					<div class="cercle route routeHD" id="segment 2 11"></div>
 					<p class="de">[[${Tuile53.numero}]]</p>
-
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile55.type}">
-					<div class="cercle sommetHG" id="coin 2 12"></div>
-					<div class="cercle sommetH" id="coin 2 14"></div>
-					<div class="cercle sommetHD" id="coin 2 16"></div>
-					<div class="cercleRoute routeG" id="segment 3 12"></div>
-					<div class="cercleRoute routeHG" id="segment 2 13"></div>
-					<div class="cercleRoute routeHD" id="segment 2 15"></div>
+					<div class="cercle sommet sommetH" id="coin 2 14"></div>
+					<div class="cercle sommet sommetHD" id="coin 2 16"></div>
+					<div class="cercle route routeG" id="segment 3 12"></div>
+					<div class="cercle route routeHG" id="segment 2 13"></div>
+					<div class="cercle route routeHD" id="segment 2 15"></div>
 					<p class="de">[[${Tuile55.numero}]]</p>
-
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile57.type}">
-					<div class="cercle sommetHG" id="coin 2 16"></div>
-					<div class="cercle sommetH" id="coin 2 18"></div>
-					<div class="cercle sommetHD" id="coin 2 20"></div>
-					<div class="cercleRoute routeG" id="segment 3 16"></div>
-					<div class="cercleRoute routeHG" id="segment 2 17"></div>
-					<div class="cercleRoute routeHD" id="segment 2 19"></div>
-					<div class="cercleRoute routeD" id="segment 3 20"></div>
+					<div class="cercle sommet sommetH" id="coin 2 18"></div>
+					<div class="cercle sommet sommetHD" id="coin 2 20"></div>
+					<div class="cercle route routeG" id="segment 3 16"></div>
+					<div class="cercle route routeHG" id="segment 2 17"></div>
+					<div class="cercle route routeHD" id="segment 2 19"></div>
+					<div class="cercle route routeD" id="segment 3 20"></div>
 					<p class="de">[[${Tuile57.numero}]]</p>
-
 				</div>
+				
 				<div class="hexagon eau"></div>
 			</div>
 
 			<div class="line3">
 				<div class="hexagon eau"></div>
 				<div th:class="'hexagon ' + ${Tuile60.type}">
-
-					<div class="cercle sommetHG" id="coin 4 6"></div>
-					<div class="cercle sommetH" id="coin 4 8"></div>
-					<div class="cercle sommetHD" id="coin 4 10"></div>
-					<div class="cercleRoute routeG" id="segment 5 6"></div>
-					<div class="cercleRoute routeHG" id="segment 4 7"></div>
-					<div class="cercleRoute routeHD" id="segment 4 9"></div>
+					<div class="cercle sommet sommetHG" id="coin 4 6"></div>
+					<div class="cercle sommet sommetH" id="coin 4 8"></div>
+					<div class="cercle sommet sommetHD" id="coin 4 10"></div>
+					<div class="cercle route routeG" id="segment 5 6"></div>
+					<div class="cercle route routeHG" id="segment 4 7"></div>
+					<div class="cercle route routeHD" id="segment 4 9"></div>
 					<p class="de">[[${Tuile60.numero}]]</p>
-
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile62.type}">
-
-					<div class="cercle sommetH"></div>
-					<div class="cercle sommetHD"></div>
+					<div class="cercle sommet sommetH" id="coin 4 12"></div>
+					<div class="cercle sommet sommetHD" id="coin 4 14"></div>
+					<div class="cercle route routeG" id="segment 5 10"></div>
+					<div class="cercle route routeHG" id="segment 4 11"></div>
+					<div class="cercle route routeHD" id="segment 4 13"></div>
 					<p class="de">[[${Tuile62.numero}]]</p>
-
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile64.type}">
-					<div class="cercle sommetH"></div>
-					<div class="cercle sommetHD"></div>
+					<div class="cercle sommet sommetH" id="coin 4 16"></div>
+					<div class="cercle sommet sommetHD" id="coin 4 18"></div>
+					<div class="cercle route routeG" id="segment 5 14"></div>
+					<div class="cercle route routeHG" id="segment 4 15"></div>
+					<div class="cercle route routeHD" id="segment 4 17"></div>
 					<p class="de">[[${Tuile64.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile66.type}">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
+					<div class="cercle sommet sommetH" id="coin 4 20"></div>
+					<div class="cercle sommet sommetHD" id="coin 4 22"></div>
+					<div class="cercle route routeG" id="segment 5 18"></div>
+					<div class="cercle route routeHG" id="segment 4 19"></div>
+					<div class="cercle route routeHD" id="segment 4 21"></div>
+					<div class="cercle route routeD" id="segment 5 22"></div>
 					<p class="de">[[${Tuile66.numero}]]</p>
-
-
 				</div>
+				
 				<div class="hexagon eau"></div>
 			</div>
 
 			<div class="line4">
 				<div class="hexagon eau"></div>
+				
 				<div th:class="'hexagon ' + ${Tuile69.type}">
-					<div class="cercle sommetH"></div>
-					<div class="cercle sommetHD"></div>
-					<div class="cercle sommetHG"></div>
+					<div class="cercle sommet sommetHG" id="coin 6 4"></div>
+					<div class="cercle sommet sommetH" id="coin 6 6"></div>
+					<div class="cercle sommet sommetHD" id="coin 6 8"></div>
+					<div class="cercle route routeG" id="segment 7 4"></div>
+					<div class="cercle route routeHG" id="segment 6 5"></div>
+					<div class="cercle route routeHD" id="segment 6 7"></div>
 					<p class="de">[[${Tuile69.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile71.type}">
-					<div class="cercle sommetH"></div>
-					<div class="cercle sommetHD"></div>
+					<div class="cercle sommet sommetH" id="coin 6 10"></div>
+					<div class="cercle sommet sommetHD" id="coin 6 12"></div>
+					<div class="cercle route routeG" id="segment 7 8"></div>
+					<div class="cercle route routeHG" id="segment 6 9"></div>
+					<div class="cercle route routeHD" id="segment 6 11"></div>
 					<p class="de">[[${Tuile71.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile73.type}">
-					<div class="cercle sommetH"></div>
-					<div class="cercle sommetHD"></div>
+					<div class="cercle sommet sommetH" id="coin 6 14"></div>
+					<div class="cercle sommet sommetHD" id="coin 6 16"></div>
+					<div class="cercle route routeG" id="segment 7 12"></div>
+					<div class="cercle route routeHG" id="segment 6 13"></div>
+					<div class="cercle route routeHD" id="segment 6 15"></div>
 					<p class="de">[[${Tuile73.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile75.type}">
-					<div class="cercle sommetH"></div>
-					<div class="cercle sommetHD"></div>
-
+					<div class="cercle sommet sommetH" id="coin 6 18"></div>
+					<div class="cercle sommet sommetHD" id="coin 6 20"></div>
+					<div class="cercle route routeG" id="segment 7 16"></div>
+					<div class="cercle route routeHG" id="segment 6 17"></div>
+					<div class="cercle route routeHD" id="segment 6 19"></div>
 					<p class="de">[[${Tuile75.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile77.type}">
-					<div class="cercle sommetH"></div>
-					<div class="cercle sommetHD"></div>
+					<div class="cercle sommet sommetH" id="coin 6 22"></div>
+					<div class="cercle sommet sommetHD" id="coin 6 24"></div>
+					<div class="cercle route routeG" id="segment 7 20"></div>
+					<div class="cercle route routeHG" id="segment 6 21"></div>
+					<div class="cercle route routeHD" id="segment 6 23"></div>					
+					<div class="cercle route routeD" id="segment 7 24"></div>
 					<p class="de">[[${Tuile77.numero}]]</p>
 				</div>
+				
 				<div class="hexagon eau"></div>
 
 			</div>
 
 			<div class="line3">
 				<div class="hexagon eau">
-
-					<div class="cercle sommetH"></div>
-
+					<div class="cercle sommet sommetH" id="coin 8 4"></div>
+					<div class="cercle sommet sommetHD" id="coin 8 6"></div>					
+					<div class="cercle route routeHD" id="segment 8 5"></div>
 				</div>
 				<div th:class="'hexagon ' + ${Tuile131.type}">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-
-					<div class="cercle sommetHG"></div>
-
+					<div class="cercle sommet sommetH" id="coin 8 8"></div>
+					<div class="cercle sommet sommetHD" id="coin 8 10"></div>
+					<div class="cercle route routeG" id="segment 9 6"></div>
+					<div class="cercle route routeHG" id="segment 8 7"></div>
+					<div class="cercle route routeHD" id="segment 8 9"></div>
 					<p class="de">[[${Tuile131.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile133.type}">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-
+					<div class="cercle sommet sommetH" id="coin 8 12"></div>
+					<div class="cercle sommet sommetHD" id="coin 8 14"></div>
+					<div class="cercle route routeG" id="segment 9 10"></div>
+					<div class="cercle route routeHG" id="segment 8 11"></div>
+					<div class="cercle route routeHD" id="segment 8 13"></div>
 					<p class="de">[[${Tuile133.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile135.type}">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-
+					<div class="cercle sommet sommetH" id="coin 8 16"></div>
+					<div class="cercle sommet sommetHD" id="coin 8 18"></div>
+					<div class="cercle route routeG" id="segment 9 14"></div>
+					<div class="cercle route routeHG" id="segment 8 15"></div>
+					<div class="cercle route routeHD" id="segment 8 16"></div>
 					<p class="de">[[${Tuile135.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile137.type}">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-
+					<div class="cercle sommet sommetH" id="coin 8 20"></div>
+					<div class="cercle sommet sommetHD" id="coin 8 22"></div>
+					<div class="cercle route routeG" id="segment 9 18"></div>
+					<div class="cercle route routeHG" id="segment 8 19"></div>
+					<div class="cercle route routeHD" id="segment 8 21"></div>
+					<div class="cercle route routeD" id="segment 9 22"></div>
 					<p class="de">[[${Tuile137.numero}]]</p>
 				</div>
+				
 				<div class="hexagon eau">
-					<div class="cercle sommetH"></div>
+
 				</div>
 
 
@@ -172,79 +216,71 @@
 
 			<div class="line2">
 				<div class="hexagon eau">
-					<div class="cercle sommetH"></div>
-
-				</div>
-				<div class="hexagon montagne">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-
-					<div class="cercle sommetHG"></div>
-				</div>
-				<div class="hexagon champs">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-				</div>
-				<div class="hexagon argile">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-				</div>
-				<div class="hexagon eau">
-					<div class="cercle sommetH"></div>
-
-				</div>
+					<div class="cercle sommet sommetH" id="coin 10 6"></div>
+					<div class="cercle sommet sommetHD" id="coin 10 8"></div>					
+					<div class="cercle route routeHD" id="segment 10 7"></div>
+				</div>				
 				<div th:class="'hexagon ' + ${Tuile140.type}">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-
-					<div class="cercle sommetHG"></div>
-
+					<div class="cercle sommet sommetH" id="coin 10 10"></div>
+					<div class="cercle sommet sommetHD" id="coin 10 12"></div>
+					<div class="cercle route routeG" id="segment 11 8"></div>
+					<div class="cercle route routeHG" id="segment 10 9"></div>
+					<div class="cercle route routeHD" id="segment 10 11"></div>
 					<p class="de">[[${Tuile140.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile142.type}">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-
+					<div class="cercle sommet sommetH" id="coin 10 14"></div>
+					<div class="cercle sommet sommetHD" id="coin 10 16"></div>
+					<div class="cercle route routeG" id="segment 11 12"></div>
+					<div class="cercle route routeHG" id="segment 10 13"></div>
+					<div class="cercle route routeHD" id="segment 10 15"></div>
 					<p class="de">[[${Tuile142.numero}]]</p>
 				</div>
+				
 				<div th:class="'hexagon ' + ${Tuile144.type}">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-
+					<div class="cercle sommet sommetH" id="coin 10 18"></div>
+					<div class="cercle sommet sommetHD" id="coin 10 20"></div>
+					<div class="cercle route routeG" id="segment 11 16"></div>
+					<div class="cercle route routeHG" id="segment 10 17"></div>
+					<div class="cercle route routeHD" id="segment 10 19"></div>
+					<div class="cercle route routeD" id="segment 11 20"></div>
 					<p class="de">[[${Tuile144.numero}]]</p>
 				</div>
-				<div class="hexagon eau">
-					<div class="cercle sommetH"></div>
+				
+				<div class="hexagon eau">	
+					<div class="cercle sommet sommetH" id="coin 10 22"></div>				
+					<div class="cercle route routeHG" id="segment 10 21"></div>			
 				</div>
 
 			</div>
 
 			<div class="linefin">
+			
 				<div class="hexagon eau">
-					<div class="cercle sommetH"></div>
+					
+					<div class="cercle sommet sommetH" id="coin 12 8"></div>					
+					<div class="cercle route routeHD" id="segment 12 9"></div>
+					<div class="cercle sommet sommetHD" id="coin 12 10"></div>
 
-					<div class="cercle sommetHD"></div>
+				</div>
+				<div class="hexagon eau">								
+					<div class="cercle route routeHG" id="segment 12 11"></div>
+					<div class="cercle sommet sommetH" id="coin 12 12"></div>									
+					<div class="cercle route routeHD" id="segment 12 13"></div>
+					<div class="cercle sommet sommetHD" id="coin 12 14"></div>
 
 
 				</div>
 				<div class="hexagon eau">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
+					<div class="cercle sommet sommetH" id="coin 12 16"></div>
+					<div class="cercle sommet sommetHD" id="coin 12 18"></div>
+					<div class="cercle route routeHG" id="segment 12 15"></div>													
+					<div class="cercle route routeHD" id="segment 12 17"></div>
 				</div>
 				<div class="hexagon eau">
-					<div class="cercle sommetH"></div>
-
-					<div class="cercle sommetHD"></div>
-				</div>
-				<div class="hexagon eau">
-					<div class="cercle sommetH"></div>
+					<div class="cercle sommet sommetH" id="coin 12 20"></div>
+					<div class="cercle route routeHG" id="segment 12 19"></div>	
 
 				</div>
 			</div>
@@ -258,7 +294,7 @@
 				<tr>
 					<th scope="col">Score</th>
 					<th scope="col">Laine</th>
-					<th scope="col">Blé</th>
+					<th scope="col">Blï¿½</th>
 					<th scope="col">Argile</th>
 					<th scope="col">Pierre</th>
 					<th scope="col">Bois</th>

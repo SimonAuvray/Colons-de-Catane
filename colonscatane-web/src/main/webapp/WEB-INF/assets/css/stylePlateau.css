@@ -198,15 +198,7 @@ body{
 	top : 10px;
 }
 
-.cercle {
-	position : absolute;
-	display : inline-block;
-    width: 24px;
-    height: 24px;
-    border-radius: 16px;
-    background: green;
-    cursor: pointer;
-}
+
 
 .cercle:hover {
 	backgroond-color : red;
@@ -228,13 +220,23 @@ body{
 	left : -11px;
 }
 
-.cercleRoute {
+
+.cercle {
 	position : absolute;
 	display : inline-block;
-    width: 35px;
-    height: 35px;
     border-radius: 16px;
-    border:2px solid green;
+    background: green;
+    cursor: pointer;
+}
+
+.sommet {
+	width: 24px;
+    height: 24px;
+}
+
+.route {
+	width: 35px;
+    height: 35px;
 }
 
 

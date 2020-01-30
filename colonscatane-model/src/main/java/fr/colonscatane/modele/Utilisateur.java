@@ -10,6 +10,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.colonscatane.views.Views;
+
 @Entity
 @Table(name = "utilisateur")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -18,17 +22,21 @@ public abstract class  Utilisateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UT_ID")
+	@JsonView(Views.Common.class)
 	protected int id;
 	
 	@Column(name = "UT_NOM")
+	@JsonView(Views.Utilisateur.class)
 	protected String nom;
 	
 	@Column(name = "UT_USERNAME", unique = true, nullable=false)
 	@NotBlank(message = "Vous devez entrer votre nom d'utilisateur")
+	@JsonView(Views.Utilisateur.class)
 	protected String username;
 	
 	@Column(name = "UT_PASSWORD", nullable=false)
 	@NotBlank(message = "Vous devez entrer votre mot de passe")
+	@JsonView(Views.Utilisateur.class)
 	protected String password;	
 	
 

@@ -1,8 +1,6 @@
 package fr.colonscatane;
 
-import java.util.Collections;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,23 +8,15 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import fr.colonscatane.dao.IDAOCoin;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOPositionPlateau;
-import fr.colonscatane.dao.IDAOSegment;
-import fr.colonscatane.dao.IDAOTuileRessource;
 import fr.colonscatane.dao.IDAOUtilisateur;
 import fr.colonscatane.exception.EmptyLibelleException;
 import fr.colonscatane.exception.NotBooleanException;
-import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
-import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.PositionPlateau;
-import fr.colonscatane.modele.Segment;
-import fr.colonscatane.modele.TuileRessource;
-import fr.colonscatane.modele.TypePosition;
-import fr.colonscatane.modele.TypeTuile;
+import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.Utilisateur;
 import fr.colonscatane.service.CoinService;
 import fr.colonscatane.service.PositionPlateauService;
@@ -75,7 +65,7 @@ public class Application {
 			daoJoueur.save(j);
 		}
 
-		premiersTours();
+//		premiersTours();
 
 		// deleteJeu();
 
@@ -271,64 +261,63 @@ public class Application {
 		}
 	}
 
-	private void premiersTours() {
-
-		// pour chaque joueur, choisir un coin ou placer la premiere colonie
-		for (int i = 0; i <= partieEnCours.getLstJoueurs().size() - 1; i++) {
-			Joueur joueurTour = partieEnCours.getLstJoueurs().get(i);
-			System.out.println(" Au joueur " + joueurTour.getCouleur() + " de jouer. ");
-			System.out
-					.println("Joueur " + joueurTour.getCouleur() + " : Choisissez le lieu de votre premiere colonie :");
-
-			int xColonie = 0;
-			int yColonie = 0;
-			boolean choixOK = false;
-
-			while (!choixOK) {
-				try {
-					System.out.println(" Ligne : ");
-					xColonie = sc.nextInt();
-					sc.nextLine();
-					System.out.println(" Colonne : ");
-					yColonie = sc.nextInt();
-					choixOK = true;
-				} catch (InputMismatchException e) {
-					System.out.println("ERR : le numero de Ligne ou de colonne doit etre un entier.");
-					sc.nextLine();
-					choixOK = false;
-				}
-				if (choixOK && servCoin.placerPremiereColonie(xColonie, yColonie, joueurTour)) {
-					choixOK = true;
-				} else {
-					System.out.println("ERR : mauvaise saisie");
-					choixOK = false;
-				}
-			}
+//	private void premiersTours() {
+//
+//		// pour chaque joueur, choisir un coin ou placer la premiere colonie
+//		for (int i = 0; i <= partieEnCours.getLstJoueurs().size() - 1; i++) {
+//			Joueur joueurTour = partieEnCours.getLstJoueurs().get(i);
+//			System.out.println(" Au joueur " + joueurTour.getCouleur() + " de jouer. ");
+//			System.out
+//					.println("Joueur " + joueurTour.getCouleur() + " : Choisissez le lieu de votre premiere colonie :");
+//
+//			int xColonie = 0;
+//			int yColonie = 0;
+//			boolean choixOK = false;
+//
+//			while (!choixOK) {
+//				try {
+//					System.out.println(" Ligne : ");
+//					xColonie = sc.nextInt();
+//					sc.nextLine();
+//					System.out.println(" Colonne : ");
+//					yColonie = sc.nextInt();
+//					choixOK = true;
+//				} catch (InputMismatchException e) {
+//					System.out.println("ERR : le numero de Ligne ou de colonne doit etre un entier.");
+//					sc.nextLine();
+//					choixOK = false;
+//				}
+//				if (choixOK && servCoin.placerPremiereColonie(xColonie, yColonie, joueurTour)==0) {
+//					choixOK = true;
+//				} else {
+//					System.out.println("ERR : mauvaise saisie");
+//					choixOK = false;
+//				}
+//			}
 
 			// Disposition d'une route voisine
-			System.out.println("Joueur " + joueurTour.getCouleur() + " : Choisissez une route :");
-			Boolean saisieRouteOK = false;
-			int xRoute = 0;
-			int yRoute = 0;
-			Segment route = new Segment();
-
-			while (!saisieRouteOK) {
-				try {
-					System.out.println(" Ligne : ");
-					xRoute = sc.nextInt();
-					sc.nextLine();
-					System.out.println(" Colonne : ");
-					yRoute = sc.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("ERR : le num�ro de Ligne ou de colonne doit etre un entier.");
-					sc.nextLine();
-				}
-
-				saisieRouteOK = servSegment.placerUneRoute(xRoute, yRoute, joueurTour);
-
-			}
-		}
-	}
+//			System.out.println("Joueur " + joueurTour.getCouleur() + " : Choisissez une route :");
+//			Boolean saisieRouteOK = false;
+//			int xRoute = 0;
+//			int yRoute = 0;
+//
+//			while (!saisieRouteOK) {
+//				try {
+//					System.out.println(" Ligne : ");
+//					xRoute = sc.nextInt();
+//					sc.nextLine();
+//					System.out.println(" Colonne : ");
+//					yRoute = sc.nextInt();
+//				} catch (InputMismatchException e) {
+//					System.out.println("ERR : le num�ro de Ligne ou de colonne doit etre un entier.");
+//					sc.nextLine();
+//				}
+//
+//				saisieRouteOK = servSegment.placerUneRoute(xRoute, yRoute, joueurTour);
+//
+//			}
+//		}
+//	}
 
 	private void deleteJeu() {
 

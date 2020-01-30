@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOSegment;
+import fr.colonscatane.exception.IsNotRouteVoisineException;
+import fr.colonscatane.exception.IsNotSegmentException;
+import fr.colonscatane.exception.IsOccupeException;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Segment;
 
@@ -23,28 +26,28 @@ public class SegmentService {
 	 * @param y
 	 * @param j
 	 * @return
+	 * @throws IsNotSegmentException 
+	 * @throws IsOccupeException
+	 * @throws IsNotRouteVoisineException 
 	 */
-	public boolean placerUneRoute(int x, int y, Joueur j) {
-		boolean segmentOk = true;
+	public Segment placerUneRoute(int x, int y, Joueur j) throws IsNotSegmentException, IsOccupeException, IsNotRouteVoisineException {
+		Segment laRouteSelectionne = null;
 		if (isSegment(x, y)) {
 			if (isLibre(x, y)) {
 				if (isRouteVoisineColonie(x, y, j)) {
-					Segment laRouteSelectionne = (Segment) daoSegment.findByXAndY(x, y).orElse(null);
+					laRouteSelectionne = daoSegment.findByXAndY(x, y).orElse(null);
 					laRouteSelectionne.setOccupation(j);
-					daoSegment.save(laRouteSelectionne);
+					laRouteSelectionne = daoSegment.save(laRouteSelectionne);
 				} else {
-					System.out.println("ERR : Veuillez saisir une route");
-					segmentOk = false;
+					throw new IsNotRouteVoisineException();
 				}
 			} else {
-				System.out.println("ERR : Cette route est déjà occupée");
-				segmentOk = false;
+				throw new IsOccupeException();
 			}
 		} else {
-			System.out.println("ERR : La route n'est pas voisine d'une colonie du joueur");
-			segmentOk = false;
+			throw new IsNotSegmentException();
 		}
-		return segmentOk;
+		return laRouteSelectionne;
 	}
 
 	/**

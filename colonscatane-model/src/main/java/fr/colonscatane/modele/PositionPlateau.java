@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.colonscatane.views.Views;
+
 @Entity
 @Table(name = "position_plateau")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -22,13 +26,18 @@ public abstract class PositionPlateau {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "POS_ID")
+	@JsonView(Views.Common.class)
 	protected int id;
 	
+	@JsonView(Views.PositionPlateau.class)
 	protected int x;
+	
+	@JsonView(Views.PositionPlateau.class)
 	protected int y;
 	
 	@ManyToOne
 	@JoinColumn(name = "POS_JOUEUR", nullable=true)
+	@JsonView(Views.PositionPlateau.class)
 	protected Joueur occupation;
 	
 	@Column (name="POS_TYPE", insertable=false, updatable=false)

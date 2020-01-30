@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.colonscatane.dao.IDAOCoin;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOTuileRessource;
+import fr.colonscatane.exception.IsNotCoinException;
+import fr.colonscatane.exception.IsOccupeException;
+import fr.colonscatane.exception.IsVoisinTropProcheException;
 import fr.colonscatane.modele.Coin;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.TuileRessource;
@@ -20,7 +23,7 @@ public class CoinService {
 	private IDAOTuileRessource daoTuileRessource;
 	@Autowired
 	private IDAOCoin daoCoin;
-	
+
 	@Autowired
 	private IDAOJoueur daoJoueur;
 
@@ -111,83 +114,83 @@ public class CoinService {
 	}
 
 	/**
-	 * Premier tour permettant de sélectionner une colonie
-	 * La particularité de ce premier tour est qu'il n'est pas nécessaire que les routes
-	 * soient voisine pour pouvoir placer une colonie
+	 * Premier tour permettant de sélectionner une colonie La particularité de ce
+	 * premier tour est qu'il n'est pas nécessaire que les routes soient voisine
+	 * pour pouvoir placer une colonie
+	 * 
 	 * @param x
 	 * @param y
 	 * @param j
 	 * @return
+	 * @throws IsVoisinTropProcheException
+	 * @throws IsOccupeException
+	 * @throws IsNotCoinException
 	 */
-	public boolean placerPremiereColonie(int x, int y, Joueur j) {
-		boolean coinOk = true;
+	public Coin placerPremiereColonie(int x, int y, Joueur j)
+			throws IsVoisinTropProcheException, IsOccupeException, IsNotCoinException {
+		Coin leCoinSelectionne = null;
 		if (isCoin(x, y)) {
 			if (isLibre(x, y)) {
 				if (!isVoisin(x, y)) {
-					Coin leCoinSelectionne = (Coin) daoCoin.findByXAndY(x, y).orElse(null);
+					leCoinSelectionne = daoCoin.findByXAndY(x, y).orElse(null);
 					leCoinSelectionne.setOccupation(j);
-					daoCoin.save(leCoinSelectionne);
+					leCoinSelectionne = daoCoin.save(leCoinSelectionne);
 				} else {
-					System.out.println("ERR : Il ya des colonies trop proches");
-					coinOk = false;
+					throw new IsVoisinTropProcheException();
 				}
 			} else {
-				System.out.println("ERR : Ce coin est dï¿½jï¿½ occupï¿½");
-				coinOk = false;
+				throw new IsOccupeException();
 			}
 		} else {
-			System.out.println("ERR : Veuillez saisir un coin");
-			coinOk = false;
+			throw new IsNotCoinException();
 		}
-		return coinOk;
+		return leCoinSelectionne;
 	}
 
 	private boolean isColonieVoisineRoute(int x, int y, Joueur j) {
 		boolean colonieVoisine = false;
 		j = daoJoueur.findByIdFetchingPosition(j.getId()).orElse(null);
-		if(j!= null) {
-			long nbRoutesVoisines = j.getSegments()
-			.stream()
-			.filter(s -> (s.getX() == x - 1) || 
-			s.getX() == (x + 1) ||
-			s.getY() == (y-1) ||
-			s.getY() == (y+1) ).count();
-			if(nbRoutesVoisines >= 1) {
+		if (j != null) {
+			long nbRoutesVoisines = j.getSegments().stream().filter(
+					s -> (s.getX() == x - 1) || s.getX() == (x + 1) || s.getY() == (y - 1) || s.getY() == (y + 1))
+					.count();
+			if (nbRoutesVoisines >= 1) {
 				colonieVoisine = true;
 			}
 		}
 		return colonieVoisine;
 	}
-	
-	
+
 	/**
 	 * Permet au joueur de placer une colonie adjecente à une de ses routes
+	 * 
 	 * @param x
 	 * @param y
 	 * @param j
 	 * @return
+	 * @throws IsNotCoinException
+	 * @throws IsOccupeException
+	 * @throws IsVoisinTropProcheException
 	 */
-	public boolean placerUneColonie(int x, int y, Joueur j) {
-		boolean coinOk = true;
+	public Coin placerUneColonie(int x, int y, Joueur j)
+			throws IsNotCoinException, IsOccupeException, IsVoisinTropProcheException {
+		Coin leCoinSelectionne = null;
 		if (isCoin(x, y)) {
 			if (isLibre(x, y)) {
 				if (isColonieVoisineRoute(x, y, j)) {
-					Coin leCoinSelectionne = (Coin) daoCoin.findByXAndY(x, y).orElse(null);
+					leCoinSelectionne = (Coin) daoCoin.findByXAndY(x, y).orElse(null);
 					leCoinSelectionne.setOccupation(j);
-					daoCoin.save(leCoinSelectionne);
+					leCoinSelectionne = daoCoin.save(leCoinSelectionne);
 				} else {
-					System.out.println("ERR : Veuillez saisir un coin");
-					coinOk = false;
+					throw new IsVoisinTropProcheException();
 				}
 			} else {
-				System.out.println("ERR : Ce coin est deja occupe");
-				coinOk = false;
+				throw new IsOccupeException();
 			}
 		} else {
-			System.out.println("ERR : Aucune route n'est adjacente a ce coin");
-			coinOk = false;
+			throw new IsNotCoinException();
 		}
-		return coinOk;
+		return leCoinSelectionne;
 	}
 
 }

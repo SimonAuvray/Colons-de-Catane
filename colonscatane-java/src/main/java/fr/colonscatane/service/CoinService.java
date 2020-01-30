@@ -1,8 +1,10 @@
 package fr.colonscatane.service;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -126,7 +128,8 @@ public class CoinService {
 	 * @throws IsOccupeException
 	 * @throws IsNotCoinException
 	 */
-	public Coin placerPremiereColonie(int x, int y, Joueur j)
+	@Async("asyncExecutor")
+	public CompletableFuture<Coin> placerPremiereColonie(int x, int y, Joueur j)
 			throws IsVoisinTropProcheException, IsOccupeException, IsNotCoinException {
 		Coin leCoinSelectionne = null;
 		if (isCoin(x, y)) {
@@ -144,7 +147,7 @@ public class CoinService {
 		} else {
 			throw new IsNotCoinException();
 		}
-		return leCoinSelectionne;
+		return CompletableFuture.completedFuture(leCoinSelectionne);
 	}
 
 	private boolean isColonieVoisineRoute(int x, int y, Joueur j) {
@@ -152,7 +155,7 @@ public class CoinService {
 		j = daoJoueur.findByIdFetchingPosition(j.getId()).orElse(null);
 		if (j != null) {
 			long nbRoutesVoisines = j.getSegments().stream().filter(
-					s -> (s.getX() == x - 1) || s.getX() == (x + 1) || s.getY() == (y - 1) || s.getY() == (y + 1))
+					s -> (((s.getY() == y) &&( s.getX() == x - 1) || s.getX() == (x + 1))) || ((s.getX() == x) && s.getY() == (y - 1) || s.getY() == (y + 1)))
 					.count();
 			if (nbRoutesVoisines >= 1) {
 				colonieVoisine = true;
@@ -172,7 +175,8 @@ public class CoinService {
 	 * @throws IsOccupeException
 	 * @throws IsVoisinTropProcheException
 	 */
-	public Coin placerUneColonie(int x, int y, Joueur j)
+	@Async("asyncExecutor")
+	public CompletableFuture<Coin> placerUneColonie(int x, int y, Joueur j)
 			throws IsNotCoinException, IsOccupeException, IsVoisinTropProcheException {
 		Coin leCoinSelectionne = null;
 		if (isCoin(x, y)) {
@@ -190,7 +194,7 @@ public class CoinService {
 		} else {
 			throw new IsNotCoinException();
 		}
-		return leCoinSelectionne;
+		return CompletableFuture.completedFuture(leCoinSelectionne);
 	}
 
 }

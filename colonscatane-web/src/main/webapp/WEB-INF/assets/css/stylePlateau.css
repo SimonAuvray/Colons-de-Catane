@@ -21,8 +21,20 @@ div .container {
 	margin-top: 10px;
 }
 
+.tableauJoueurs {
+	background-color: #993300;
+	width: 80%;
+	margin: auto;
+}
+
 .joueurStatus{
 	display: inline-block;
+	background-color: #101010;
+	color: white;
+	margin-left: 5%;
+	width: 15%;
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 
 body{

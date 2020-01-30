@@ -21,9 +21,8 @@ div .container {
 	margin-top: 10px;
 }
 
-.qlogo{
-	size: 75%;
-	height: auto;
+.joueurStatus{
+	display: inline-block;
 }
 
 body{

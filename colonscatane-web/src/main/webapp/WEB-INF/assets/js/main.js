@@ -71,3 +71,12 @@ fetch('http://localhost:8080/colonscatane-web/api/partie/listeSegments')
 	}
 });
 
+//let tableauJoueurs = document.querySelector('#form_produit');
+//fetch('http://localhost:8080/colonscatane-web/api/partie/listeJoueurs')
+//.then(resp => resp.json())
+//.then(joueurs => {
+//	for (let j of joueurs){
+//
+//	}
+//});
+

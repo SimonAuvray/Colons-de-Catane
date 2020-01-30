@@ -14,9 +14,14 @@
 	<section class="sticky-top">
 		<div class="text-light bg-dark">scores</div>
 		<div>Tour du joueur: </div>
+		<div>
+			<div th:each="joueur : ${joueurs}" name="joueurStatus">
+				[[${joueur.username}]]
+			</div>
+		</div>
 	</section>
 	<div class="container">
-		<a class="quiter" th:href="@{menu/quiter}" name="quiter">
+		<a class="quiter" th:href="@{menu/retour}" name="quiter">
 			Log-out <img src="assets/icons-deconnexion-50.png">
 		</a>
 	</div>

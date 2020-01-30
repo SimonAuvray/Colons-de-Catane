@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.colonscatane.application.PartieContextLoader;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOPartie;
 import fr.colonscatane.dao.IDAOTuileRessource;
@@ -34,6 +35,8 @@ public class PartieController {
 	private IDAOPartie daoPartie;
 	@Autowired
 	private IDAOTuileRessource daoTuile;
+	@Autowired
+	private PartieContextLoader partieContext;
 	
 	@GetMapping("/partie")
 	public String lancerpartie(Model model) {
@@ -43,16 +46,19 @@ public class PartieController {
 		for (TuileRessource t : mesTuiles) {
 			model.addAttribute("Tuile"+t.getId(), t);
 		}
+		
+//		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());
+		
 		return "partie";
 	}
 	
-	@GetMapping("/menu/quiter")
+	@GetMapping("/menu/retour")
 	@Transactional
 	public String quitterPartie(HttpSession session) {
 		Joueur joueurUtilisateur = daoJoueur.findByUsername((String) session.getAttribute("user")).orElse(null);
 		joueurUtilisateur.resetJoueur();
 		daoJoueur.save(joueurUtilisateur);
-		return "redirect:menu";
+		return "menu";
 	}
 
 	@PostMapping("/nouvellepartie")

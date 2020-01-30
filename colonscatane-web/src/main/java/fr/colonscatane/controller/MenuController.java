@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+
 import javax.swing.JOptionPane;
 import javax.transaction.Transactional;
 
@@ -16,11 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.ApplicationScope;
 import org.springframework.web.context.annotation.SessionScope;
+
 
 
 import fr.colonscatane.application.PartieContextLoader;
@@ -39,6 +42,7 @@ public class MenuController {
 	private IDAOJoueur daoJoueur;
 	
 	@Autowired
+<<<<<<< HEAD
 	private IDAOPartie daoPartie;
 	
 	@Autowired

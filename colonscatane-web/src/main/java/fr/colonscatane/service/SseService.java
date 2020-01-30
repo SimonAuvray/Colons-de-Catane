@@ -20,8 +20,10 @@ public class SseService {
 		// runnable : fonction qui n'attend rien et qui ne retourne rien
 		emitter.onCompletion(() -> {
 			// synchronized permet de signaler qu'il faut attendre que la liste soit disponible avant d'agirr dessus.
+
 			// en effet, elle peut etre utilisee par plusieurs thread. Il faut qu'elle soit disponible avant d'y supprimer
 			// un element
+
 			synchronized (this.emitters) {
 			this.emitters.remove(emitter);
 			}
@@ -37,10 +39,11 @@ public class SseService {
 		return emitter;
 		
 	}
-	
+
 	// Fonction pour transmettre un message au client 
 	// le message peut etre un string ou un objet.
 	// avec Jackson, c'est objet devrait etre automatiquement transcrit au format json
+
 
 	public void emissionObjet(Object o) {
 		this.emitters.forEach(emitter -> {

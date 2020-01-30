@@ -48,11 +48,7 @@ public class PartieController {
 			model.addAttribute("Tuile"+t.getId(), t);
 		}
 		
-		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());
-		for(Joueur j : partieContext.getParties().get(0).getLstJoueurs()) {
-			System.out.println(" joueur : " + j.getUsername());
-		}
-		
+		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());		
 		return "partie";
 	}
 	

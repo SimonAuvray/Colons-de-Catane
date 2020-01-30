@@ -209,7 +209,7 @@ body{
 }
 
 .cercle:hover {
-	backgroond : red;
+	backgroond-color : red;
 }
 
 .sommetH{
@@ -237,11 +237,6 @@ body{
     background: green;
 }
 
-.routeHD{
-	top : -11px;
-	left : 139px;
-	z-index : 1;
-}
 
 .routeHD{
 	top : -42px;
@@ -256,6 +251,12 @@ body{
 .routeG{
 	top : 27px;
 	left : -19px;
+}
+
+.routeD{
+	top : 27px;
+	left : 130px;	
+	z-index : 1;
 }
 
 

@@ -28,8 +28,6 @@ import fr.colonscatane.modele.TuileRessource;
 @Controller
 public class PartieController {
 	
-
-
 	@Autowired
 	private IDAOJoueur daoJoueur;
 	@Autowired
@@ -44,17 +42,18 @@ public class PartieController {
 		
 		for (TuileRessource t : mesTuiles) {
 			model.addAttribute("Tuile"+t.getId(), t);
-			
-			
-			//System.out.println( "RessourceTuile"+t.getId() +" "+t.getType().toString());
 		}
-
 		return "partie";
 	}
 	
-	
-
-
+	@GetMapping("/menu/quiter")
+	@Transactional
+	public String quitterPartie(HttpSession session) {
+		Joueur joueurUtilisateur = daoJoueur.findByUsername((String) session.getAttribute("user")).orElse(null);
+		joueurUtilisateur.resetJoueur();
+		daoJoueur.save(joueurUtilisateur);
+		return "redirect:menu";
+	}
 
 	@PostMapping("/nouvellepartie")
 	@Transactional

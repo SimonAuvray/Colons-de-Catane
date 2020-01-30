@@ -12,12 +12,18 @@ header{
 	
 }
 
-header h2 {
-	color : #c6c6c6;
-	text-align : center;
-	position : relative;
-	top : 40%;
-	bottom : 60%;
+div .container {
+	position: relative
+}
+
+.quiter {
+	float: right;
+	margin-top: 10px;
+}
+
+.qlogo{
+	size: 75%;
+	height: auto;
 }
 
 body{

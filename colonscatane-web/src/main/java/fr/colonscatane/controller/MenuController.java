@@ -40,14 +40,15 @@ public class MenuController {
 	@Transactional
 	public String getNouvellePartie(Model model, HttpSession session) {
 		
-		if(partieContext.getParties().isEmpty()) {
+		 
 			// enregistrer l'utilisateur de session comme joueur immediatement
 			Joueur monJoueur = daoJoueur.findByUsername((String) session.getAttribute("user")).orElse(null);
-			monJoueur.setRole(ROLE.Joueur);
+			
 
 			// creation de la partie, ajout de l'utilisateur (si pas deja fait) et
 			// enregistrement de la nouvelle liste Joueurs
 			if (monJoueur.getPartie() == null) {
+				monJoueur.setRole(ROLE.Joueur);
 				Partie maPartie = new Partie();
 				List<Joueur> listeJoueurs = new ArrayList<Joueur>();
 				listeJoueurs.add(monJoueur);
@@ -72,10 +73,7 @@ public class MenuController {
 				i++;
 			}
 			return "nouvellepartie";
-		}
-		else {
-			return "menu";
-		}
+		
 	}
 
 	@GetMapping("/parametres")

@@ -96,6 +96,9 @@ public class PartieController {
 					daoJoueur.save(joueurInvite);
 					List<Joueur> maListe = joueurUtilisateur.getPartie().getLstJoueurs();
 					maListe.add(joueurInvite);
+					maPartie.setLstJoueurs(maListe);
+					joueurUtilisateur.setPartie(maPartie);
+					
 					daoJoueur.save(joueurUtilisateur);
 				}
 			}

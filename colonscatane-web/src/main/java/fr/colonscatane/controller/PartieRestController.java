@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import fr.colonscatane.application.PartieContextLoader;
 import fr.colonscatane.dao.IDAOCoin;
 import fr.colonscatane.dao.IDAOJoueur;
+import fr.colonscatane.dao.IDAOPartie;
 import fr.colonscatane.dao.IDAOSegment;
 import fr.colonscatane.exception.IsNotCoinException;
 import fr.colonscatane.exception.IsNotRouteVoisineException;
@@ -26,6 +28,7 @@ import fr.colonscatane.modele.Couleur;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Segment;
 import fr.colonscatane.service.CoinService;
+import fr.colonscatane.service.PartieService;
 import fr.colonscatane.service.SegmentService;
 import fr.colonscatane.service.SseService;
 import fr.colonscatane.views.Views;
@@ -43,15 +46,24 @@ public class PartieRestController {
 
 	@Autowired
 	private IDAOSegment daoSegment;
+	
+	@Autowired
+	private IDAOPartie daoPartie;
 
 	@Autowired
 	private CoinService serviceCoin;
 
 	@Autowired
 	private SegmentService serviceSegment;
+	
+	@Autowired
+	private PartieService servicePartie;
 
 	@Autowired
 	private SseService sse;
+	
+	@Autowired
+	private PartieContextLoader partieContext;
 
 	@GetMapping("/coin/{x}/{y}")
 	@JsonView(Views.PositionPlateauWithJoueur.class)
@@ -99,4 +111,11 @@ public class PartieRestController {
 	public List<Segment> getListeSegments() {
 		return daoSegment.findAll();
 	}
+	
+//	@GetMapping("/listeJoueurs")
+//	@JsonView(Views.Joueur.class)
+//	public List<Joueur> getListejoueurs() {
+//		//pour l'instant une seule partie possible
+//		return partieContext.getParties().get(0).getLstJoueurs();
+//	}
 }

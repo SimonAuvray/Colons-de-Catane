@@ -66,8 +66,6 @@ public class Joueur extends Utilisateur {
 	@Column(name="J_ROLE")
 	private ROLE role;
 	
-	
-	
 	@ManyToOne
 	@JoinColumn(name = "JOUEUR_PARTIE")
 	private Partie partie;
@@ -203,9 +201,6 @@ public class Joueur extends Utilisateur {
 		super(username, mdp);
 	}
 	
-	
-	
-	
 	public Joueur (Couleur couleur, String nom, int score,int boisPossede, int blePossede, int argilePossede, int pierrePossede, int moutonPossede, int compteurColonie, int compteurVille, int compteurRoute) {
 		this(couleur, nom) ;
 		this.score = score;
@@ -219,13 +214,27 @@ public class Joueur extends Utilisateur {
 		this.compteurRoute = compteurRoute;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "Joueur [couleur=" + couleur + ", nom=" + nom + "]";
 	}
 	
-	
+	public void resetJoueur() {
+		this.score = 0;
+		this.boisPossede = 0;
+		this.blePossede = 0 ;
+		this.argilePossede = 0;
+		this.pierrePossede = 0;
+		this.moutonPossede = 0;
+		this.compteurColonie = 0;
+		this.compteurVille = 0;
+		this.compteurRoute = 0;
+		this.couleur = null;
+		this.role = ROLE.Inactif;
+		this.ordre = 0;
+		this.occupations = null;
+		this.partie = null;
+	}
 	
 	
 		

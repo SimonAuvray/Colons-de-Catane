@@ -1,6 +1,9 @@
 package fr.colonscatane.service;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import fr.colonscatane.dao.IDAOJoueur;
@@ -30,7 +33,8 @@ public class SegmentService {
 	 * @throws IsOccupeException
 	 * @throws IsNotRouteVoisineException 
 	 */
-	public Segment placerUneRoute(int x, int y, Joueur j) throws IsNotSegmentException, IsOccupeException, IsNotRouteVoisineException {
+	@Async("asyncExecutor")
+	public CompletableFuture<Segment> placerUneRoute(int x, int y, Joueur j) throws IsNotSegmentException, IsOccupeException, IsNotRouteVoisineException {
 		Segment laRouteSelectionne = null;
 		if (isSegment(x, y)) {
 			if (isLibre(x, y)) {
@@ -47,7 +51,7 @@ public class SegmentService {
 		} else {
 			throw new IsNotSegmentException();
 		}
-		return laRouteSelectionne;
+		return CompletableFuture.completedFuture(laRouteSelectionne);
 	}
 
 	/**
@@ -83,15 +87,17 @@ public class SegmentService {
 	 * @return boolean
 	 */
 	private boolean isRouteVoisineColonie(int x, int y, Joueur j) {
+		System.out.println("Vérification des colonies voisines");
 		boolean routeVoisine = false;
 		j = daoJoueur.findByIdFetchingPosition(j.getId()).orElse(null);
 		if(j!= null) {
 			long nbColonieVoisine = j.getCoins()
 			.stream()
-			.filter(c -> (c.getX() == (x - 1) || 
-			c.getX() == (x + 1) ||
-			c.getY() == (y-1) ||
-			c.getY() == (y+1)) ).count();
+			.filter(c -> (((c.getY() == y) && (c.getX() == (x - 1) || 
+			c.getX() == (x + 1))) ||
+			((c.getX()) == x &&
+			(c.getY() == (y-1) ||
+			c.getY() == (y+1)))) ).count();
 			if(nbColonieVoisine >= 1) {
 				routeVoisine = true;
 			}

@@ -8,6 +8,8 @@ eventSource.addEventListener('message', (event) => {
 	let msg = event.data;
 	alert(msg);
 });
+
+// Met la bonne couleur sur les emplacement
 const MiseAJourCouleurPosition = (position,type) => {
 	let element = document.getElementById(type +" "+ position.x +" "+ position.y);
 	let couleur = 'green';
@@ -28,6 +30,8 @@ const MiseAJourCouleurPosition = (position,type) => {
 	element.style.backgroundColor = couleur;
 }
 
+
+// enregistre la position dans la base de données 
 const setOccupation = async (event) => {
 	event.preventDefault();
 let coordonnees = event.target.id.toString().split(' ');
@@ -50,8 +54,11 @@ let coordonnees = event.target.id.toString().split(' ');
 // enregistrer l'occupation pour une position
 const addClickCoordonnee = (position,type) => {
 	console.log(type +" "+ position.x + " " + position.y);
-	console.log(document.getElementById(type +" "+ position.x +" "+ position.y));
-	document.getElementById(type +" "+ position.x +" "+ position.y).addEventListener('click', setOccupation);
+	if(document.getElementById(type +" "+ position.x +" "+ position.y) !== null){
+		document.getElementById(type +" "+ position.x +" "+ position.y).addEventListener('click', setOccupation);
+	}else{
+		console.log("pas d'element correspondant aux coordonnées");
+	}
 }
 
 
@@ -60,6 +67,9 @@ fetch('http://localhost:8080/colonscatane-web/api/partie/listeCoins')
 .then(coins => {
 	for (let c of coins) {
 		addClickCoordonnee(c,"coin");
+		if(c.occupation != null){
+			MiseAJourCouleurPosition(c, "coin");
+		}
 	}
 });
 
@@ -68,6 +78,9 @@ fetch('http://localhost:8080/colonscatane-web/api/partie/listeSegments')
 .then(segments => {
 	for (let s of segments) {
 		addClickCoordonnee(s,"segment");
+		if(s.occupation != null){
+			MiseAJourCouleurPosition(s, "segment");
+		}
 	}
 });
 

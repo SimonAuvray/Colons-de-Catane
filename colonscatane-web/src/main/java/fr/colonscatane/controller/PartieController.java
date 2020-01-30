@@ -2,6 +2,7 @@ package fr.colonscatane.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -48,6 +49,9 @@ public class PartieController {
 		}
 		
 		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());
+		for(Joueur j : partieContext.getParties().get(0).getLstJoueurs()) {
+			System.out.println(" joueur : " + j.getUsername());
+		}
 		
 		return "partie";
 	}
@@ -98,6 +102,9 @@ public class PartieController {
 					maListe.add(joueurInvite);
 					maPartie.setLstJoueurs(maListe);
 					joueurUtilisateur.setPartie(maPartie);
+					List<Partie> parties = new ArrayList<Partie>();
+					parties.add(maPartie);
+					partieContext.setParties(parties);
 					
 					daoJoueur.save(joueurUtilisateur);
 				}

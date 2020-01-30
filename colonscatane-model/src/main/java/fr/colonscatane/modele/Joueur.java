@@ -39,6 +39,8 @@ public class Joueur extends Utilisateur {
 	@Column(name="J_ROLE")
 	private ROLE role;
 	
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "JOUEUR_PARTIE")
 	private Partie partie;
@@ -56,6 +58,14 @@ public class Joueur extends Utilisateur {
 	
 	public int getOrdre() {
 		return ordre;
+	}
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
 	}
 
 	public void setOrdre(int ordre) {
@@ -153,6 +163,8 @@ public class Joueur extends Utilisateur {
 	public Joueur (String nom) {
 		this.nom = nom;
 	}
+	
+
 	
 	public Joueur (Couleur couleur, String nom) {
 		super(nom);

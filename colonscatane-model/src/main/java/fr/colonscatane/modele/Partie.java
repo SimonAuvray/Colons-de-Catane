@@ -56,6 +56,26 @@ public class Partie {
 			}
 		}
 		
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public List<Tour> getTours() {
+			return tours;
+		}
+
+		public void setTours(List<Tour> tours) {
+			this.tours = tours;
+		}
+
+		public void setLstJoueurs(List<Joueur> lstJoueurs) {
+			this.lstJoueurs = lstJoueurs;
+		}
+
 		public List<Joueur> getLstJoueurs(){
 			return this.lstJoueurs;
 		}

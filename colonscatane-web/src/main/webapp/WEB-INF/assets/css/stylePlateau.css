@@ -209,7 +209,7 @@ body{
 }
 
 .cercle:hover {
-	backgroond : red;
+	backgroond-color : red;
 }
 
 .sommetH{
@@ -237,11 +237,6 @@ body{
     border:2px solid green;
 }
 
-.routeHD{
-	top : -11px;
-	left : 139px;
-	z-index : 1;
-}
 
 .routeHD{
 	top : -42px;
@@ -258,6 +253,13 @@ body{
 	left : -19px;
 }
 
+.routeD{
+	top : 27px;
+	left : 130px;	
+	z-index : 1;
+}
+
+
 .de{
 	position : absolute;
 	display : inline-block;
@@ -265,6 +267,7 @@ body{
 	left : 68px;
 	font-size : x-large;
 	
+
 }
 
 

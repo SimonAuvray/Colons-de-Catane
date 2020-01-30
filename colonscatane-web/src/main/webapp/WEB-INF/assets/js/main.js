@@ -7,10 +7,6 @@ let eventSource = new EventSource('http://localhost:8080/colonscatane-web/sse');
 eventSource.addEventListener('message', (event) => {
 	let msg = event.data;
 	alert(msg);
-	
-	
-	let object = JSON.parse(event.data);
-	console.log(object);
 });
 const MiseAJourCouleurPosition = (position,type) => {
 	let element = document.getElementById(type +" "+ position.x +" "+ position.y);
@@ -34,11 +30,12 @@ const MiseAJourCouleurPosition = (position,type) => {
 
 const setOccupation = async (event) => {
 	event.preventDefault();
-	
-	let coordonnees = event.target.id.toString().split(' ');
+let coordonnees = event.target.id.toString().split(' ');
 	let type = coordonnees[0];
 	let x = coordonnees[1];
 	let y = coordonnees[2];
+	
+	console.log("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
 	
 	let positionOccupee = await
 			fetch("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {

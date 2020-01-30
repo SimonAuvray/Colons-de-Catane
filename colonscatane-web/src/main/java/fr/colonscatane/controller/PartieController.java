@@ -91,12 +91,16 @@ public class PartieController {
 				}
 				else {
 					//ajout de l'invite a la partie quand il accepte
-					joueurInvite.setRole(ROLE.Invite);
+					joueurInvite.setRole(ROLE.Joueur);
+					joueurInvite.setPartie(joueurUtilisateur.getPartie());
 					daoJoueur.save(joueurInvite);
+					List<Joueur> maListe = joueurUtilisateur.getPartie().getLstJoueurs();
+					maListe.add(joueurInvite);
+					daoJoueur.save(joueurUtilisateur);
 				}
 			}
 		}		
-		return "nouvellepartie";
+		return "redirect:nouvellepartie";
 	}
 }
 

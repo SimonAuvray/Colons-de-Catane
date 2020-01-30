@@ -47,7 +47,7 @@ public class PartieController {
 			model.addAttribute("Tuile"+t.getId(), t);
 		}
 		
-//		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());
+		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());
 		
 		return "partie";
 	}
@@ -58,6 +58,10 @@ public class PartieController {
 		Joueur joueurUtilisateur = daoJoueur.findByUsername((String) session.getAttribute("user")).orElse(null);
 		joueurUtilisateur.resetJoueur();
 		daoJoueur.save(joueurUtilisateur);
+		partieContext.getParties().get(0).getLstJoueurs().forEach(j -> {j.setPartie(null);
+			daoJoueur.save(j);
+		});
+		partieContext.setParties(null);
 		return "menu";
 	}
 

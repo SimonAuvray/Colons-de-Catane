@@ -59,7 +59,6 @@ public class MenuController {
 				List<Partie> listeParties = new ArrayList<Partie>();
 				listeParties.add(maPartie);
 				partieContext.setParties(listeParties);
-//				System.out.println("nombre de parties ; "+partieContext.getParties().size());
 			}
 			int i = 0;
 			// recuperation du joueur mis a jour avec sa partie, pour chaque joueur de la
@@ -75,7 +74,7 @@ public class MenuController {
 			return "nouvellepartie";
 		}
 		else {
-			return "home";
+			return "menu";
 		}
 	}
 

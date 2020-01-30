@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.colonscatane.views.Views;
+
 @Entity
 @Table(name = "Partie")
 public class Partie {
@@ -22,9 +26,11 @@ public class Partie {
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "PARTIE_ID")
+		@JsonView(Views.Common.class)
 		private int id;
 
 		@OneToMany(mappedBy = "partie")
+		@JsonView(Views.PartieWithJoueurs.class)
 		List<Joueur> lstJoueurs;
 		
 		@OneToMany(mappedBy = "partieTour")

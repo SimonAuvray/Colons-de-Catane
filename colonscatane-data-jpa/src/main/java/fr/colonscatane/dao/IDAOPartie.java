@@ -7,6 +7,6 @@ import fr.colonscatane.modele.Partie;
 
 public interface IDAOPartie extends JpaRepository<Partie, Integer>{
 	
-	@Query("select p from Partie p left join p.lstJoueurs j where p.id=?1")
+	@Query("select p from Partie p left join fetch p.lstJoueurs j where p.id=?1")
 	public Partie findByIdFetchingJoueurs(Integer id);
 }

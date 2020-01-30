@@ -21,5 +21,9 @@ public class Views {
 	public static class Joueur extends Utilisateur{}
 	
 	public static class JoueurWithPositionsPlateau extends Joueur{}
+	
+	public static class Partie extends Common{}
+	
+	public static class PartieWithJoueurs extends Partie {}
 
 }

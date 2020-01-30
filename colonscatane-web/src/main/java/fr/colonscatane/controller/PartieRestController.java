@@ -72,14 +72,12 @@ public class PartieRestController {
 	@JsonView(Views.PositionPlateauWithJoueur.class)
 	public Coin enregistrerPremiereColonie(@PathVariable int x, @PathVariable int y, HttpSession session) {
 		Joueur j = daoJoueur.findById((Integer) session.getAttribute("userId")).orElse(null);
-		j.setCouleur(Couleur.BLEU);
 		CompletableFuture<Coin> result = null;
 		Coin coin = null;
 		try {
 			result = serviceCoin.placerPremiereColonie(x, y, j);
 			CompletableFuture.allOf(result);
 			coin = result.get();
-			coin.setOccupation(j);
 		} catch (IsVoisinTropProcheException | IsOccupeException | IsNotCoinException | InterruptedException | ExecutionException e) {
 			sse.emissionObjet(e.getMessage());
 		}
@@ -92,14 +90,12 @@ public class PartieRestController {
 			HttpSession session) {
 		System.out.println("Enregistrement d'une route");
 		Joueur j = daoJoueur.findById((Integer) session.getAttribute("userId")).orElse(null);
-		j.setCouleur(Couleur.BLEU);
 		CompletableFuture<Segment> result = null;
 		Segment route = null;
 		try {
 			result = serviceSegment.placerUneRoute(x, y, j);
 			CompletableFuture.allOf(result);
 			route = result.get();
-			route.setOccupation(j);
 		} catch (IsNotSegmentException | IsOccupeException | IsNotRouteVoisineException | InterruptedException | ExecutionException e) {
 			sse.emissionObjet(e.getMessage());
 		}
@@ -110,11 +106,11 @@ public class PartieRestController {
 	@JsonView(Views.PositionPlateauWithJoueur.class)
 	public List<Coin> getListeCoins() {
 		List<Coin> coins = daoCoin.findAll();
-		coins.forEach(c -> {
-			if(c.getOccupation() != null) {
-				c.getOccupation().setCouleur(Couleur.BLEU);
-			}
-		});
+//		coins.forEach(c -> {
+//			if(c.getOccupation() != null) {
+//				c.getOccupation().setCouleur(Couleur.BLEU);
+//			}
+//		});
 		return coins;
 	}
 
@@ -122,11 +118,11 @@ public class PartieRestController {
 	@JsonView(Views.PositionPlateauWithJoueur.class)
 	public List<Segment> getListeSegments() {
 		List<Segment> segments = daoSegment.findAll();
-		segments.forEach(s -> {
-			if(s.getOccupation() != null) {
-				s.getOccupation().setCouleur(Couleur.BLEU);
-			}
-		});
+//		segments.forEach(s -> {
+//			if(s.getOccupation() != null) {
+//				s.getOccupation().setCouleur(Couleur.BLEU);
+//			}
+//		});
 		return segments;
 	}
 	

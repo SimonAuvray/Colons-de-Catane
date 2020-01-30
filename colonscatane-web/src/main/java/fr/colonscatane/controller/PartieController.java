@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import fr.colonscatane.application.PartieContextLoader;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOPartie;
@@ -23,6 +25,7 @@ import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.TuileRessource;
+import fr.colonscatane.views.Views;
 
 
 
@@ -39,12 +42,19 @@ public class PartieController {
 	private PartieContextLoader partieContext;
 	
 	@GetMapping("/partie")
-	public String lancerpartie(Model model) {
+	@JsonView(Views.PartieWithJoueurs.class)
+	public String lancerpartie(Model model,HttpSession session) {
 		
 		List<TuileRessource> mesTuiles =  daoTuile.findAll();
 		
 		for (TuileRessource t : mesTuiles) {
 			model.addAttribute("Tuile"+t.getId(), t);
+		}
+		Joueur joueurUtilisateur = daoJoueur.findByUsername((String) session.getAttribute("user")).orElse(null) ;
+		Partie maPartie = daoPartie.findByIdFetchingJoueurs(joueurUtilisateur.getPartie().getId());
+		if(maPartie.getLstJoueurs().stream().filter(j -> j.getCouleur() != null).count() != maPartie.getLstJoueurs().size()) {
+			maPartie.attribuerCouleur();
+			maPartie.getLstJoueurs().forEach(j -> daoJoueur.save(j));
 		}
 		
 		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());

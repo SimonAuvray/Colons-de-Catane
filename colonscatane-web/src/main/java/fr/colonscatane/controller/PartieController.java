@@ -47,8 +47,6 @@ public class PartieController {
 	@Autowired
 	SseService sse;
 	
-	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();
-	
 	@Autowired
 	private PartieService servicePartie;
 	
@@ -74,9 +72,17 @@ public class PartieController {
 		for (TuileRessource t : mesTuiles) {
 			model.addAttribute("Tuile"+t.getId(), t);
 		}
-		
-		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());		
-		return "partie";
+		Partie partie = new Partie();
+		if(partieContext.getParties() != null && partieContext.getParties().size() >0){
+			partie = partieContext.getParties().get(0);
+		}else {
+			return "redirect:nouvellepartie";
+		}
+		if(partie != null) {
+			model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());		
+			return "partie";
+		}
+		return "redirect:nouvellepartie";
 	}
 	
 	@GetMapping("/menu/retour")

@@ -1,5 +1,6 @@
 package fr.colonscatane.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -124,6 +125,10 @@ public class PartieRestController {
 	@Transactional
 	public List<Joueur> getListejoueurs() {
 		//pour l'instant une seule partie possible
-		return partieContext.getParties().get(0).getLstJoueurs();
+		if( partieContext.getParties().size()>0) {
+			return partieContext.getParties().get(0).getLstJoueurs();
+		}else {
+			return new ArrayList<Joueur>();
+		}
 	}
 }

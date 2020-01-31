@@ -66,11 +66,13 @@ public class PartieController {
 	
 	@GetMapping("/partie")
 	public String lancerpartie(Model model) {
-		
-//		servicePositionPlateau.initialisationPlateau();
-//		serviceCoin.addRessources();
-//		serviceTuileRessource.placementRessource();
-//		serviceTuileRessource.placementNumero();
+	
+		if(daoPositionPlateau.findAll().size() == 0) {
+			servicePositionPlateau.initialisationPlateau();
+			serviceCoin.addRessources();
+			serviceTuileRessource.placementRessource();
+			serviceTuileRessource.placementNumero();
+		}
 		
 		List<TuileRessource> mesTuiles =  daoTuile.findAll();
 		
@@ -108,9 +110,9 @@ public class PartieController {
 			
 		}
 		partieContext.setParties(null);
-		daoPositionPlateau.deleteAll();
-		daoPositionPlateau.dropLiens();
-		daoPositionPlateau.resetIncrement();
+//		daoPositionPlateau.deleteAll();
+//		daoPositionPlateau.dropLiens();
+//		daoPositionPlateau.resetIncrement();
 		return "menu";
 	}
 

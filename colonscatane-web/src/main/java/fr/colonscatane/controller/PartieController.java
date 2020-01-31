@@ -79,7 +79,9 @@ public class PartieController {
 			return "redirect:nouvellepartie";
 		}
 		if(partie != null) {
-			model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());		
+			partie.attribuerCouleur();
+			partie.getLstJoueurs().forEach(j -> daoJoueur.save(j));
+			model.addAttribute("joueurs", partie.getLstJoueurs());		
 			return "partie";
 		}
 		return "redirect:nouvellepartie";

@@ -3,6 +3,7 @@ package fr.colonscatane.controller;
 
 
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class HomeController {
 			return "home";
 		}
 		if( daoUtilisateur.findByUsernameAndPassword(user.getUsername(), user.getPassword() ).orElse(null) == null ) {
+			JOptionPane.showMessageDialog(null, "Erreur dans l'identifiant ou le mot de passe");
 			return "home";
 		}
 		else {

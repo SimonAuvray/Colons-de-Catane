@@ -30,8 +30,81 @@ const MiseAJourCouleurPosition = (position,type) => {
 	element.style.backgroundColor = couleur;
 }
 
-let compteurActionInit = 0;
+let compteurClickInit = 0;
 // enregistre la position dans la base de données (et compter les actions)
+const setOccupationEtcompteClick2 = async (event) => {
+	event.preventDefault();
+	let coordonnees = event.target.id.toString().split(' ');
+	let type = coordonnees[0];
+	let x = coordonnees[1];
+	let y = coordonnees[2];
+	setOccupation2(type, x, y);
+	compteClick();
+}
+
+function setOccupation2(type, x, y){
+console.log("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
+	
+	let positionOccupee = await
+			fetch("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {
+		method: 'GET'
+	}).then(resp => resp.json());
+	
+	console.log(positionOccupee);
+	MiseAJourCouleurPosition(positionOccupee,type);
+}
+
+function compteClick(){
+	console.log("bzqqzq");
+}
+
+var tourJoueur ;
+const setOccupationEtcompteClick = async (event) => {
+	event.preventDefault();
+let coordonnees = event.target.id.toString().split(' ');
+	let type = coordonnees[0];
+	let x = coordonnees[1];
+	let y = coordonnees[2];
+	
+	console.log("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
+	
+	let positionOccupee = await
+			fetch("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {
+		method: 'GET'
+	}).then(resp => resp.json());
+	
+	console.log(positionOccupee);
+	MiseAJourCouleurPosition(positionOccupee,type);
+	compteurClickInit++;
+	console.log(" compteur clicks : " + compteurClickInit)
+	
+		fetch('http://localhost:8080/colonscatane-web/api/partie/listeJoueurs')
+		.then(resp => resp.json())
+		.then(joueurs => {
+			if(compteurClickInit <2){
+				tourJoueur = joueurs[0];
+				document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
+				console.log(" 1 er joueur ");
+			}
+			else if(compteurClickInit >1 && compteurClickInit <4){
+				tourJoueur = joueurs[1];
+				document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
+				console.log(" 2 er joueur ");
+			}
+			else if(joueurs.length == 3){
+				if(compteurClickInit >3 && compteurClickInit <6){
+					tourJoueur = joueurs[2];
+					document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
+				}
+			}
+			else if(joueurs.length == 4){
+				if(compteurClickInit >7 && compteurClickInit <8){
+					tourJoueur = joueurs[3];
+					document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
+				}
+			}
+		});
+}
 const setOccupation = async (event) => {
 	event.preventDefault();
 let coordonnees = event.target.id.toString().split(' ');
@@ -48,8 +121,6 @@ let coordonnees = event.target.id.toString().split(' ');
 	
 	console.log(positionOccupee);
 	MiseAJourCouleurPosition(positionOccupee,type);
-	compteurActionInit++;
-	nextClick();
 }
 
 
@@ -57,7 +128,7 @@ let coordonnees = event.target.id.toString().split(' ');
 const addClickCoordonnee = (position,type) => {
 	console.log(type +" "+ position.x + " " + position.y);
 	if(document.getElementById(type +" "+ position.x +" "+ position.y) !== null){
-		document.getElementById(type +" "+ position.x +" "+ position.y).addEventListener('click', setOccupation);
+		document.getElementById(type +" "+ position.x +" "+ position.y).addEventListener('click', setOccupationEtcompteClick);
 	}else{
 		console.log("pas d'element correspondant aux coordonnées");
 	}
@@ -93,52 +164,4 @@ fetch('http://localhost:8080/colonscatane-web/api/partie/listeJoueurs')
 .then(resp => resp.json())
 .then(joueurs => {
 	tourJoueur = joueurs[0];
-	if(compteurActionInit <= joueurs.length * 2){
-		appelTourJoueurInit(joueurs);
-	}
-	
 });
-
-var nombreClicks = -1;
-function nextClick (){
-	nombreClicks++;
-	if(nombreClicks < 2){
-		tourJoueur = joueurs[0];
-	}
-	if(nombreClicks > 1 && nombreClicks < 4){
-		tourJoueur = joueurs[1];
-	}
-	else if(mesJoueurs.length == 3){
-		if(nombreClicks > 3 && nombreClicks < 6){
-			tourJoueur = joueurs[2];
-		}
-	}
-	else if(mesJoueurs.length == 4){
-		if(nombreClicks > 5 && nombreClicks < 8){
-			tourJoueur = joueurs[3];
-		}
-	}
-	document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
-}
-
-function appelTourJoueurInit(joueurs){
-	
-	console.log("tour d'initialisation");
-	if(compteurActionInit < 2){
-		tourJoueur = joueurs[0];
-	}
-	if(compteurActionInit > 1 && compteurActionInit < 4){
-		tourJoueur = joueurs[1];
-	}
-	else if(mesJoueurs.length == 3){
-		if(compteurActionInit > 3 && compteurActionInit < 6){
-			tourJoueur = joueurs[2];
-		}
-	}
-	else if(mesJoueurs.length == 4){
-		if(compteurActionInit > 5 && compteurActionInit < 8){
-			tourJoueur = joueurs[3];
-		}
-	}
-	document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
-}

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import fr.colonscatane.application.PartieContextLoader;
 import fr.colonscatane.dao.IDAOJoueur;
@@ -30,6 +31,7 @@ public class MenuController {
 	@Autowired
 	private PartieContextLoader partieContext;
 
+	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();
 
 	@GetMapping("/menu")
 	public String getMenu() {
@@ -72,6 +74,8 @@ public class MenuController {
 				model.addAttribute("joueur" + i, j);
 				i++;
 			}
+			
+			
 			return "nouvellepartie";
 		
 	}

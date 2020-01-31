@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import fr.colonscatane.application.PartieContextLoader;
 import fr.colonscatane.dao.IDAOJoueur;
@@ -24,6 +25,11 @@ import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.TuileRessource;
+import fr.colonscatane.service.PartieService;
+import fr.colonscatane.service.PositionPlateauService;
+import fr.colonscatane.service.CoinService;
+import fr.colonscatane.service.SseService;
+import fr.colonscatane.service.TuileRessourceService;
 
 
 
@@ -38,9 +44,30 @@ public class PartieController {
 	private IDAOTuileRessource daoTuile;
 	@Autowired
 	private PartieContextLoader partieContext;
+	@Autowired
+	SseService sse;
+	
+	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();
+	
+	@Autowired
+	private PartieService servicePartie;
+	
+	@Autowired
+	private PositionPlateauService servicePositionPlateau;
+	
+	@Autowired
+	private CoinService serviceCoin;
+	
+	@Autowired
+	private TuileRessourceService serviceTuileRessource;
 	
 	@GetMapping("/partie")
 	public String lancerpartie(Model model) {
+		
+//		servicePositionPlateau.initialisationPlateau();
+//		serviceCoin.addRessources();
+//		serviceTuileRessource.placementRessource();
+//		serviceTuileRessource.placementNumero();
 		
 		List<TuileRessource> mesTuiles =  daoTuile.findAll();
 		
@@ -56,11 +83,17 @@ public class PartieController {
 	@Transactional
 	public String quitterPartie(HttpSession session) {
 		Joueur joueurUtilisateur = daoJoueur.findByUsername((String) session.getAttribute("user")).orElse(null);
-		joueurUtilisateur.resetJoueur();
-		daoJoueur.save(joueurUtilisateur);
-		partieContext.getParties().get(0).getLstJoueurs().forEach(j -> {j.setPartie(null);
+//		joueurUtilisateur.resetJoueur();
+//		joueurUtilisateur.setRole(ROLE.Inactif);
+//		daoJoueur.save(joueurUtilisateur);
+		List<Joueur> maListe = joueurUtilisateur.getPartie().getLstJoueurs();
+		for (Joueur j : maListe) {
+			
+			j.resetJoueur();
+			j.setRole(ROLE.Inactif);
 			daoJoueur.save(j);
-		});
+			
+		}
 		partieContext.setParties(null);
 		return "menu";
 	}
@@ -103,9 +136,14 @@ public class PartieController {
 					partieContext.setParties(parties);
 					
 					daoJoueur.save(joueurUtilisateur);
+					
+					sse.emissionObjet(joueurInvite.getUsername() + "a été invité");
+				
 				}
 			}
-		}		
+		}
+		
+		
 		return "redirect:nouvellepartie";
 	}
 }

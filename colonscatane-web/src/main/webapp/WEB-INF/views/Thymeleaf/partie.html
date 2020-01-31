@@ -12,7 +12,7 @@
 </head>
 <body>
 	<section class="sticky-top">
-		<div>Tour du joueur: <p class="tourJoueur" name="tourJoueur"> [[${session.user}]] </p></div>
+		<div>Tour du joueur: <p class="tourJoueur" name="tourJoueur"> [[${joueurs[0].username}]] </p></div>
 		<div class="tableauJoueurs">
 			<div th:each="joueur : ${joueurs}" class="joueurStatus">
 				<b>[[${joueur.username}]]</b>

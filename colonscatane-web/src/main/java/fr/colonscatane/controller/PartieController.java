@@ -2,6 +2,7 @@ package fr.colonscatane.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import fr.colonscatane.application.PartieContextLoader;
 import fr.colonscatane.dao.IDAOJoueur;
@@ -23,6 +25,7 @@ import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.TuileRessource;
+import fr.colonscatane.service.SseService;
 
 
 
@@ -37,6 +40,10 @@ public class PartieController {
 	private IDAOTuileRessource daoTuile;
 	@Autowired
 	private PartieContextLoader partieContext;
+	@Autowired
+	SseService sse;
+	
+	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();
 	
 	@GetMapping("/partie")
 	public String lancerpartie(Model model) {
@@ -100,9 +107,14 @@ public class PartieController {
 					joueurUtilisateur.setPartie(maPartie);
 					
 					daoJoueur.save(joueurUtilisateur);
+					
+					sse.emissionObjet(joueurInvite.getUsername() + "a été invité");
+				
 				}
 			}
-		}		
+		}
+		
+		
 		return "redirect:nouvellepartie";
 	}
 }

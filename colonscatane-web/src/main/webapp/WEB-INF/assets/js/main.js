@@ -3,7 +3,7 @@
  */
 
 // ecoute des evenements du serveur
-let eventSource = new EventSource('http://localhost:8080/colonscatane-web/sse');
+let eventSource = new EventSource('http://localhost:8081/colonscatane-web/sse');
 eventSource.addEventListener('message', (event) => {
 	let msg = event.data;
 	alert(msg);

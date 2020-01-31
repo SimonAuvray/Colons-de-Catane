@@ -1,5 +1,11 @@
 @charset "ISO-8859-1";
 
+.jumbotron {
+	background-image: url('../ferme.jpg');
+	position: relative;
+	background-size: cover;
+	background-position: center;
+}
 
 .sqare{
 	display:block;

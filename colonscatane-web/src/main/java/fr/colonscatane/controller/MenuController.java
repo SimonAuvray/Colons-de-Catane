@@ -84,5 +84,10 @@ public class MenuController {
 	public String getParametres() {
 		return "parametres";
 	}
+	
+	@GetMapping("/copainscatane")
+	public String getcopainscatane() {
+		return "copainscatane";
+	}
 
 }

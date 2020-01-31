@@ -1,5 +1,6 @@
 package fr.colonscatane.application;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +9,15 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 import fr.colonscatane.modele.Partie;
 
-@ApplicationScope
 @Component
-public class PartieContextLoader {
+@ApplicationScope
+public class PartieContextLoader implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	
 	private List<Partie> parties;
 

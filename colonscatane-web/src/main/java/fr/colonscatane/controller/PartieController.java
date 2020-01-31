@@ -20,9 +20,11 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import fr.colonscatane.application.PartieContextLoader;
 import fr.colonscatane.dao.IDAOJoueur;
 import fr.colonscatane.dao.IDAOPartie;
+import fr.colonscatane.dao.IDAOPositionPlateau;
 import fr.colonscatane.dao.IDAOTuileRessource;
 import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
+import fr.colonscatane.modele.PositionPlateau;
 import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.TuileRessource;
 import fr.colonscatane.service.PartieService;
@@ -44,6 +46,9 @@ public class PartieController {
 	private IDAOTuileRessource daoTuile;
 	@Autowired
 	private PartieContextLoader partieContext;
+	
+	@Autowired
+	private IDAOPositionPlateau<PositionPlateau> daoPositionPlateau;
 	@Autowired
 	SseService sse;
 	
@@ -103,6 +108,9 @@ public class PartieController {
 			
 		}
 		partieContext.setParties(null);
+		daoPositionPlateau.deleteAll();
+		daoPositionPlateau.dropLiens();
+		daoPositionPlateau.resetIncrement();
 		return "menu";
 	}
 

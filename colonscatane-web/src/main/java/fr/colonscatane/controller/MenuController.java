@@ -31,7 +31,6 @@ public class MenuController {
 	@Autowired
 	private PartieContextLoader partieContext;
 
-	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();
 
 	@GetMapping("/menu")
 	public String getMenu() {
@@ -45,7 +44,9 @@ public class MenuController {
 		 
 			// enregistrer l'utilisateur de session comme joueur immediatement
 			Joueur monJoueur = daoJoueur.findByUsername((String) session.getAttribute("user")).orElse(null);
-			
+			if(monJoueur == null) {
+				return "redirect:home";
+			}
 
 			// creation de la partie, ajout de l'utilisateur (si pas deja fait) et
 			// enregistrement de la nouvelle liste Joueurs
@@ -67,6 +68,11 @@ public class MenuController {
 			// recuperation du joueur mis a jour avec sa partie, pour chaque joueur de la
 			// partie envoyer dans la session pour affichage
 			Partie maPartie = daoPartie.findByIdFetchingJoueurs(monJoueur.getPartie().getId());
+			if (partieContext.getParties() == null || partieContext.getParties().size()==0) {
+				ArrayList<Partie> parties = new ArrayList<Partie>();
+				parties.add(maPartie);
+				partieContext.setParties(parties);
+			}
 //			Partie maPartie = daoPartie.findById(monJoueur.getPartie().getId()).get();
 //			Hibernate.initialize(maPartie.getLstJoueurs());
 			List<Joueur> mesJoueurs = maPartie.getLstJoueurs();

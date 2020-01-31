@@ -130,10 +130,10 @@ public class PartieRestController {
 		return segments;
 	}
 	
-//	@GetMapping("/listeJoueurs")
-//	@JsonView(Views.Joueur.class)
-//	public List<Joueur> getListejoueurs() {
-//		//pour l'instant une seule partie possible
-//		return partieContext.getParties().get(0).getLstJoueurs();
-//	}
+	@GetMapping("/listeJoueurs")
+	@JsonView(Views.Joueur.class)
+	public List<Joueur> getListejoueurs() {
+		//pour l'instant une seule partie possible
+		return partieContext.getParties().get(0).getLstJoueurs();
+	}
 }

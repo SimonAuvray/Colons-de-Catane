@@ -95,23 +95,25 @@ fetch('http://localhost:8080/colonscatane-web/api/partie/listeJoueurs')
 		nombreJoueur++;
 	}
 	mesJoueurs = joueurs;
+	console.log(mesJoueurs.length);
 });
 
 //compte des actions initiales => fin du 1er tour
-var tourJoueur = joueurs[0];
+var tourJoueur = mesJoueurs[0];
 while(compteurActionInit <= nombreJoueur * 2){
 	if(compteurActionInit > 1 && compteurActionInit < 4){
-		tourJoueur = joueurs[1];
+		tourJoueur = mesJoueurs[1];
 	}
-	else if(joueurs.length == 3){
+	else if(mesJoueurs.length == 3){
 		if(compteurActionInit > 3 && compteurActionInit < 6){
-			tourJoueur = joueurs[2];
+			tourJoueur = mesJoueurs[2];
 		}
 	}
-	else if(joueurs.length == 4){
+	else if(mesJoueurs.length == 4){
 		if(compteurActionInit > 5 && compteurActionInit < 8){
-			tourJoueur = joueurs[3];
+			tourJoueur = mesJoueurs[3];
 		}
 	}
+	document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
 	//faire un inner HTML pour donner tourJoueur a l'élément
 }

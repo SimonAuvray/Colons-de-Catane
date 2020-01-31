@@ -3,7 +3,7 @@
  */
 
 // ecoute des evenements du serveur
-let eventSource = new EventSource('http://localhost:8080/colonscatane-web/sse');
+let eventSource = new EventSource('http://172.16.44.108:8080/colonscatane-web/sse');
 eventSource.addEventListener('message', (event) => {
 	let msg = event.data;
 	alert(msg);
@@ -43,10 +43,10 @@ const setOccupationEtcompteClick2 = async (event) => {
 }
 
 function setOccupation2(type, x, y){
-console.log("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
+console.log("http://172.16.44.108:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
 	
 	let positionOccupee = await
-			fetch("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {
+			fetch("http://172.16.44.108:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {
 		method: 'GET'
 	}).then(resp => resp.json());
 	
@@ -66,10 +66,10 @@ let coordonnees = event.target.id.toString().split(' ');
 	let x = coordonnees[1];
 	let y = coordonnees[2];
 	
-	console.log("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
+	console.log("http://172.16.44.108:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
 	
 	let positionOccupee = await
-			fetch("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {
+			fetch("http://172.16.44.108:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {
 		method: 'GET'
 	}).then(resp => resp.json());
 	
@@ -78,7 +78,7 @@ let coordonnees = event.target.id.toString().split(' ');
 	compteurClickInit++;
 	console.log(" compteur clicks : " + compteurClickInit)
 	
-		fetch('http://localhost:8080/colonscatane-web/api/partie/listeJoueurs')
+		fetch('http://172.16.44.108:8080/colonscatane-web/api/partie/listeJoueurs')
 		.then(resp => resp.json())
 		.then(joueurs => {
 			if(compteurClickInit <2){
@@ -112,10 +112,10 @@ let coordonnees = event.target.id.toString().split(' ');
 	let x = coordonnees[1];
 	let y = coordonnees[2];
 	
-	console.log("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
+	console.log("http://172.16.44.108:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y);
 	
 	let positionOccupee = await
-			fetch("http://localhost:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {
+			fetch("http://172.16.44.108:8080/colonscatane-web/api/partie/"+ type+"/"+x +"/"+y, {
 		method: 'GET'
 	}).then(resp => resp.json());
 	
@@ -135,7 +135,7 @@ const addClickCoordonnee = (position,type) => {
 }
 
 
-fetch('http://localhost:8080/colonscatane-web/api/partie/listeCoins')
+fetch('http://172.16.44.108:8080/colonscatane-web/api/partie/listeCoins')
 .then(resp => resp.json())
 .then(coins => {
 	for (let c of coins) {
@@ -146,7 +146,7 @@ fetch('http://localhost:8080/colonscatane-web/api/partie/listeCoins')
 	}
 });
 
-fetch('http://localhost:8080/colonscatane-web/api/partie/listeSegments')
+fetch('http://172.16.44.108:8080/colonscatane-web/api/partie/listeSegments')
 .then(resp => resp.json())
 .then(segments => {
 	for (let s of segments) {
@@ -160,7 +160,7 @@ fetch('http://localhost:8080/colonscatane-web/api/partie/listeSegments')
 //recuperation de la liste de joueurs
 let nombreJoueur = 0;
 let mesJoueurs = [];
-fetch('http://localhost:8080/colonscatane-web/api/partie/listeJoueurs')
+fetch('http://172.16.44.108:8080/colonscatane-web/api/partie/listeJoueurs')
 .then(resp => resp.json())
 .then(joueurs => {
 	tourJoueur = joueurs[0];

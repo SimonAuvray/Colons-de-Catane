@@ -87,33 +87,35 @@ fetch('http://localhost:8080/colonscatane-web/api/partie/listeSegments')
 
 //recuperation de la liste de joueurs
 let nombreJoueur = 0;
-var mesJoueurs = [];
+let mesJoueurs = [];
 fetch('http://localhost:8080/colonscatane-web/api/partie/listeJoueurs')
 .then(resp => resp.json())
 .then(joueurs => {
-	for (let j of joueurs){
-		nombreJoueur++;
+	
+	if(compteurActionInit <= joueurs.length * 2){
+		appelTourJoueurInit(joueurs);
 	}
-	mesJoueurs = joueurs;
-	console.log(mesJoueurs.length);
+	
 });
 
-//compte des actions initiales => fin du 1er tour
-var tourJoueur = mesJoueurs[0];
-while(compteurActionInit <= nombreJoueur * 2){
+function appelTourJoueurInit(joueurs){
+	
+	console.log("tour d'initialisation");
+	if(compteurActionInit < 2){
+		tourJoueur = joueurs[0];
+	}
 	if(compteurActionInit > 1 && compteurActionInit < 4){
-		tourJoueur = mesJoueurs[1];
+		tourJoueur = joueurs[1];
 	}
 	else if(mesJoueurs.length == 3){
 		if(compteurActionInit > 3 && compteurActionInit < 6){
-			tourJoueur = mesJoueurs[2];
+			tourJoueur = joueurs[2];
 		}
 	}
 	else if(mesJoueurs.length == 4){
 		if(compteurActionInit > 5 && compteurActionInit < 8){
-			tourJoueur = mesJoueurs[3];
+			tourJoueur = joueurs[3];
 		}
 	}
 	document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
-	//faire un inner HTML pour donner tourJoueur a l'élément
 }

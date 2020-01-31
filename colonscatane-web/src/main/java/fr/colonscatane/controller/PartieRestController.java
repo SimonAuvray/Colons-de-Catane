@@ -5,6 +5,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -132,6 +133,7 @@ public class PartieRestController {
 	
 	@GetMapping("/listeJoueurs")
 	@JsonView(Views.Joueur.class)
+	@Transactional
 	public List<Joueur> getListejoueurs() {
 		//pour l'instant une seule partie possible
 		return partieContext.getParties().get(0).getLstJoueurs();

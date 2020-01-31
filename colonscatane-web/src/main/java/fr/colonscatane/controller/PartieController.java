@@ -63,11 +63,17 @@ public class PartieController {
 	@Transactional
 	public String quitterPartie(HttpSession session) {
 		Joueur joueurUtilisateur = daoJoueur.findByUsername((String) session.getAttribute("user")).orElse(null);
-		joueurUtilisateur.resetJoueur();
-		daoJoueur.save(joueurUtilisateur);
-		partieContext.getParties().get(0).getLstJoueurs().forEach(j -> {j.setPartie(null);
+//		joueurUtilisateur.resetJoueur();
+//		joueurUtilisateur.setRole(ROLE.Inactif);
+//		daoJoueur.save(joueurUtilisateur);
+		List<Joueur> maListe = joueurUtilisateur.getPartie().getLstJoueurs();
+		for (Joueur j : maListe) {
+			
+			j.resetJoueur();
+			j.setRole(ROLE.Inactif);
 			daoJoueur.save(j);
-		});
+			
+		}
 		partieContext.setParties(null);
 		return "menu";
 	}

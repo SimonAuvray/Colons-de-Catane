@@ -25,7 +25,11 @@ import fr.colonscatane.modele.Joueur;
 import fr.colonscatane.modele.Partie;
 import fr.colonscatane.modele.ROLE;
 import fr.colonscatane.modele.TuileRessource;
+import fr.colonscatane.service.PartieService;
+import fr.colonscatane.service.PositionPlateauService;
+import fr.colonscatane.service.CoinService;
 import fr.colonscatane.service.SseService;
+import fr.colonscatane.service.TuileRessourceService;
 
 
 
@@ -45,8 +49,25 @@ public class PartieController {
 	
 	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();
 	
+	@Autowired
+	private PartieService servicePartie;
+	
+	@Autowired
+	private PositionPlateauService servicePositionPlateau;
+	
+	@Autowired
+	private CoinService serviceCoin;
+	
+	@Autowired
+	private TuileRessourceService serviceTuileRessource;
+	
 	@GetMapping("/partie")
 	public String lancerpartie(Model model) {
+		
+//		servicePositionPlateau.initialisationPlateau();
+//		serviceCoin.addRessources();
+//		serviceTuileRessource.placementRessource();
+//		serviceTuileRessource.placementNumero();
 		
 		List<TuileRessource> mesTuiles =  daoTuile.findAll();
 		
@@ -54,8 +75,7 @@ public class PartieController {
 			model.addAttribute("Tuile"+t.getId(), t);
 		}
 		
-		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());
-		
+		model.addAttribute("joueurs", partieContext.getParties().get(0).getLstJoueurs());		
 		return "partie";
 	}
 	
@@ -111,6 +131,9 @@ public class PartieController {
 					maListe.add(joueurInvite);
 					maPartie.setLstJoueurs(maListe);
 					joueurUtilisateur.setPartie(maPartie);
+					List<Partie> parties = new ArrayList<Partie>();
+					parties.add(maPartie);
+					partieContext.setParties(parties);
 					
 					daoJoueur.save(joueurUtilisateur);
 					

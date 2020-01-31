@@ -12,11 +12,11 @@
 </head>
 <body>
 	<section class="sticky-top">
-		<div class="text-light bg-dark">scores</div>
-		<div>Tour du joueur: </div>
-		<div>
-			<div th:each="joueur : ${joueurs}" name="joueurStatus">
-				[[${joueur.username}]]
+		<div>Tour du joueur: <p class="tourJoueur" name="tourJoueur"> </p></div>
+		<div class="tableauJoueurs">
+			<div th:each="joueur : ${joueurs}" class="joueurStatus">
+				<b>[[${joueur.username}]]</b>
+				<p> Points victoire : [[${joueur.score}]]</p>
 			</div>
 		</div>
 	</section>
@@ -208,6 +208,8 @@
 				</div>
 				
 				<div class="hexagon eau">
+					<div class="cercle sommet sommetH" id="coin 8 24"></div>
+					<div class="cercle route routeHG" id="segment 8 23"></div>	
 
 				</div>
 

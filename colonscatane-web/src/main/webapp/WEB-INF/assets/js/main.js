@@ -49,6 +49,7 @@ let coordonnees = event.target.id.toString().split(' ');
 	console.log(positionOccupee);
 	MiseAJourCouleurPosition(positionOccupee,type);
 	compteurActionInit++;
+	nextClick();
 }
 
 
@@ -91,12 +92,34 @@ let mesJoueurs = [];
 fetch('http://localhost:8080/colonscatane-web/api/partie/listeJoueurs')
 .then(resp => resp.json())
 .then(joueurs => {
-	
+	tourJoueur = joueurs[0];
 	if(compteurActionInit <= joueurs.length * 2){
 		appelTourJoueurInit(joueurs);
 	}
 	
 });
+
+var nombreClicks = -1;
+function nextClick (){
+	nombreClicks++;
+	if(nombreClicks < 2){
+		tourJoueur = joueurs[0];
+	}
+	if(nombreClicks > 1 && nombreClicks < 4){
+		tourJoueur = joueurs[1];
+	}
+	else if(mesJoueurs.length == 3){
+		if(nombreClicks > 3 && nombreClicks < 6){
+			tourJoueur = joueurs[2];
+		}
+	}
+	else if(mesJoueurs.length == 4){
+		if(nombreClicks > 5 && nombreClicks < 8){
+			tourJoueur = joueurs[3];
+		}
+	}
+	document.querySelector('p[name="tourJoueur"]').innerHTML = tourJoueur.username;
+}
 
 function appelTourJoueurInit(joueurs){
 	
